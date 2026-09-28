@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: italia-landing
-          image: ghcr.io/nulp-ai-enterprise/italia-landing:sha-XXXXXXX
+          image: ghcr.io/nulp-ai-enterprise/italia-landing:sha-e53e0e3
           imagePullPolicy: Always
           ports:
             - name: http

@@ -1,0 +1,21 @@
+.status {
+  display: flex;
+  align-items: center;
+  min-height: clamp(420px, 36vw, 640px);
+  padding-block: clamp(56px, 6vw, 112px);
+  background: var(--mist);
+}
+
+.title {
+  max-width: 18em;
+  font-size: clamp(30px, 3.3vw, 62px);
+  line-height: 1.12;
+}
+
+.text {
+  max-width: 56ch;
+  margin-bottom: clamp(24px, 2.3vw, 40px);
+  font-size: clamp(16px, 1.15vw, 20px);
+  line-height: 1.65;
+  color: var(--ink-soft);
+}

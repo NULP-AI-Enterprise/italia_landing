@@ -1,0 +1,40 @@
+.lang {
+  display: inline-flex;
+  align-self: center;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
+.option {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 clamp(12px, 0.9vw, 18px);
+  color: var(--ink-nav);
+  font: 700 14px/1 var(--font-body);
+  letter-spacing: 0.02em;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.option:not(.active):hover {
+  background: var(--mist);
+}
+
+.active {
+  background: var(--navy);
+  color: #fff;
+}
+
+.flag {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  border-radius: 50%;
+}
+
+@media (max-width: 960px) {
+  .lang {
+    align-self: flex-start;
+  }
+}

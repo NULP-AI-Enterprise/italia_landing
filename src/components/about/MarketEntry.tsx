@@ -1,26 +1,17 @@
-import Image from "next/image";
-import Link from "next/link";
-import type { Dictionary } from "@/i18n/get-dictionary";
+import type { AboutPageContent } from "@/content/repository";
+import { ContentImage } from "@/components/ui/ContentImage";
 import { Reveal } from "@/components/ui/Reveal";
 import { RichText } from "@/components/ui/RichText";
-import arches from "@/assets/images/arches.jpg";
 import styles from "./MarketEntry.module.css";
 
-type MarketEntryProps = {
-  market: Dictionary["about"]["market"];
-  ctaHref: string;
-};
-
-export function MarketEntry({ market, ctaHref }: MarketEntryProps) {
+/** Photo on the left (full bleed), statement on the right. */
+export function MarketEntry({ market }: { market: AboutPageContent["market"] }) {
   return (
     <section className={styles.market} aria-labelledby="market-title">
-      <Image
-        className={styles.photo}
-        src={arches}
-        alt={market.imageAlt}
-        sizes="(max-width: 960px) 100vw, 50vw"
-      />
-      <Reveal className={styles.panel}>
+      <div className={styles.media}>
+        <ContentImage media={market.image} sizes="(max-width: 960px) 100vw, 52vw" />
+      </div>
+      <Reveal className={styles.content}>
         <h2 className={`section-title ${styles.title}`} id="market-title">
           {market.title}
         </h2>
@@ -28,9 +19,6 @@ export function MarketEntry({ market, ctaHref }: MarketEntryProps) {
         <p className={styles.text}>
           <RichText text={market.text} />
         </p>
-        <Link className="btn" href={ctaHref}>
-          {market.cta}
-        </Link>
       </Reveal>
     </section>
   );

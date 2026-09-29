@@ -53,11 +53,12 @@ export function LanguageSwitcher({ locale, label }: { locale: Locale; label: str
             href={switchLocalePath(pathname, target)}
             hrefLang={target}
             lang={target}
-            aria-label={languageNames[target]}
             aria-current={active ? "true" : undefined}
           >
             <Flag locale={target} />
+            {/* Visible code stays part of the accessible name (WCAG 2.5.3) */}
             {localeLabels[target]}
+            <span className="visually-hidden"> — {languageNames[target]}</span>
           </Link>
         );
       })}

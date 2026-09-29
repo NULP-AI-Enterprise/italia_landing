@@ -1,5 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { defaultLocale, hasLocale, localeCookie, locales, type Locale } from "@/i18n/config";
+import {
+  defaultLocale,
+  hasLocale,
+  localeCookie,
+  looksLikeLocale,
+  resolveLocale,
+  type Locale,
+} from "@/i18n/config";
 
 /** Picks a locale: saved choice first, then Accept-Language, then the default. */
 function pickLocale(request: NextRequest): Locale {
@@ -12,28 +19,41 @@ function pickLocale(request: NextRequest): Locale {
     .map((part) => {
       const [tag, ...params] = part.trim().split(";");
       const q = params.find((p) => p.trim().startsWith("q="));
-      return { base: tag.toLowerCase().split("-")[0], q: q ? Number(q.split("=")[1]) : 1 };
+      return { tag, q: q ? Number(q.split("=")[1]) : 1 };
     })
-    .filter((entry) => entry.base && !Number.isNaN(entry.q))
+    .filter((entry) => entry.tag && !Number.isNaN(entry.q))
     .sort((a, b) => b.q - a.q);
 
-  for (const { base } of ranked) {
-    if (hasLocale(base)) return base;
+  for (const { tag } of ranked) {
+    const locale = resolveLocale(tag);
+    if (locale) return locale;
   }
   return defaultLocale;
 }
 
+function redirectTo(request: NextRequest, pathname: string, permanent: boolean) {
+  const url = request.nextUrl.clone();
+  url.pathname = pathname;
+  return NextResponse.redirect(url, permanent ? 308 : 307);
+}
+
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const current = locales.find(
-    (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),
-  );
+  const [, first = "", ...rest] = pathname.split("/");
+  const tail = rest.length ? `/${rest.join("/")}` : "";
 
-  // Locale already in the URL: remember it for the next visit to "/".
-  if (current) {
+  // Canonical locale in the URL: serve it and remember it for the next visit to "/".
+  if (hasLocale(first)) {
+    // Repair double prefixes produced by the old redirect ("/uk/ua/about" -> "/uk/about").
+    // Safe because no page slug is a two-letter code.
+    const [second = "", ...remaining] = rest;
+    if (looksLikeLocale(second)) {
+      const target = resolveLocale(second) ?? first;
+      return redirectTo(request, `/${target}${remaining.length ? `/${remaining.join("/")}` : ""}`, true);
+    }
     const response = NextResponse.next();
-    if (request.cookies.get(localeCookie)?.value !== current) {
-      response.cookies.set(localeCookie, current, {
+    if (request.cookies.get(localeCookie)?.value !== first) {
+      response.cookies.set(localeCookie, first, {
         path: "/",
         maxAge: 60 * 60 * 24 * 365,
         sameSite: "lax",
@@ -42,9 +62,16 @@ export function proxy(request: NextRequest) {
     return response;
   }
 
-  const url = request.nextUrl.clone();
-  url.pathname = `/${pickLocale(request)}${pathname === "/" ? "" : pathname}`;
-  return NextResponse.redirect(url);
+  // The first segment is a language code in another spelling ("/ua", "/UK", "/it-IT")
+  // or an unsupported one ("/en"): replace it instead of prefixing, so "/ua/about"
+  // becomes "/uk/about" and never "/uk/ua/about".
+  if (looksLikeLocale(first)) {
+    const alias = resolveLocale(first);
+    return redirectTo(request, `/${alias ?? pickLocale(request)}${tail}`, alias !== null);
+  }
+
+  // No locale at all ("/", "/about"): prefix the visitor's locale.
+  return redirectTo(request, `/${pickLocale(request)}${pathname === "/" ? "" : pathname}`, false);
 }
 
 export const config = {

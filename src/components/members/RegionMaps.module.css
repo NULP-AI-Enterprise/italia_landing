@@ -1,0 +1,55 @@
+.maps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 4vw, 80px);
+}
+
+/* Both countries share one height, as in the design */
+.map {
+  width: auto;
+  max-width: 100%;
+  height: clamp(180px, 20vw, 380px);
+}
+
+.map path {
+  stroke: #fff;
+  stroke-width: 1;
+  stroke-linejoin: round;
+  cursor: pointer;
+  transition: fill 0.2s ease;
+}
+
+.ua path {
+  fill: #3f4aa8;
+}
+
+.it path {
+  fill: #57707f;
+}
+
+.map path:hover {
+  fill: #1d2a7a;
+}
+
+.it path:hover {
+  fill: #34495a;
+}
+
+.map path.selected {
+  fill: var(--orange);
+  stroke: var(--ink-black);
+  stroke-width: 1.5;
+}
+
+@media (max-width: 560px) {
+  .map {
+    height: auto;
+    width: 100%;
+  }
+
+  .it {
+    width: 70%;
+  }
+}

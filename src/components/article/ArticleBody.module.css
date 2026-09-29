@@ -1,0 +1,63 @@
+.article {
+  display: grid;
+  gap: 1em;
+  max-width: calc(880px + 2 * var(--gutter));
+  padding-top: clamp(32px, 3.5vw, 72px);
+  font-size: clamp(16px, 1.2vw, 20px);
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.article h2 {
+  margin-top: 1.2em;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(22px, 1.8vw, 32px);
+  line-height: 1.25;
+  color: var(--navy);
+}
+
+.article ul {
+  display: grid;
+  gap: 0.6em;
+  margin: 0;
+  padding-left: 1.3em;
+}
+
+.article li::marker {
+  color: var(--navy);
+}
+
+.figures dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2px;
+  margin: 0.5em 0;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--line);
+}
+
+.figures div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 4px;
+  padding: 20px;
+  background: var(--mist);
+}
+
+.figures dt {
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+.figures dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(24px, 2vw, 36px);
+  line-height: 1.1;
+  color: var(--indigo);
+  font-variant-numeric: tabular-nums;
+}

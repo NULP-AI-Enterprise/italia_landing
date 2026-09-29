@@ -1,7 +1,7 @@
 .lang {
   display: inline-flex;
   align-self: center;
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong);
   background: #fff;
 }
 
@@ -11,14 +11,16 @@
   gap: 8px;
   min-height: 40px;
   padding: 0 clamp(12px, 0.9vw, 18px);
-  color: var(--ink-nav);
+  color: var(--ink-soft);
   font: 700 14px/1 var(--font-body);
   letter-spacing: 0.02em;
+  text-decoration: none;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .option:not(.active):hover {
   background: var(--mist);
+  color: var(--ink-black);
 }
 
 .active {

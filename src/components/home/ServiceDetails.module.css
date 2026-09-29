@@ -1,0 +1,98 @@
+.details {
+  padding-bottom: clamp(40px, 5vw, 100px);
+}
+
+.service {
+  padding-block: clamp(32px, 4.5vw, 96px);
+}
+
+.service + .service {
+  border-top: 1px solid var(--line);
+}
+
+/* Short highlight after a card click, so the reader sees where they landed */
+.service:target .title {
+  animation: landed 1.8s var(--ease);
+}
+
+@keyframes landed {
+  0%,
+  35% {
+    background: #ffe7c2;
+    box-shadow: 0 0 0 8px #ffe7c2;
+  }
+  100% {
+    background: transparent;
+    box-shadow: 0 0 0 8px transparent;
+  }
+}
+
+.top {
+  display: grid;
+  grid-template-columns: minmax(0, 35fr) minmax(0, 65fr);
+  align-items: start;
+  gap: clamp(20px, 1.6vw, 36px);
+}
+
+.media {
+  aspect-ratio: 2.21 / 1;
+  overflow: hidden;
+  background: var(--mist);
+}
+
+.media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.title {
+  margin-bottom: clamp(14px, 2vw, 40px);
+  font-weight: 700;
+  font-size: clamp(19px, 1.55vw, 31px);
+  line-height: 1.3;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--ink-black);
+  border-radius: 2px;
+}
+
+.lead,
+.body p {
+  max-width: 88ch;
+  font-size: clamp(16px, 1.45vw, 29px);
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.body {
+  display: grid;
+  gap: 0.6em;
+  margin-top: clamp(20px, 2.2vw, 44px);
+}
+
+.body p {
+  max-width: none;
+}
+
+.link {
+  display: inline-block;
+  padding-block: 6px;
+  font-weight: 700;
+  color: var(--navy);
+  text-underline-offset: 4px;
+}
+
+.link:hover {
+  color: var(--indigo);
+}
+
+@media (max-width: 767px) {
+  .top {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    text-align: start;
+  }
+}

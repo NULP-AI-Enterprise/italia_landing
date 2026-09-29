@@ -1,28 +1,44 @@
 import type { Metadata } from "next";
-import { HomeHero } from "@/components/home/HomeHero";
-import { JoinBanner } from "@/components/home/JoinBanner";
-import { Services } from "@/components/home/Services";
+import { ServiceCards } from "@/components/home/ServiceCards";
+import { ServiceDetails } from "@/components/home/ServiceDetails";
+import { JoinButton } from "@/components/ui/JoinButton";
+import { PageHero } from "@/components/ui/PageHero";
+import { getPage, getServices } from "@/content/repository";
 import { localeAlternates } from "@/i18n/alternates";
 import { localePath } from "@/i18n/config";
 import { getDictionary, getLocale } from "@/i18n/get-dictionary";
+import styles from "./home.module.css";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [locale, dict] = await Promise.all([getLocale(), getDictionary()]);
+  const locale = await getLocale();
+  const [page, dict] = await Promise.all([getPage("home", locale), getDictionary()]);
   return {
-    title: { absolute: `${dict.meta.homeTitle} — ${dict.meta.siteName}` },
-    description: dict.meta.homeDescription,
+    title: { absolute: `${page.seo.title} — ${dict.siteName}` },
+    description: page.seo.description,
     alternates: localeAlternates(locale),
   };
 }
 
 export default async function HomePage() {
-  const [locale, dict] = await Promise.all([getLocale(), getDictionary()]);
+  const locale = await getLocale();
+  const [page, services, dict] = await Promise.all([
+    getPage("home", locale),
+    getServices(locale),
+    getDictionary(),
+  ]);
 
   return (
     <>
-      <HomeHero hero={dict.home.hero} logoAlt={dict.a11y.logoAlt} />
-      <Services services={dict.home.services} />
-      <JoinBanner join={dict.home.join} href={localePath(locale, "/join")} />
+      <PageHero title={page.hero.title} logoAlt={dict.a11y.logoAlt}>
+        <ul className={styles.cities}>
+          {page.hero.cities.map((city) => (
+            <li key={city}>{city}</li>
+          ))}
+        </ul>
+      </PageHero>
+      <ServiceCards heading={page.servicesHeading} services={services} />
+      <JoinButton href={localePath(locale, "/join")} label={dict.actions.join} />
+      <ServiceDetails locale={locale} heading={page.detailsHeading} services={services} />
     </>
   );
 }

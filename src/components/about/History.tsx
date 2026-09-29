@@ -1,49 +1,34 @@
-import Image from "next/image";
-import type { Dictionary } from "@/i18n/get-dictionary";
+import type { AboutPageContent } from "@/content/repository";
+import { ContentImage } from "@/components/ui/ContentImage";
 import { Reveal } from "@/components/ui/Reveal";
-import { RichText } from "@/components/ui/RichText";
-import signing from "@/assets/images/history-signing.jpg";
-import conference from "@/assets/images/history-conference.jpg";
-import expo from "@/assets/images/history-expo.jpg";
-import members from "@/assets/images/history-members.jpg";
+import { RichText, TextLines } from "@/components/ui/RichText";
 import styles from "./History.module.css";
 
-const photos = [signing, conference, expo, members];
-
-export function History({ history }: { history: Dictionary["about"]["history"] }) {
+export function History({ history }: { history: AboutPageContent["history"] }) {
   return (
     <section className={styles.history} aria-labelledby="history-title">
       <div className={`container ${styles.grid}`}>
         <Reveal>
-          <span className="eyebrow">{history.eyebrow}</span>
+          <p className="eyebrow">{history.eyebrow}</p>
           <h2 className={`section-title ${styles.title}`} id="history-title">
-            {history.titleLines.map((line) => (
-              <span className="line" key={line}>
-                {line}{" "}
-              </span>
-            ))}
+            <TextLines text={history.title} />
           </h2>
           <div className={styles.body}>
-            {history.paragraphs.map((paragraph) => (
-              <p key={paragraph}>
+            {history.paragraphs.map((paragraph, index) => (
+              <p key={index}>
                 <RichText text={paragraph} />
               </p>
             ))}
           </div>
         </Reveal>
 
-        <div className={styles.collage}>
-          {photos.map((photo, index) => (
-            <Reveal as="figure" className={styles.item} index={index} key={photo.src}>
-              <Image
-                src={photo}
-                alt={history.imageAlts[index]}
-                placeholder="blur"
-                sizes="(max-width: 960px) 50vw, 25vw"
-              />
+        <ul className={styles.collage}>
+          {history.images.map((image, index) => (
+            <Reveal as="li" className={styles.item} index={index} key={image.src}>
+              <ContentImage media={image} sizes="(max-width: 960px) 50vw, 24vw" />
             </Reveal>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

@@ -11,3 +11,17 @@ export function localeAlternates(locale: Locale, path = "/"): Metadata["alternat
     },
   };
 }
+
+/** Page metadata from an editor-managed SEO block. */
+export function pageMetadata(
+  seo: { title: string; description: string },
+  locale: Locale,
+  path: string,
+): Metadata {
+  return {
+    title: seo.title,
+    description: seo.description,
+    alternates: localeAlternates(locale, path),
+    openGraph: { title: seo.title, description: seo.description, locale, type: "website" },
+  };
+}

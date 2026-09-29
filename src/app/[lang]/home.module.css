@@ -1,0 +1,13 @@
+.cities {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: clamp(14px, 2.2vw, 48px);
+  row-gap: 4px;
+  margin: clamp(8px, 0.9vw, 18px) 0 0;
+  padding: 0;
+  list-style: none;
+  font-weight: 700;
+  font-size: clamp(16px, 1.75vw, 34px);
+  line-height: 1.3;
+}

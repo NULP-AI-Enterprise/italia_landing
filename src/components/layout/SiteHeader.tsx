@@ -1,37 +1,34 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { sitePages } from "@/config/site-pages";
 import { localePath, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/get-dictionary";
-import logo from "@/assets/images/logo.png";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import styles from "./SiteHeader.module.css";
 
 type SiteHeaderProps = {
   locale: Locale;
+  siteName: string;
   nav: Dictionary["nav"];
   a11y: Dictionary["a11y"];
 };
 
-export function SiteHeader({ locale, nav, a11y }: SiteHeaderProps) {
+/**
+ * As in the design: the current page name sits on the left and the menu
+ * lists the other main sections.
+ */
+export function SiteHeader({ locale, siteName, nav, a11y }: SiteHeaderProps) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
-  const homePath = localePath(locale);
-  const isHome = pathname === homePath;
-
-  const items = [
-    { href: localePath(locale, "/about"), label: nav.about },
-    { href: localePath(locale, "/#services"), label: nav.services },
-    { href: localePath(locale, "/publications"), label: nav.publications },
-    { href: localePath(locale, "/members"), label: nav.members },
-  ];
+  const current = sitePages.find((page) => localePath(locale, page.path) === pathname);
+  const items = sitePages.filter((page) => page.inHeader && page !== current);
 
   // Header shadow once the page leaves the top
   useEffect(() => {
@@ -65,10 +62,7 @@ export function SiteHeader({ locale, nav, a11y }: SiteHeaderProps) {
       <div ref={sentinelRef} className={styles.sentinel} aria-hidden="true" />
       <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
         <div className={`container ${styles.inner}`}>
-          <Link className={styles.brand} href={homePath} aria-label={a11y.homeLink}>
-            <Image className={styles.logo} src={logo} alt="" width={58} height={58} preload />
-            {isHome && <span className={styles.pageTitle}>{nav.home}</span>}
-          </Link>
+          <span className={styles.pageTitle}>{current ? nav[current.key] : siteName}</span>
 
           <nav
             id="site-nav"
@@ -76,15 +70,14 @@ export function SiteHeader({ locale, nav, a11y }: SiteHeaderProps) {
             aria-label={a11y.mainNav}
           >
             <ul className={styles.list}>
-              {items.map((item) => (
-                <li key={item.href}>
+              {items.map((page) => (
+                <li key={page.key}>
                   <Link
                     className={styles.link}
-                    href={item.href}
-                    aria-current={pathname === item.href ? "page" : undefined}
+                    href={localePath(locale, page.path)}
                     onClick={() => setOpen(false)}
                   >
-                    {item.label}
+                    {nav[page.key]}
                   </Link>
                 </li>
               ))}
@@ -101,7 +94,7 @@ export function SiteHeader({ locale, nav, a11y }: SiteHeaderProps) {
             aria-label={open ? a11y.closeMenu : a11y.openMenu}
             onClick={() => setOpen((value) => !value)}
           >
-            <span className={styles.bars} />
+            <span className={styles.bars} aria-hidden="true" />
           </button>
         </div>
       </header>

@@ -1,0 +1,88 @@
+.hero {
+  position: relative;
+  padding-bottom: clamp(20px, 1.25vw, 26px);
+  color: #fff;
+  /* Deep indigo with lighter edges, as in the design */
+  background:
+    radial-gradient(120% 140% at 50% 55%, #00003d 0%, #000047 55%, var(--indigo-edge) 100%),
+    var(--indigo);
+}
+
+.inner {
+  display: grid;
+  /* emblem | text | empty column of the same width, so the text is centred on the page */
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: clamp(20px, 3vw, 64px);
+  min-height: clamp(180px, 15vw, 300px);
+  padding-block: clamp(24px, 2.4vw, 48px);
+}
+
+.emblem,
+.inner::after {
+  width: clamp(72px, 8.4vw, 170px);
+}
+
+.emblem {
+  height: auto;
+}
+
+.inner::after {
+  content: "";
+}
+
+.content {
+  text-align: center;
+}
+
+.title {
+  font-weight: 700;
+  font-size: clamp(26px, 3.2vw, 64px);
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+}
+
+.lead {
+  max-width: 64ch;
+  margin: clamp(8px, 0.8vw, 16px) auto 0;
+  font-size: clamp(16px, 1.3vw, 24px);
+  line-height: 1.5;
+  color: var(--on-dark-soft);
+  text-wrap: pretty;
+}
+
+.stripe {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: clamp(5px, 0.75vw, 14px);
+}
+
+.stripe span:nth-child(1) {
+  background: var(--it-green);
+}
+
+.stripe span:nth-child(2) {
+  background: #fff;
+}
+
+.stripe span:nth-child(3) {
+  background: var(--it-red);
+}
+
+@media (max-width: 767px) {
+  .inner {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    row-gap: 16px;
+    padding-block: 28px;
+  }
+
+  .emblem {
+    width: 88px;
+  }
+
+  .inner::after {
+    display: none;
+  }
+}

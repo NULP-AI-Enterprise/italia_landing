@@ -1,16 +1,15 @@
 .footer {
-  background: var(--navy);
-  color: var(--on-navy-soft);
-  font-size: 14px;
+  background: var(--indigo);
+  color: var(--on-dark-soft);
+  font-size: 15px;
 }
 
 .inner {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px 32px;
-  padding-block: 28px;
+  gap: 20px 40px;
+  padding-block: 32px;
 }
 
 .brand {
@@ -18,13 +17,13 @@
   align-items: center;
   gap: 12px;
   color: #fff;
-  font-family: var(--font-display);
   font-weight: 700;
-  font-size: 15px;
+  font-size: 16px;
+  text-decoration: none;
 }
 
 .logo {
-  width: 40px;
+  width: 48px;
   height: auto;
   border-radius: 50%;
   background: #fff;
@@ -33,6 +32,7 @@
 .nav {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 8px 28px;
   margin: 0;
   padding: 0;
@@ -40,16 +40,28 @@
 }
 
 .nav a {
-  transition: color 0.2s ease;
+  display: inline-block;
+  padding: 4px 0;
+  text-decoration: none;
+  text-underline-offset: 4px;
 }
 
 .nav a:hover {
   color: #fff;
+  text-decoration: underline;
 }
 
-@media (max-width: 767px) {
+.copy {
+  white-space: nowrap;
+}
+
+@media (max-width: 960px) {
   .inner {
-    flex-direction: column;
-    align-items: flex-start;
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+
+  .nav {
+    justify-content: flex-start;
   }
 }

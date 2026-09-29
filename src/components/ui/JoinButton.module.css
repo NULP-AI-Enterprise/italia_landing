@@ -1,0 +1,11 @@
+.wrap {
+  display: flex;
+  justify-content: center;
+  padding-block: clamp(32px, 4vw, 80px);
+}
+
+.join {
+  min-width: min(100%, clamp(220px, 20vw, 400px));
+  min-height: clamp(56px, 5.2vw, 104px);
+  font-size: clamp(20px, 1.9vw, 38px);
+}

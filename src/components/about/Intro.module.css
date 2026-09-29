@@ -1,5 +1,6 @@
 .intro {
   display: grid;
+  padding-top: clamp(16px, 1vw, 24px);
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: stretch;
 }
@@ -33,8 +34,7 @@
 
 .pillarTitle {
   margin-bottom: 6px;
-  font-family: var(--font-body);
-  font-weight: 600;
+  font-weight: 700;
   font-size: clamp(16px, 1.1vw, 21px);
   line-height: 1.35;
   color: var(--navy);
@@ -60,6 +60,10 @@
 }
 
 .media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 

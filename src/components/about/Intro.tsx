@@ -1,11 +1,10 @@
-import Image from "next/image";
-import type { Dictionary } from "@/i18n/get-dictionary";
+import type { AboutPageContent } from "@/content/repository";
+import { ContentImage } from "@/components/ui/ContentImage";
 import { Reveal } from "@/components/ui/Reveal";
 import { RichText } from "@/components/ui/RichText";
-import flags from "@/assets/images/flags.jpg";
 import styles from "./Intro.module.css";
 
-export function Intro({ intro }: { intro: Dictionary["about"]["intro"] }) {
+export function Intro({ intro }: { intro: AboutPageContent["intro"] }) {
   const pillars = [
     { ...intro.vision, accent: true },
     { ...intro.mission, accent: false },
@@ -28,13 +27,7 @@ export function Intro({ intro }: { intro: Dictionary["about"]["intro"] }) {
       </Reveal>
 
       <div className={styles.media}>
-        <Image
-          src={flags}
-          alt={intro.imageAlt}
-          fill
-          sizes="(max-width: 960px) 100vw, 50vw"
-          loading="eager"
-        />
+        <ContentImage media={intro.image} sizes="(max-width: 960px) 100vw, 50vw" eager />
       </div>
     </section>
   );

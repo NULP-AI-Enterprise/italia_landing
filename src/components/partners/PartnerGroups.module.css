@@ -1,0 +1,80 @@
+.groups {
+  display: grid;
+  gap: clamp(48px, 5vw, 110px);
+  padding-top: clamp(32px, 3.5vw, 72px);
+}
+
+.title {
+  margin-bottom: clamp(16px, 1.6vw, 28px);
+  font-size: clamp(24px, 2.2vw, 40px);
+}
+
+.intro {
+  max-width: 70ch;
+  margin: -8px 0 24px;
+  color: var(--ink-soft);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 1.6vw, 28px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  display: flex;
+  gap: 18px;
+  padding: clamp(18px, 1.6vw, 28px);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.logo {
+  flex: none;
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+}
+
+.body {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+
+.name {
+  font-weight: 700;
+  font-size: clamp(16px, 1.15vw, 20px);
+  line-height: 1.35;
+  color: var(--ink-black);
+}
+
+.description {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.site {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.site a {
+  color: var(--navy);
+  text-underline-offset: 3px;
+}
+
+.site a:hover {
+  color: var(--indigo);
+}
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

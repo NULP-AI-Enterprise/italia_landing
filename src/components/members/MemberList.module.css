@@ -1,0 +1,202 @@
+.letters {
+  display: grid;
+  gap: clamp(20px, 2vw, 36px);
+}
+
+.letter {
+  margin-bottom: 8px;
+  font-weight: 400;
+  font-size: clamp(40px, 3.4vw, 64px);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--ink-black);
+}
+
+/* Outline lettering is decorative; keep a solid fallback when forced colours are on */
+@media (forced-colors: active) {
+  .letter {
+    color: CanvasText;
+    -webkit-text-stroke: 0;
+  }
+}
+
+.list {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 44px;
+  padding: 8px 0;
+  cursor: pointer;
+  list-style-position: outside;
+}
+
+.summary::marker {
+  color: var(--navy);
+}
+
+.name {
+  font-size: clamp(18px, 1.3vw, 22px);
+  color: var(--ink-black);
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 5px;
+}
+
+.summary:hover .name {
+  text-decoration-color: var(--orange);
+}
+
+.tagline {
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.member[open] .summary {
+  margin-bottom: 12px;
+}
+
+.noDetails {
+  margin-bottom: 16px;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+/* Company card (dark, as in the design) */
+.card {
+  max-width: 820px;
+  margin-bottom: 24px;
+  overflow: hidden;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #00003f 0%, #000052 60%, #04107a 100%);
+  color: #fff;
+}
+
+.cardMain {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 20px;
+  padding: clamp(18px, 1.6vw, 28px);
+}
+
+.photo {
+  width: 120px;
+  height: 150px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.cardText {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.company {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.companyName {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.cardTagline,
+.description {
+  font-size: 15px;
+  color: var(--on-dark-soft);
+}
+
+.facts {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  font-size: 15px;
+}
+
+.facts div {
+  display: grid;
+  grid-template-columns: minmax(110px, auto) 1fr;
+  gap: 12px;
+}
+
+.facts dt {
+  color: var(--on-dark-soft);
+}
+
+.facts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.card a {
+  color: #fff;
+  text-underline-offset: 3px;
+}
+
+.card a:hover {
+  color: #ffd79a;
+}
+
+.card :focus-visible {
+  outline-color: #ffd79a;
+}
+
+.website {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.needs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.needsBlock {
+  padding: 18px clamp(18px, 1.6vw, 28px);
+  background: #000048;
+}
+
+.needsBlock h4 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.needsBlock ul {
+  margin: 0;
+  padding-left: 1.2em;
+  font-size: 15px;
+  color: var(--on-dark-soft);
+}
+
+@media (max-width: 560px) {
+  .cardMain {
+    grid-template-columns: 1fr;
+  }
+
+  .facts div {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

@@ -6,7 +6,8 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(24px, 3.6vw, 76px);
-  margin: 0;
+  /* Only vertical: horizontal auto margins come from .container and centre the grid */
+  margin-block: 0;
   list-style: none;
 }
 

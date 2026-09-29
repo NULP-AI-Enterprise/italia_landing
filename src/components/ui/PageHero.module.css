@@ -37,7 +37,7 @@
 
 .title {
   font-weight: 700;
-  font-size: clamp(26px, 3.2vw, 64px);
+  font-size: clamp(26px, 3.2vw, 52px); /* 52px keeps the home title on one line in both languages */
   line-height: 1.15;
   letter-spacing: -0.005em;
   text-wrap: balance;

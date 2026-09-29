@@ -1,0 +1,22 @@
+{
+  "seo": {
+    "title": {
+      "uk": "Календар заходів",
+      "it": "Calendario degli eventi"
+    },
+    "description": {
+      "uk": "Виставки та ділові заходи в Італії, у яких бере участь асоціація Made in Ukraine for Italy.",
+      "it": "Fiere ed eventi d’affari in Italia a cui partecipa l’associazione Made in Ukraine for Italy."
+    }
+  },
+  "hero": {
+    "title": {
+      "uk": "Календар заходів",
+      "it": "Calendario degli eventi"
+    },
+    "lead": {
+      "uk": "Виставки та ділові події в Італії, де можна зустріти асоціацію та її членів.",
+      "it": "Fiere ed eventi d’affari in Italia dove incontrare l’associazione e i suoi soci."
+    }
+  }
+}

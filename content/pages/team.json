@@ -1,0 +1,22 @@
+{
+  "seo": {
+    "title": {
+      "uk": "Команда",
+      "it": "Team"
+    },
+    "description": {
+      "uk": "Команда асоціації Made in Ukraine for Italy: керівництво, керівники напрямів і регіональні представництва в Україні та Італії.",
+      "it": "Il team dell’associazione Made in Ukraine for Italy: direzione, responsabili dei dipartimenti e rappresentanze regionali in Ucraina e in Italia."
+    }
+  },
+  "hero": {
+    "title": {
+      "uk": "Люди, що будують міст",
+      "it": "Le persone che costruiscono il ponte"
+    },
+    "lead": {
+      "uk": "Наша команда поєднує глибоку експертизу в торгівлі, праві, дипломатії та бізнес-розвитку з двох боків Адріатики.",
+      "it": "Il nostro team unisce una profonda esperienza nel commercio, nel diritto, nella diplomazia e nello sviluppo d’impresa sulle due sponde dell’Adriatico."
+    }
+  }
+}

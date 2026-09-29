@@ -1,0 +1,98 @@
+[
+  {
+    "id": "construction-materials",
+    "order": 1,
+    "name": {
+      "uk": "Будівництво та матеріали",
+      "it": "Edilizia e materiali"
+    }
+  },
+  {
+    "id": "sun-protection-textiles",
+    "order": 2,
+    "name": {
+      "uk": "Сонцезахист і тканини",
+      "it": "Protezione solare e tessuti"
+    }
+  },
+  {
+    "id": "furniture-interior",
+    "order": 3,
+    "name": {
+      "uk": "Меблі та інтер’єр",
+      "it": "Arredamento e interni"
+    }
+  },
+  {
+    "id": "ventilation-heat-recovery",
+    "order": 4,
+    "name": {
+      "uk": "Вентиляція та рекуперація",
+      "it": "Ventilazione e recupero di calore"
+    }
+  },
+  {
+    "id": "consumer-goods",
+    "order": 5,
+    "name": {
+      "uk": "Споживчі товари",
+      "it": "Beni di consumo"
+    }
+  },
+  {
+    "id": "windows-doors",
+    "order": 6,
+    "name": {
+      "uk": "Вікна та двері",
+      "it": "Finestre e porte"
+    }
+  },
+  {
+    "id": "sport-leisure",
+    "order": 7,
+    "name": {
+      "uk": "Спорт і відпочинок",
+      "it": "Sport e tempo libero"
+    }
+  },
+  {
+    "id": "media-communications",
+    "order": 8,
+    "name": {
+      "uk": "Медіа та комунікації",
+      "it": "Media e comunicazione"
+    }
+  },
+  {
+    "id": "medicine-beauty",
+    "order": 9,
+    "name": {
+      "uk": "Медицина та краса",
+      "it": "Medicina e bellezza"
+    }
+  },
+  {
+    "id": "light-industry-fashion",
+    "order": 10,
+    "name": {
+      "uk": "Легка промисловість і мода",
+      "it": "Industria leggera e moda"
+    }
+  },
+  {
+    "id": "metalworking",
+    "order": 11,
+    "name": {
+      "uk": "Металообробка",
+      "it": "Lavorazione dei metalli"
+    }
+  },
+  {
+    "id": "tourism",
+    "order": 12,
+    "name": {
+      "uk": "Туризм",
+      "it": "Turismo"
+    }
+  }
+]

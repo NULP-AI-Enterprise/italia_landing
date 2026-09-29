@@ -1,0 +1,110 @@
+[
+  {
+    "id": "representation",
+    "order": 1,
+    "published": true,
+    "title": {
+      "uk": "Офіційне представництво в Італії для членів асоціації",
+      "it": "Rappresentanza ufficiale in Italia per i soci dell’associazione"
+    },
+    "summary": {
+      "uk": "Ми забезпечуємо представництво вашого бізнесу в різних регіонах Італії. Завдяки цьому ви залишаєтеся активними в Італії незалежно від того, де перебуваєте.",
+      "it": "Garantiamo la rappresentanza della vostra impresa in diverse regioni d’Italia. Così restate attivi in Italia ovunque vi troviate."
+    },
+    "lead": {
+      "uk": "Ми забезпечуємо представництво вашого бізнесу в різних регіонах Італії. Завдяки цьому ви залишаєтеся активними в Італії незалежно від того, де перебуваєте, і можете впевнено розвивати свою діяльність на італійському ринку.",
+      "it": "Garantiamo la rappresentanza della vostra impresa in diverse regioni d’Italia. Così restate attivi in Italia ovunque vi troviate e potete sviluppare con sicurezza la vostra attività sul mercato italiano."
+    },
+    "body": [
+      {
+        "uk": "Представницький офіс — це надійна позиція, яку забезпечують як офіційний статус, так і фізична присутність через наших представників на місцях. Це необхідна умова для повноцінної роботи в Італії, престижна можливість пов’язати свій бізнес із фінансовою столицею країни та ключовими регіонами, а також економічно вигідне рішення. Ви заощаджуєте значні кошти та час, адже вам більше не потрібно шукати відповідну адресу в Італії чи витрачатися на утримання власного офісу.",
+        "it": "Un ufficio di rappresentanza è una posizione solida, garantita sia dallo status ufficiale sia dalla presenza fisica dei nostri rappresentanti sul territorio. È una condizione necessaria per operare pienamente in Italia, un’occasione prestigiosa per legare la vostra impresa alla capitale finanziaria del Paese e alle regioni chiave, oltre che una soluzione conveniente. Risparmiate tempo e risorse, perché non dovete più cercare un indirizzo adatto in Italia né sostenere i costi di un ufficio proprio."
+      }
+    ],
+    "image": {
+      "src": "/media/services/office.jpg",
+      "width": 1800,
+      "height": 1198,
+      "alt": {
+        "uk": "Скляні хмарочоси ділового району Мілана знизу",
+        "it": "Grattacieli in vetro del quartiere degli affari di Milano visti dal basso"
+      }
+    }
+  },
+  {
+    "id": "operational-support",
+    "order": 2,
+    "published": true,
+    "title": {
+      "uk": "Операційна підтримка та дорожня карта розвитку",
+      "it": "Supporto operativo e roadmap di sviluppo"
+    },
+    "summary": {
+      "uk": "Кожен бізнес потребує індивідуального підходу. Ми розробляємо рішення, створені спеціально для кожної компанії, незалежно від її розміру та цілей.",
+      "it": "Ogni impresa ha bisogno di un approccio su misura. Sviluppiamo soluzioni pensate per ciascuna azienda, qualunque siano le sue dimensioni e i suoi obiettivi."
+    },
+    "lead": {
+      "uk": "Кожен бізнес потребує індивідуального підходу. Ми розробляємо рішення, створені спеціально для кожної компанії, незалежно від її розміру та цілей.",
+      "it": "Ogni impresa ha bisogno di un approccio su misura. Sviluppiamo soluzioni pensate per ciascuna azienda, qualunque siano le sue dimensioni e i suoi obiettivi."
+    },
+    "body": [
+      {
+        "uk": "Увага до індивідуальних запитів і застосування наших найкращих знань у кожному конкретному випадку — ось що робить нас стратегічним партнером і тим місцем, куди звертаються насамперед, коли йдеться про запуск або масштабування бізнесу в Італії.",
+        "it": "L’attenzione alle richieste individuali e l’applicazione delle nostre migliori competenze a ogni singolo caso ci rendono un partner strategico e il primo punto di riferimento quando si tratta di avviare o far crescere un’impresa in Italia."
+      },
+      {
+        "uk": "Ми також є ключовим партнером у пошуку та використанні численних європейських, національних і регіональних програм фінансування для бізнесу. Ми допомагаємо нашим партнерам зорієнтуватися в цих можливостях і заохочуємо їх активно ними користуватися.",
+        "it": "Siamo anche un partner chiave nella ricerca e nell’utilizzo dei numerosi programmi di finanziamento europei, nazionali e regionali per le imprese. Aiutiamo i nostri partner a orientarsi tra queste opportunità e li incoraggiamo a coglierle attivamente."
+      }
+    ],
+    "image": {
+      "src": "/media/services/roadmap.jpg",
+      "width": 1800,
+      "height": 1200,
+      "alt": {
+        "uk": "Команда обговорює план проєкту над кресленнями за столом",
+        "it": "Un team discute il piano di progetto sui disegni tecnici al tavolo"
+      }
+    }
+  },
+  {
+    "id": "networking",
+    "order": 3,
+    "published": true,
+    "title": {
+      "uk": "Ділові зустрічі та нетворкінг B2B і B2C",
+      "it": "Incontri d’affari e networking B2B e B2C"
+    },
+    "summary": {
+      "uk": "Однією з наших ключових послуг є регулярні нетворкінг-заходи, на яких ми представляємо нових партнерів і членів асоціації, а також надаємо їм платформу, щоб презентувати свої продукти й послуги.",
+      "it": "Uno dei nostri servizi principali sono gli eventi di networking periodici, in cui presentiamo nuovi partner e soci dell’associazione e offriamo loro una piattaforma per presentare prodotti e servizi."
+    },
+    "lead": {
+      "uk": "Однією з наших ключових послуг є регулярні нетворкінг-заходи, на яких ми представляємо нових партнерів і членів асоціації, а також надаємо їм платформу, щоб презентувати свої продукти й послуги, звернутися по підтримку та запропонувати рішення в межах спільноти.",
+      "it": "Uno dei nostri servizi principali sono gli eventi di networking periodici, in cui presentiamo nuovi partner e soci dell’associazione e offriamo loro una piattaforma per presentare prodotti e servizi, chiedere supporto e proporre soluzioni all’interno della community."
+    },
+    "body": [
+      {
+        "uk": "Наші заходи виходять за межі України та Італії й часто об’єднують учасників зі США, країн ЄС та Азії. Також на наших заходах часто бувають спеціальні гості з різних сфер діяльності.",
+        "it": "I nostri eventi vanno oltre i confini di Ucraina e Italia e riuniscono spesso partecipanti da Stati Uniti, Paesi dell’UE e Asia. Vi prendono parte spesso anche ospiti speciali provenienti da diversi settori."
+      },
+      {
+        "uk": "Крім того, ми регулярно беремо участь у виставковому житті Італії. Це робить нас компетентним партнером в організації, моніторингу та участі в усіх відповідних заходах, що дають змогу представити асоціацію та її членів безпосередньо в самому серці їхньої галузі.",
+        "it": "Inoltre, partecipiamo regolarmente alla vita fieristica italiana. Questo ci rende un partner competente nell’organizzazione, nel monitoraggio e nella partecipazione a tutti gli eventi rilevanti, che permettono di presentare l’associazione e i suoi soci direttamente nel cuore del loro settore."
+      }
+    ],
+    "image": {
+      "src": "/media/services/networking.jpg",
+      "width": 1800,
+      "height": 868,
+      "alt": {
+        "uk": "Учасники ділового заходу слухають доповідача в залі",
+        "it": "Partecipanti a un evento d’affari ascoltano il relatore in sala"
+      }
+    },
+    "link": {
+      "label": { "uk": "Календар заходів", "it": "Calendario degli eventi" },
+      "href": "/events"
+    }
+  }
+]

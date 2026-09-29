@@ -1,0 +1,331 @@
+[
+  {
+    "code": "UA-05",
+    "name": {
+      "uk": "Вінницька область",
+      "it": "Oblast’ di Vinnycja"
+    }
+  },
+  {
+    "code": "UA-07",
+    "name": {
+      "uk": "Волинська область",
+      "it": "Oblast’ di Volinia"
+    }
+  },
+  {
+    "code": "UA-12",
+    "name": {
+      "uk": "Дніпропетровська область",
+      "it": "Oblast’ di Dnipropetrovs’k"
+    }
+  },
+  {
+    "code": "UA-14",
+    "name": {
+      "uk": "Донецька область",
+      "it": "Oblast’ di Donec’k"
+    }
+  },
+  {
+    "code": "UA-18",
+    "name": {
+      "uk": "Житомирська область",
+      "it": "Oblast’ di Žytomyr"
+    }
+  },
+  {
+    "code": "UA-21",
+    "name": {
+      "uk": "Закарпатська область",
+      "it": "Oblast’ della Transcarpazia"
+    }
+  },
+  {
+    "code": "UA-23",
+    "name": {
+      "uk": "Запорізька область",
+      "it": "Oblast’ di Zaporižžja"
+    }
+  },
+  {
+    "code": "UA-26",
+    "name": {
+      "uk": "Івано-Франківська область",
+      "it": "Oblast’ di Ivano-Frankivs’k"
+    }
+  },
+  {
+    "code": "UA-30",
+    "name": {
+      "uk": "Київ",
+      "it": "Kyiv (città)"
+    }
+  },
+  {
+    "code": "UA-32",
+    "name": {
+      "uk": "Київська область",
+      "it": "Oblast’ di Kyiv"
+    }
+  },
+  {
+    "code": "UA-35",
+    "name": {
+      "uk": "Кіровоградська область",
+      "it": "Oblast’ di Kirovohrad"
+    }
+  },
+  {
+    "code": "UA-09",
+    "name": {
+      "uk": "Луганська область",
+      "it": "Oblast’ di Luhans’k"
+    }
+  },
+  {
+    "code": "UA-46",
+    "name": {
+      "uk": "Львівська область",
+      "it": "Oblast’ di Leopoli"
+    }
+  },
+  {
+    "code": "UA-48",
+    "name": {
+      "uk": "Миколаївська область",
+      "it": "Oblast’ di Mykolaïv"
+    }
+  },
+  {
+    "code": "UA-51",
+    "name": {
+      "uk": "Одеська область",
+      "it": "Oblast’ di Odessa"
+    }
+  },
+  {
+    "code": "UA-53",
+    "name": {
+      "uk": "Полтавська область",
+      "it": "Oblast’ di Poltava"
+    }
+  },
+  {
+    "code": "UA-56",
+    "name": {
+      "uk": "Рівненська область",
+      "it": "Oblast’ di Rivne"
+    }
+  },
+  {
+    "code": "UA-59",
+    "name": {
+      "uk": "Сумська область",
+      "it": "Oblast’ di Sumy"
+    }
+  },
+  {
+    "code": "UA-61",
+    "name": {
+      "uk": "Тернопільська область",
+      "it": "Oblast’ di Ternopil’"
+    }
+  },
+  {
+    "code": "UA-63",
+    "name": {
+      "uk": "Харківська область",
+      "it": "Oblast’ di Charkiv"
+    }
+  },
+  {
+    "code": "UA-65",
+    "name": {
+      "uk": "Херсонська область",
+      "it": "Oblast’ di Cherson"
+    }
+  },
+  {
+    "code": "UA-68",
+    "name": {
+      "uk": "Хмельницька область",
+      "it": "Oblast’ di Chmel’nyc’kyj"
+    }
+  },
+  {
+    "code": "UA-71",
+    "name": {
+      "uk": "Черкаська область",
+      "it": "Oblast’ di Čerkasy"
+    }
+  },
+  {
+    "code": "UA-74",
+    "name": {
+      "uk": "Чернігівська область",
+      "it": "Oblast’ di Černihiv"
+    }
+  },
+  {
+    "code": "UA-77",
+    "name": {
+      "uk": "Чернівецька область",
+      "it": "Oblast’ di Černivci"
+    }
+  },
+  {
+    "code": "UA-43",
+    "name": {
+      "uk": "Автономна Республіка Крим",
+      "it": "Repubblica Autonoma di Crimea"
+    }
+  },
+  {
+    "code": "UA-40",
+    "name": {
+      "uk": "Севастополь",
+      "it": "Sebastopoli"
+    }
+  },
+  {
+    "code": "IT-65",
+    "name": {
+      "uk": "Абруццо",
+      "it": "Abruzzo"
+    }
+  },
+  {
+    "code": "IT-77",
+    "name": {
+      "uk": "Базиліката",
+      "it": "Basilicata"
+    }
+  },
+  {
+    "code": "IT-78",
+    "name": {
+      "uk": "Калабрія",
+      "it": "Calabria"
+    }
+  },
+  {
+    "code": "IT-72",
+    "name": {
+      "uk": "Кампанія",
+      "it": "Campania"
+    }
+  },
+  {
+    "code": "IT-45",
+    "name": {
+      "uk": "Емілія-Романья",
+      "it": "Emilia-Romagna"
+    }
+  },
+  {
+    "code": "IT-36",
+    "name": {
+      "uk": "Фріулі-Венеція-Джулія",
+      "it": "Friuli-Venezia Giulia"
+    }
+  },
+  {
+    "code": "IT-62",
+    "name": {
+      "uk": "Лаціо",
+      "it": "Lazio"
+    }
+  },
+  {
+    "code": "IT-42",
+    "name": {
+      "uk": "Лігурія",
+      "it": "Liguria"
+    }
+  },
+  {
+    "code": "IT-25",
+    "name": {
+      "uk": "Ломбардія",
+      "it": "Lombardia"
+    }
+  },
+  {
+    "code": "IT-57",
+    "name": {
+      "uk": "Марке",
+      "it": "Marche"
+    }
+  },
+  {
+    "code": "IT-67",
+    "name": {
+      "uk": "Молізе",
+      "it": "Molise"
+    }
+  },
+  {
+    "code": "IT-21",
+    "name": {
+      "uk": "П’ємонт",
+      "it": "Piemonte"
+    }
+  },
+  {
+    "code": "IT-75",
+    "name": {
+      "uk": "Апулія",
+      "it": "Puglia"
+    }
+  },
+  {
+    "code": "IT-88",
+    "name": {
+      "uk": "Сардинія",
+      "it": "Sardegna"
+    }
+  },
+  {
+    "code": "IT-82",
+    "name": {
+      "uk": "Сицилія",
+      "it": "Sicilia"
+    }
+  },
+  {
+    "code": "IT-52",
+    "name": {
+      "uk": "Тоскана",
+      "it": "Toscana"
+    }
+  },
+  {
+    "code": "IT-32",
+    "name": {
+      "uk": "Трентіно-Альто-Адідже",
+      "it": "Trentino-Alto Adige"
+    }
+  },
+  {
+    "code": "IT-55",
+    "name": {
+      "uk": "Умбрія",
+      "it": "Umbria"
+    }
+  },
+  {
+    "code": "IT-23",
+    "name": {
+      "uk": "Валле-д’Аоста",
+      "it": "Valle d’Aosta"
+    }
+  },
+  {
+    "code": "IT-34",
+    "name": {
+      "uk": "Венето",
+      "it": "Veneto"
+    }
+  }
+]

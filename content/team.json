@@ -1,0 +1,200 @@
+[
+  {
+    "id": "iryna-kolomoiets-sultan",
+    "order": 1,
+    "published": true,
+    "group": "leadership",
+    "name": { "uk": "Ірина Коломоєць Султан", "it": "Iryna Kolomoiets Sultan" },
+    "role": { "uk": "Президент", "it": "Presidente" },
+    "quote": {
+      "uk": "Неупереджений погляд на світ дає нескінченні можливості для відкриття нових світів.",
+      "it": "Uno sguardo imparziale sul mondo offre infinite possibilità di scoprire nuovi mondi."
+    }
+  },
+  {
+    "id": "oksana-burbulevych",
+    "order": 2,
+    "published": true,
+    "group": "leadership",
+    "name": { "uk": "Оксана Володимирівна Бурбулевич", "it": "Oksana Volodymyrivna Burbulevych" },
+    "role": { "uk": "Віцепрезидент", "it": "Vicepresidente" },
+    "quote": {
+      "uk": "Родина — це не головне. Родина — це все.",
+      "it": "La famiglia non è la cosa più importante. La famiglia è tutto."
+    }
+  },
+  {
+    "id": "oksana-filonenko",
+    "order": 3,
+    "published": true,
+    "group": "leadership",
+    "name": { "uk": "Філоненко Оксана Володимирівна", "it": "Filonenko Oksana Volodymyrivna" },
+    "role": {
+      "uk": "Віцепрезидент з питань культурної дипломатії",
+      "it": "Vicepresidente per la diplomazia culturale"
+    },
+    "quote": {
+      "uk": "Культура — це єдине благо людства, яке, розділене між усіма, замість того щоб зменшуватися, стає більшим.",
+      "it": "La cultura è l’unico bene dell’umanità che, diviso fra tutti, anziché diminuire diventa più grande."
+    }
+  },
+  {
+    "id": "pavlo-korzh",
+    "order": 4,
+    "published": true,
+    "group": "departments",
+    "name": { "uk": "Павло Сергійович Корж", "it": "Pavlo Serhiiovych Korzh" },
+    "role": { "uk": "Керівник представництва в Україні", "it": "Responsabile della rappresentanza in Ucraina" },
+    "quote": {
+      "uk": "Найкращий момент був учора — наступний найкращий зараз.",
+      "it": "Il momento migliore era ieri, il prossimo migliore è adesso."
+    }
+  },
+  {
+    "id": "viktor-zaklitskyi",
+    "order": 5,
+    "published": true,
+    "group": "departments",
+    "name": { "uk": "Закліцький Віктор Євгенович", "it": "Zaklitskyi Viktor Yevhenovych" },
+    "role": {
+      "uk": "Керівник департаменту Rebuild Ukraine Better",
+      "it": "Responsabile del dipartimento Rebuild Ukraine Better"
+    },
+    "quote": {
+      "uk": "Діти бачать, що ми робимо сьогодні. Це і є те, що ми їм залишимо.",
+      "it": "I bambini vedono ciò che facciamo oggi. È questo che lasceremo loro."
+    }
+  },
+  {
+    "id": "valerii-konoplia",
+    "order": 6,
+    "published": true,
+    "group": "departments",
+    "name": { "uk": "Конопля Валерій Олександрович", "it": "Konoplia Valerii Oleksandrovych" },
+    "role": {
+      "uk": "Керівник департаменту медіа та комунікацій",
+      "it": "Responsabile del dipartimento media e comunicazione"
+    },
+    "quote": { "uk": "Мрія, дія, рух.", "it": "Sogno, azione, movimento." }
+  },
+  {
+    "id": "eduard-paskariuk",
+    "order": 7,
+    "published": true,
+    "group": "departments",
+    "name": { "uk": "Паскарюк Едуард Вадимович", "it": "Paskariuk Eduard Vadymovych" },
+    "role": {
+      "uk": "Керівник департаменту будівельних технологій",
+      "it": "Responsabile del dipartimento tecnologie edilizie"
+    },
+    "quote": {
+      "uk": "Де чесність стає довірою, а довіра — майбутнім.",
+      "it": "Dove l’onestà diventa fiducia e la fiducia diventa futuro."
+    }
+  },
+  {
+    "id": "olena-dotsenko",
+    "order": 8,
+    "published": true,
+    "group": "departments",
+    "name": { "uk": "Доценко Олена Олександрівна", "it": "Dotsenko Olena Oleksandrivna" },
+    "role": {
+      "uk": "Керівник департаменту зв’язків з громадськістю",
+      "it": "Responsabile del dipartimento relazioni pubbliche"
+    },
+    "quote": {
+      "uk": "Запалена свічка не втрачає вогню, запалюючи іншу. Так само і світло всередині нас.",
+      "it": "Una candela accesa non perde la sua fiamma accendendone un’altra. Così è anche la luce dentro di noi."
+    }
+  },
+  {
+    "id": "valerio-lombardo",
+    "order": 9,
+    "published": true,
+    "group": "departments",
+    "name": { "uk": "Валеріо Ломбардо", "it": "Valerio Lombardo" },
+    "role": {
+      "uk": "Радник з питань заходів та креативних проєктів",
+      "it": "Consulente per eventi e progetti creativi"
+    },
+    "quote": {
+      "uk": "Мистецтво — це, по суті, форма спілкування. Воно адаптується до будь-чого: форми, часу, — щоб щоразу розділяти концепцію епохи.",
+      "it": "L’arte è, in sostanza, una forma di comunicazione. Si adatta a qualsiasi cosa, forma e tempo, per condividere ogni volta il concetto di un’epoca."
+    }
+  },
+  {
+    "id": "nadiia-raputa",
+    "order": 10,
+    "published": true,
+    "group": "regions",
+    "name": { "uk": "Рапута Надія Михайлівна", "it": "Raputa Nadiia Mykhailivna" },
+    "role": {
+      "uk": "Директор представництва в регіоні Венето, керівник департаменту текстилю та легкої промисловості",
+      "it": "Direttore della rappresentanza nella regione Veneto, responsabile del dipartimento tessile e industria leggera"
+    },
+    "quote": {
+      "uk": "Сміливі рішення — відповідальні зміни!",
+      "it": "Decisioni coraggiose, cambiamenti responsabili!"
+    }
+  },
+  {
+    "id": "feliks-loshchenov",
+    "order": 11,
+    "published": true,
+    "group": "regions",
+    "name": { "uk": "Лощенов Фелікс Олександрович", "it": "Loshchenov Feliks Oleksandrovych" },
+    "role": { "uk": "Директор з регіонального розвитку в Україні", "it": "Direttore per lo sviluppo regionale in Ucraina" },
+    "quote": { "uk": "Майбутнє за технологіями.", "it": "Il futuro è della tecnologia." }
+  },
+  {
+    "id": "olena-sereda",
+    "order": 12,
+    "published": true,
+    "group": "regions",
+    "name": { "uk": "Олена Середа", "it": "Olena Sereda" },
+    "role": { "uk": "Директор представництва в регіоні Лаціо", "it": "Direttore della rappresentanza nella regione Lazio" },
+    "quote": {
+      "uk": "Ми не вчимо дітей мріяти про майбутнє. Ми вчимо їх його проєктувати.",
+      "it": "Non insegniamo ai bambini a sognare il futuro. Insegniamo loro a progettarlo."
+    }
+  },
+  {
+    "id": "giuseppe-colantuono",
+    "order": 13,
+    "published": true,
+    "group": "regions",
+    "name": { "uk": "Джузеппе Колантуоно", "it": "Giuseppe Colantuono" },
+    "role": {
+      "uk": "Директор представництва в регіоні Кампанія, член правління",
+      "it": "Direttore della rappresentanza nella regione Campania, membro del Consiglio direttivo"
+    },
+    "quote": {
+      "uk": "Відкриті кордони, відкриті серця: Італія та Україна!",
+      "it": "Confini aperti, cuori aperti: Italia e Ucraina!"
+    }
+  },
+  {
+    "id": "lada-kober",
+    "order": 14,
+    "published": true,
+    "group": "regions",
+    "name": { "uk": "Лада Кобер", "it": "Lada Kober" },
+    "role": { "uk": "Директор представництва в регіоні Апулія", "it": "Direttore della rappresentanza nella regione Puglia" },
+    "quote": {
+      "uk": "Сміливість — не в тому, щоб не боятися, а в тому, щоб, навіть відчуваючи страх, усе одно йти вперед.",
+      "it": "Il coraggio non sta nel non avere paura, ma nell’andare avanti anche quando la si prova."
+    }
+  },
+  {
+    "id": "viktoriia-prokopovych",
+    "order": 15,
+    "published": true,
+    "group": "regions",
+    "name": { "uk": "Вікторія Володимирівна Прокопович", "it": "Viktoriia Volodymyrivna Prokopovych" },
+    "role": {
+      "uk": "Директор представництва в регіоні Сицилія та Сардинія",
+      "it": "Direttore della rappresentanza nelle regioni Sicilia e Sardegna"
+    },
+    "quote": { "uk": "Вірити, любити, боротися і перемагати!", "it": "Credere, amare, lottare e vincere!" }
+  }
+]

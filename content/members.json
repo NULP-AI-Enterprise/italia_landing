@@ -1,0 +1,75 @@
+[
+  {
+    "id": "abra",
+    "published": true,
+    "name": "ABRA (АБРА)",
+    "industries": [],
+    "regions": [],
+    "expertise": [],
+    "offers": [],
+    "seeks": []
+  },
+  {
+    "id": "alser",
+    "published": true,
+    "name": "Alser",
+    "industries": [],
+    "regions": [],
+    "expertise": [],
+    "offers": [],
+    "seeks": []
+  },
+  {
+    "id": "bioclimatica",
+    "published": true,
+    "name": "Bioclimatica",
+    "industries": [],
+    "regions": [],
+    "expertise": [],
+    "offers": [],
+    "seeks": []
+  },
+  {
+    "id": "bioplast",
+    "published": true,
+    "name": "Bioplast",
+    "industries": [],
+    "regions": [],
+    "expertise": [],
+    "offers": [],
+    "seeks": []
+  },
+  {
+    "id": "thesis-i",
+    "published": true,
+    "name": "Thesis-I",
+    "tagline": {
+      "uk": "Компанія з розробки апаратного та програмного забезпечення",
+      "it": "Azienda di sviluppo hardware e software"
+    },
+    "industries": [],
+    "regions": [],
+    "expertise": ["AI", "IoT", "DeepTech", "MedTech", "AgroTech"],
+    "website": "https://www.thesis-i.com",
+    "logo": {
+      "src": "/media/members/thesis-i-logo.png",
+      "width": 72,
+      "height": 72,
+      "alt": { "uk": "Логотип Thesis-I", "it": "Logo di Thesis-I" }
+    },
+    "contact": {
+      "name": "Vitalii Bretsko",
+      "position": { "uk": "Засновник і генеральний директор", "it": "Fondatore e CEO" },
+      "email": "vbretsko@thesis-i.com",
+      "phone": "+380509925337",
+      "photo": {
+        "src": "/media/members/thesis-i-bretsko.jpg",
+        "width": 203,
+        "height": 253,
+        "alt": { "uk": "Віталій Брецько", "it": "Vitalii Bretsko" }
+      }
+    },
+    "offers": [],
+    "seeks": []
+  }
+]

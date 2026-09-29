@@ -1,0 +1,22 @@
+{
+  "seo": {
+    "title": {
+      "uk": "Члени асоціації",
+      "it": "Soci"
+    },
+    "description": {
+      "uk": "Каталог активних членів асоціації Made in Ukraine for Italy: пошук за галуззю, назвою та регіоном.",
+      "it": "Il catalogo dei soci attivi dell’associazione Made in Ukraine for Italy: ricerca per settore, nome e regione."
+    }
+  },
+  "hero": {
+    "title": {
+      "uk": "Активні члени асоціації",
+      "it": "I soci attivi dell’associazione"
+    },
+    "lead": {
+      "uk": "Перевірені українські та італійські компанії, що будують двосторонній бізнес разом.",
+      "it": "Aziende ucraine e italiane verificate che costruiscono insieme un business bilaterale."
+    }
+  }
+}

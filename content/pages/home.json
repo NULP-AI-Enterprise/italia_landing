@@ -1,0 +1,22 @@
+{
+  "seo": {
+    "title": { "uk": "Головна", "it": "Home" },
+    "description": {
+      "uk": "Асоціація Made in Ukraine for Italy (MIUFI) об’єднує український бізнес та італійський ринок: офіційне представництво в Італії, операційна підтримка, ділові зустрічі B2B і B2C.",
+      "it": "L’associazione Made in Ukraine for Italy (MIUFI) unisce le imprese ucraine e il mercato italiano: rappresentanza ufficiale in Italia, supporto operativo, incontri d’affari B2B e B2C."
+    }
+  },
+  "hero": {
+    "title": { "uk": "Асоціація Made in Ukraine for Italy", "it": "Associazione Made in Ukraine for Italy" },
+    "cities": [
+      { "uk": "Мілан", "it": "Milano" },
+      { "uk": "Венеція", "it": "Venezia" },
+      { "uk": "Рим", "it": "Roma" },
+      { "uk": "Барі", "it": "Bari" },
+      { "uk": "Неаполь", "it": "Napoli" },
+      { "uk": "Палермо", "it": "Palermo" }
+    ]
+  },
+  "servicesHeading": { "uk": "Наші послуги", "it": "I nostri servizi" },
+  "detailsHeading": { "uk": "Детально про послуги", "it": "I servizi in dettaglio" }
+}

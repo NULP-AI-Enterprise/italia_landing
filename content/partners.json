@@ -1,0 +1,322 @@
+[
+  {
+    "id": "uafm",
+    "order": 1,
+    "published": true,
+    "category": "association",
+    "name": {
+      "uk": "Українська асоціація меблевиків",
+      "it": "Associazione ucraina dei produttori di mobili"
+    },
+    "description": {
+      "uk": "Об’єднання, мета якого — формування кращого меблевого середовища в Україні через об’єднання і зростання кожного учасника.",
+      "it": "Associazione che mira a creare un ambiente migliore per il settore del mobile in Ucraina attraverso l’unione e la crescita di ogni partecipante."
+    },
+    "website": "https://uafm.com.ua"
+  },
+  {
+    "id": "assofranchising",
+    "order": 2,
+    "published": true,
+    "category": "association",
+    "name": {
+      "uk": "Assofranchising — Associazione Italiana del Franchising",
+      "it": "Assofranchising — Associazione Italiana del Franchising"
+    },
+    "description": {
+      "uk": "Асоціація, що захищає та підтримує інтереси франчайзингових мереж і сприяє розвитку якісного франчайзингу в Італії.",
+      "it": "L’associazione che difende e sostiene gli interessi delle reti associate, favorendo lo sviluppo del franchising di qualità in Italia."
+    },
+    "website": "https://www.assofranchising.it"
+  },
+  {
+    "id": "strichka",
+    "order": 3,
+    "published": true,
+    "category": "association",
+    "name": {
+      "uk": "Стрічка",
+      "it": "Strichka"
+    },
+    "description": {
+      "uk": "Цифрова платформа, що єднає українців з усього світу та допомагає біженцям і організаціям.",
+      "it": "Piattaforma digitale che unisce gli ucraini di tutto il mondo e aiuta rifugiati e organizzazioni."
+    }
+  },
+  {
+    "id": "apincitta",
+    "order": 4,
+    "published": true,
+    "category": "association",
+    "name": {
+      "uk": "Associazione Apincittà Ambiente Urbano",
+      "it": "Associazione Apincittà Ambiente Urbano"
+    },
+    "description": {
+      "uk": "Екологічна асоціація з Ломбардії, що займається бджільництвом і захистом бджіл.",
+      "it": "Associazione ambientalista lombarda dedicata all’apicoltura e alla tutela delle api."
+    },
+    "website": "https://apincitta.it"
+  },
+  {
+    "id": "happy-mind",
+    "order": 5,
+    "published": true,
+    "category": "association",
+    "name": {
+      "uk": "Благодійний фонд Happy Mind",
+      "it": "Fondazione benefica Happy Mind"
+    },
+    "description": {
+      "uk": "Надає психологічну підтримку ветеранам і цивільним за допомогою цифрового продукту когнітивної психології.",
+      "it": "Offre supporto psicologico a veterani e civili attraverso un prodotto digitale di psicologia cognitiva."
+    }
+  },
+  {
+    "id": "artemilo1941",
+    "order": 6,
+    "published": true,
+    "category": "association",
+    "name": {
+      "uk": "Artemilo1941 Association",
+      "it": "Artemilo1941 Association"
+    },
+    "description": {
+      "uk": "Мистецька асоціація, що виросла з досвіду, накопиченого у сфері мистецтва з 1990 року, за ініціативи засновника — маестро Міло.",
+      "it": "Associazione nata dall’esperienza maturata nel settore dell’arte dal 1990 per volere del fondatore, il Maestro Milo."
+    },
+    "website": "https://artemilo1941association.com"
+  },
+  {
+    "id": "wood-processing-association",
+    "order": 7,
+    "published": true,
+    "category": "association",
+    "name": {
+      "uk": "Асоціація деревообробних підприємств України",
+      "it": "Associazione delle imprese di lavorazione del legno dell’Ucraina"
+    },
+    "description": {
+      "uk": "Провідна асоціація учасників ринку деревини: компаній деревообробної та суміжних галузей.",
+      "it": "Principale associazione degli operatori del mercato del legno: aziende della lavorazione del legno e dei settori affini."
+    }
+  },
+  {
+    "id": "quarta-partners",
+    "order": 8,
+    "published": true,
+    "category": "association",
+    "name": {
+      "uk": "Quarta & Partners — Studio Legale Tributario",
+      "it": "Quarta & Partners — Studio Legale Tributario"
+    },
+    "description": {
+      "uk": "Юридична та податкова фірма в Мілані: податки, кіберправо, захист персональних даних, протидія відмиванню коштів і судові спори.",
+      "it": "Studio legale tributario a Milano: consulenza in materia fiscale, cyber law, privacy, antiriciclaggio e contenzioso."
+    }
+  },
+  {
+    "id": "kbu",
+    "order": 9,
+    "published": true,
+    "category": "association",
+    "name": {
+      "uk": "Конфедерація будівельників України",
+      "it": "Confederazione dei costruttori dell’Ucraina"
+    },
+    "description": {
+      "uk": "Найбільше галузеве об’єднання будівельників в Україні.",
+      "it": "La più grande associazione di settore dei costruttori in Ucraina."
+    },
+    "website": "https://kbu.org.ua"
+  },
+  {
+    "id": "hrun-development-fund",
+    "order": 10,
+    "published": true,
+    "category": "association",
+    "name": {
+      "uk": "ГО «Фонд розвитку Грунської громади»",
+      "it": "ONG «Fondo per lo sviluppo della comunità di Hrun’»"
+    },
+    "description": {
+      "uk": "Простір підтримки та змін, що об’єднує зусилля задля розбудови спроможної громади.",
+      "it": "Uno spazio di sostegno e di cambiamento che unisce gli sforzi per costruire una comunità capace."
+    }
+  },
+  {
+    "id": "studio-quirino",
+    "order": 11,
+    "published": true,
+    "category": "association",
+    "name": {
+      "uk": "Studio Quirino & Associati",
+      "it": "Studio Quirino & Associati"
+    },
+    "description": {
+      "uk": "Консультації з корпоративних, податкових, бухгалтерських і комерційних питань.",
+      "it": "Consulenza in materia societaria, fiscale, contabile e commerciale."
+    }
+  },
+  {
+    "id": "russo-alluminio",
+    "order": 1,
+    "published": true,
+    "category": "rebuild",
+    "name": {
+      "uk": "Russo Alluminio",
+      "it": "Russo Alluminio"
+    },
+    "description": {
+      "uk": "Продаж вікон і дверей з дерева та дерево-алюмінію.",
+      "it": "Vendita di infissi in legno e legno-alluminio."
+    },
+    "website": "https://www.russo-alluminio.it"
+  },
+  {
+    "id": "le-piu-belle-tende",
+    "order": 2,
+    "published": true,
+    "category": "rebuild",
+    "name": {
+      "uk": "Le Più Belle Tende",
+      "it": "Le Più Belle Tende"
+    },
+    "description": {
+      "uk": "Виготовлення, монтаж і обслуговування тентів і штор.",
+      "it": "Realizzazione, installazione e manutenzione di tende."
+    },
+    "website": "https://lepiubelletende.it"
+  },
+  {
+    "id": "penta-group",
+    "order": 3,
+    "published": true,
+    "category": "rebuild",
+    "name": {
+      "uk": "Penta Group",
+      "it": "Penta Group"
+    },
+    "description": {
+      "uk": "Будівельна компанія, для якої головне — якість послуг і задоволення потреб клієнта.",
+      "it": "Impresa di costruzioni guidata dalla volontà di offrire un servizio di assoluta qualità."
+    }
+  },
+  {
+    "id": "verrastro-group",
+    "order": 4,
+    "published": true,
+    "category": "rebuild",
+    "name": {
+      "uk": "Verrastro Group",
+      "it": "Verrastro Group"
+    },
+    "description": {
+      "uk": "Виробництво бітумних і цементних сумішей, проєктування та будівництво доріг, залізниць і аеропортів.",
+      "it": "Produzione di conglomerati bituminosi e cementizi, progettazione e costruzione di strade, ferrovie e aeroporti."
+    },
+    "website": "https://verrastrogroup.it"
+  },
+  {
+    "id": "innova-serramenti",
+    "order": 5,
+    "published": true,
+    "category": "rebuild",
+    "name": {
+      "uk": "Innova Serramenti",
+      "it": "Innova Serramenti"
+    },
+    "description": {
+      "uk": "Вікна з ПВХ, дерева та алюмінію від провідних постачальників.",
+      "it": "Finestre in PVC, legno e alluminio dei migliori fornitori."
+    }
+  },
+  {
+    "id": "bioclimatica-pergole",
+    "order": 6,
+    "published": true,
+    "category": "rebuild",
+    "name": {
+      "uk": "Bioclimatica — Pergole su misura",
+      "it": "Bioclimatica — Pergole su misura"
+    },
+    "description": {
+      "uk": "Біокліматичні перголи на замовлення.",
+      "it": "Pergole bioclimatiche su misura."
+    }
+  },
+  {
+    "id": "gruppo-centanni",
+    "order": 7,
+    "published": true,
+    "category": "rebuild",
+    "name": {
+      "uk": "Gruppo Centanni",
+      "it": "Gruppo Centanni"
+    },
+    "description": {
+      "uk": "Технічні штори та рішення для інтер’єру.",
+      "it": "Tende tecniche e soluzioni d’arredo."
+    },
+    "website": "https://www.centotendetecniche.com"
+  },
+  {
+    "id": "mfa-ukraine",
+    "order": 1,
+    "published": true,
+    "category": "institutional",
+    "name": {
+      "uk": "Міністерство закордонних справ України",
+      "it": "Ministero degli Affari Esteri dell’Ucraina"
+    },
+    "website": "https://mfa.gov.ua"
+  },
+  {
+    "id": "embassy-of-ukraine-in-italy",
+    "order": 2,
+    "published": true,
+    "category": "institutional",
+    "name": {
+      "uk": "Посольство України в Італійській Республіці",
+      "it": "Ambasciata dell’Ucraina nella Repubblica Italiana"
+    },
+    "description": {
+      "uk": "За сумісництвом — також у Республіці Мальта та Республіці Сан-Марино.",
+      "it": "Accreditata anche presso la Repubblica di Malta e la Repubblica di San Marino."
+    },
+    "website": "https://italy.mfa.gov.ua"
+  },
+  {
+    "id": "luhansk-regional-administration",
+    "order": 3,
+    "published": true,
+    "category": "institutional",
+    "name": {
+      "uk": "Луганська обласна державна адміністрація — обласна військова адміністрація",
+      "it": "Amministrazione statale regionale di Luhans’k — Amministrazione militare regionale"
+    },
+    "website": "https://lova.gov.ua"
+  },
+  {
+    "id": "hrun-community",
+    "order": 4,
+    "published": true,
+    "category": "institutional",
+    "name": {
+      "uk": "Грунська об’єднана територіальна громада",
+      "it": "Comunità territoriale unita di Hrun’"
+    },
+    "website": "https://grunska-gromada.gov.ua"
+  },
+  {
+    "id": "knu",
+    "order": 5,
+    "published": true,
+    "category": "institutional",
+    "name": {
+      "uk": "Київський національний університет імені Тараса Шевченка",
+      "it": "Università nazionale Taras Ševčenko di Kyiv"
+    },
+    "website": "https://knu.ua"
+  }
+]

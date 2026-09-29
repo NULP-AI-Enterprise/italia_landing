@@ -1,0 +1,178 @@
+[
+  {
+    "id": "salone-nautico-2026",
+    "published": true,
+    "title": "Salone Nautico Internazionale di Genova",
+    "description": {
+      "uk": "Міжнародна виставка яхт і човнів.",
+      "it": "Salone internazionale della nautica da diporto."
+    },
+    "city": {
+      "uk": "Генуя",
+      "it": "Genova"
+    },
+    "startDate": "2026-10-01",
+    "endDate": "2026-10-06",
+    "website": "https://www.salonenautico.com/en/"
+  },
+  {
+    "id": "cphi-milan-2026",
+    "published": true,
+    "title": "CPHI Milan 2026",
+    "description": {
+      "uk": "Провідна фармацевтична виставка, що об’єднує експертів галузі з усього світу.",
+      "it": "La principale fiera farmaceutica che riunisce esperti del settore da tutto il mondo."
+    },
+    "city": {
+      "uk": "Мілан",
+      "it": "Milano"
+    },
+    "startDate": "2026-10-06",
+    "endDate": "2026-10-08",
+    "website": "https://www.cphi.com/europe/"
+  },
+  {
+    "id": "in-out-2026",
+    "published": true,
+    "title": "IN&OUT — The Hospitality Community",
+    "description": {
+      "uk": "Виставка для індустрії гостинності та контрактних рішень.",
+      "it": "Fiera dedicata all’ospitalità e al contract."
+    },
+    "city": {
+      "uk": "Ріміні",
+      "it": "Rimini"
+    },
+    "startDate": "2026-10-14",
+    "endDate": "2026-10-16",
+    "website": "https://www.inoutexpo.it/en"
+  },
+  {
+    "id": "beautytobusiness-2026",
+    "published": true,
+    "title": "BeautyToBusiness",
+    "description": {
+      "uk": "Перша галузева виставка, присвячена всьому ланцюгу постачання косметичної індустрії.",
+      "it": "La prima manifestazione verticale dedicata alla filiera dell’industria cosmetica."
+    },
+    "city": {
+      "uk": "Бергамо",
+      "it": "Bergamo"
+    },
+    "startDate": "2026-10-21",
+    "endDate": "2026-10-22",
+    "website": "https://beautytobusiness.it"
+  },
+  {
+    "id": "ibe-2026",
+    "published": true,
+    "title": "International Business Expo (IBE 2026)",
+    "description": {
+      "uk": "Конференції з тими, хто змінює бізнес, ринки та ідеї.",
+      "it": "Conferenze con le voci che stanno trasformando imprese, mercati e idee."
+    },
+    "city": {
+      "uk": "Мілан",
+      "it": "Milano"
+    },
+    "startDate": "2026-10-27",
+    "endDate": "2026-10-28",
+    "website": "https://www.internationalbusinessexpo.it"
+  },
+  {
+    "id": "ecomondo-2026",
+    "published": true,
+    "title": "Ecomondo",
+    "description": {
+      "uk": "Виставка зеленої та циркулярної економіки.",
+      "it": "La fiera della green e circular economy."
+    },
+    "city": {
+      "uk": "Ріміні",
+      "it": "Rimini"
+    },
+    "startDate": "2026-11-03",
+    "endDate": "2026-11-06",
+    "website": "https://www.ecomondo.com/en"
+  },
+  {
+    "id": "aestetica-2026",
+    "published": true,
+    "title": "Aestetica",
+    "description": {
+      "uk": "Найбільша виставка естетики на півдні Італії.",
+      "it": "La più grande fiera di estetica del Sud Italia."
+    },
+    "city": {
+      "uk": "Неаполь",
+      "it": "Napoli"
+    },
+    "startDate": "2026-11-07",
+    "endDate": "2026-11-09",
+    "website": "https://aestetica.net"
+  },
+  {
+    "id": "eima-2026",
+    "published": true,
+    "title": "EIMA International 2026",
+    "description": {
+      "uk": "Міжнародна виставка сільськогосподарської та садової техніки.",
+      "it": "Esposizione internazionale di macchine per l’agricoltura e il giardinaggio."
+    },
+    "city": {
+      "uk": "Болонья",
+      "it": "Bologna"
+    },
+    "startDate": "2026-11-10",
+    "endDate": "2026-11-14",
+    "website": "https://www.eima.it"
+  },
+  {
+    "id": "megawatt-2026",
+    "published": true,
+    "title": "MEGAWATT Exhibition & Conference",
+    "description": {
+      "uk": "Міжнародна подія про весь енергетичний ланцюг: від генерації та передачі до зберігання й розумних мереж.",
+      "it": "Evento internazionale sull’intera filiera energetica: dalla generazione e trasmissione all’accumulo e alle smart grid."
+    },
+    "city": {
+      "uk": "Бергамо",
+      "it": "Bergamo"
+    },
+    "startDate": "2026-11-18",
+    "endDate": "2026-11-19",
+    "website": "https://www.megawattexpo.com"
+  },
+  {
+    "id": "artigiano-in-fiera-2026",
+    "published": true,
+    "title": "Artigiano in Fiera",
+    "description": {
+      "uk": "Міжнародний ярмарок ремесел.",
+      "it": "Fiera internazionale dell’artigianato."
+    },
+    "city": {
+      "uk": "Мілан",
+      "it": "Milano"
+    },
+    "startDate": "2026-12-05",
+    "endDate": "2026-12-13",
+    "website": "https://www.artigianoinfiera.it"
+  },
+  {
+    "id": "omc-med-energy-2027",
+    "published": true,
+    "title": "OMC Med Energy Conference and Exhibition 2027",
+    "description": {
+      "uk": "Конференція та виставка з енергетики Середземномор’я.",
+      "it": "Conferenza ed esposizione sull’energia nel Mediterraneo."
+    },
+    "city": {
+      "uk": "Равенна",
+      "it": "Ravenna"
+    },
+    "startDate": "2027-04-13",
+    "endDate": "2027-04-15",
+    "website": "https://www.omc.it/en/"
+  }
+]

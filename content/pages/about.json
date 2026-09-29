@@ -1,0 +1,113 @@
+{
+  "seo": {
+    "title": { "uk": "Асоціація", "it": "Associazione" },
+    "description": {
+      "uk": "Асоціація Made in Ukraine for Italy (MIUFI) — інституційний міст між підприємницькими спільнотами України та Італії. Бачення, місія та історія асоціації.",
+      "it": "L’associazione Made in Ukraine for Italy (MIUFI) è un ponte istituzionale tra le comunità imprenditoriali di Ucraina e Italia. Visione, missione e storia dell’associazione."
+    }
+  },
+  "hero": {
+    "title": {
+      "uk": "Об’єднуємо український бізнес та італійський ринок",
+      "it": "Uniamo le imprese ucraine e il mercato italiano"
+    },
+    "lead": {
+      "uk": "Ми є інституційним мостом між підприємницькою спільнотою України та Італії, заснованим на цінностях довіри, взаємної вигоди та відданості розвитку.",
+      "it": "Siamo un ponte istituzionale tra le comunità imprenditoriali di Ucraina e Italia, fondato sui valori di fiducia, reciproco vantaggio e impegno per lo sviluppo."
+    }
+  },
+  "intro": {
+    "title": {
+      "uk": "Асоціація, яка з’єднує українські бізнеси з італійським ринком, партнерами та інвесторами.",
+      "it": "Un’associazione che collega le imprese ucraine con il mercato italiano, i partner e gli investitori."
+    },
+    "vision": {
+      "title": { "uk": "Бачення", "it": "Visione" },
+      "text": {
+        "uk": "Світ, де українська якість має своє постійне місце <b>в Італії</b>, а через неї — <b>у всій Європі</b>. Де кожен український виробник має рівний доступ до міжнародних ринків незалежно від розміру компанії.",
+        "it": "Un mondo in cui la qualità ucraina ha un posto stabile <b>in Italia</b> e, attraverso l’Italia, <b>in tutta Europa</b>. In cui ogni produttore ucraino ha pari accesso ai mercati internazionali, indipendentemente dalle dimensioni dell’azienda."
+      }
+    },
+    "mission": {
+      "title": { "uk": "Місія", "it": "Missione" },
+      "text": {
+        "uk": "<b>Знижуємо бар’єри виходу на ринок</b>: через представленість вашої компанії в Італії 365 днів на рік, інституційні партнерства, колективну участь у міжнародних виставках і пряме B2B-знайомство з перевіреними партнерами та інвесторами.",
+        "it": "<b>Riduciamo le barriere di accesso al mercato</b>: grazie alla presenza della vostra azienda in Italia 365 giorni all’anno, a partnership istituzionali, alla partecipazione collettiva a fiere internazionali e al contatto diretto B2B con partner e investitori verificati."
+      }
+    },
+    "image": {
+      "src": "/media/about/flags.jpg",
+      "width": 800,
+      "height": 450,
+      "alt": { "uk": "Тканинні прапори Італії та України", "it": "Bandiere in tessuto di Italia e Ucraina" }
+    }
+  },
+  "market": {
+    "title": {
+      "uk": "Вихід на ринок Італії та Європи. Без зайвих кроків.",
+      "it": "Accesso al mercato italiano ed europeo. Senza passaggi superflui."
+    },
+    "text": {
+      "uk": "Асоціація <b>Made in Ukraine for Italy</b> відкриває двері для українських бізнесів до італійського ринку та інвестицій через перевірену мережу партнерів, інвестиційну підтримку та живу мережу ділових контактів.",
+      "it": "L’associazione <b>Made in Ukraine for Italy</b> apre alle imprese ucraine le porte del mercato italiano e degli investimenti grazie a una rete di partner verificati, al supporto agli investimenti e a una rete viva di contatti d’affari."
+    },
+    "image": {
+      "src": "/media/about/arches.jpg",
+      "width": 958,
+      "height": 708,
+      "alt": {
+        "uk": "Вечірнє подвір’я історичної італійської вілли з арками, де збираються учасники заходу",
+        "it": "Cortile serale di una storica villa italiana con portici, dove si riuniscono i partecipanti a un evento"
+      }
+    }
+  },
+  "history": {
+    "eyebrow": { "uk": "Наша історія", "it": "La nostra storia" },
+    "title": {
+      "uk": "Заснована з метою.\nПобудована на партнерстві.",
+      "it": "Fondata con uno scopo.\nCostruita sulla partnership."
+    },
+    "paragraphs": [
+      {
+        "uk": "Асоціація Made in Ukraine for Italy (<b>MIUFI</b>) заснована у 2020 році з місією гідно представити найкращих українських експортерів на одному з найвимогливіших ринків Європи — <i>італійському</i> — і довести, що бренд <b>Made in Ukraine</b> здатний стояти в одному ряду з Made in Italy.",
+        "it": "L’associazione Made in Ukraine for Italy (<b>MIUFI</b>) è stata fondata nel 2020 con la missione di rappresentare degnamente i migliori esportatori ucraini in uno dei mercati più esigenti d’Europa, <i>quello italiano</i>, e di dimostrare che il marchio <b>Made in Ukraine</b> può stare al fianco del Made in Italy."
+      },
+      {
+        "uk": "За 6 років роботи Рада об’єднала <b>понад 50</b> активних членів, організувала понад 30 виставок і заходів. Ми діємо в <i>Мілані, Римі, Венеції, Неаполі, Палермо, Києві</i> та співпрацюємо з ТПП обох країн, Confindustria, ICE та іншими провідними установами.",
+        "it": "In 6 anni di attività il Consiglio ha riunito <b>oltre 50</b> soci attivi e organizzato più di 30 fiere ed eventi. Operiamo a <i>Milano, Roma, Venezia, Napoli, Palermo e Kyiv</i> e collaboriamo con le Camere di commercio di entrambi i Paesi, Confindustria, ICE e altre importanti istituzioni."
+      }
+    ],
+    "images": [
+      {
+        "src": "/media/history/signing.jpg",
+        "width": 361,
+        "height": 271,
+        "alt": { "uk": "Підписання документів про партнерство", "it": "Firma di documenti di partenariato" }
+      },
+      {
+        "src": "/media/history/conference.jpg",
+        "width": 361,
+        "height": 270,
+        "alt": {
+          "uk": "Бейдж учасника Двосторонньої конференції з відновлення України",
+          "it": "Badge della Conferenza bilaterale sulla ricostruzione dell’Ucraina"
+        }
+      },
+      {
+        "src": "/media/history/expo.jpg",
+        "width": 361,
+        "height": 271,
+        "alt": {
+          "uk": "Представниці асоціації на стенді міжнародної виставки",
+          "it": "Rappresentanti dell’associazione allo stand di una fiera internazionale"
+        }
+      },
+      {
+        "src": "/media/history/members.jpg",
+        "width": 361,
+        "height": 271,
+        "alt": { "uk": "Учасники асоціації на вечірньому заході", "it": "Soci dell’associazione a un evento serale" }
+      }
+    ]
+  }
+}

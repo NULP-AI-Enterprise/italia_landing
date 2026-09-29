@@ -43,3 +43,7 @@ next-env.d.ts
 
 # k8s secrets (never commit plaintext secrets)
 k8s/secret.yaml
+
+.claude/
+.idea/
+README.md

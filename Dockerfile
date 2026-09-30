@@ -27,6 +27,8 @@ RUN mkdir -p ./public
 COPY --from=builder /app/public              ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static     ./.next/static
+# SQL migrations, applied by the app on first database access
+COPY --from=builder --chown=nextjs:nodejs /app/drizzle          ./drizzle
 USER nextjs
 EXPOSE 3000
 CMD ["node", "server.js"]

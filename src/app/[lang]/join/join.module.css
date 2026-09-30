@@ -1,0 +1,4 @@
+.wrap {
+  max-width: calc(640px + 2 * var(--gutter));
+  padding-block: clamp(32px, 4vw, 72px);
+}

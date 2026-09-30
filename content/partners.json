@@ -12,7 +12,13 @@
       "uk": "Об’єднання, мета якого — формування кращого меблевого середовища в Україні через об’єднання і зростання кожного учасника.",
       "it": "Associazione che mira a creare un ambiente migliore per il settore del mobile in Ucraina attraverso l’unione e la crescita di ogni partecipante."
     },
-    "website": "https://uafm.com.ua"
+    "website": "https://uafm.com.ua",
+    "image": {
+      "src": "/media/partners/uafm.png",
+      "width": 161,
+      "height": 160
+    },
+    "imageLayout": "thumb"
   },
   {
     "id": "assofranchising",
@@ -41,22 +47,29 @@
     "description": {
       "uk": "Цифрова платформа, що єднає українців з усього світу та допомагає біженцям і організаціям.",
       "it": "Piattaforma digitale che unisce gli ucraini di tutto il mondo e aiuta rifugiati e organizzazioni."
-    }
+    },
+    "website": "https://www.strichka.org.ua"
   },
   {
-    "id": "apincitta",
+    "id": "ucraina-piu",
     "order": 4,
     "published": true,
     "category": "association",
     "name": {
-      "uk": "Associazione Apincittà Ambiente Urbano",
-      "it": "Associazione Apincittà Ambiente Urbano"
+      "uk": "Ucraina Più – Milano APS",
+      "it": "Ucraina Più – Milano APS"
     },
     "description": {
-      "uk": "Екологічна асоціація з Ломбардії, що займається бджільництвом і захистом бджіл.",
-      "it": "Associazione ambientalista lombarda dedicata all’apicoltura e alla tutela delle api."
+      "uk": "Асоціація соціального сприяння в Мілані: міжкультурна освіта, соціальна інтеграція українців і фінансова освіта у співпраці з Генеральним консульством України в Мілані.",
+      "it": "Associazione di promozione sociale di Milano: educazione all’interculturalità, integrazione sociale dei cittadini ucraini ed educazione finanziaria, in collaborazione con il Consolato Generale d’Ucraina a Milano."
     },
-    "website": "https://apincitta.it"
+    "website": "https://ucrainapiumilano.org",
+    "image": {
+      "src": "/media/partners/ucraina-piu.jpg",
+      "width": 598,
+      "height": 216
+    },
+    "imageLayout": "cover"
   },
   {
     "id": "happy-mind",
@@ -70,22 +83,35 @@
     "description": {
       "uk": "Надає психологічну підтримку ветеранам і цивільним за допомогою цифрового продукту когнітивної психології.",
       "it": "Offre supporto psicologico a veterani e civili attraverso un prodotto digitale di psicologia cognitiva."
-    }
+    },
+    "website": "https://happymind.help",
+    "image": {
+      "src": "/media/partners/happy-mind.jpg",
+      "width": 393,
+      "height": 262
+    },
+    "imageLayout": "cover"
   },
   {
-    "id": "artemilo1941",
+    "id": "apincitta",
     "order": 6,
     "published": true,
     "category": "association",
     "name": {
-      "uk": "Artemilo1941 Association",
-      "it": "Artemilo1941 Association"
+      "uk": "Associazione Apincittà Ambiente Urbano",
+      "it": "Associazione Apincittà Ambiente Urbano"
     },
     "description": {
-      "uk": "Мистецька асоціація, що виросла з досвіду, накопиченого у сфері мистецтва з 1990 року, за ініціативи засновника — маестро Міло.",
-      "it": "Associazione nata dall’esperienza maturata nel settore dell’arte dal 1990 per volere del fondatore, il Maestro Milo."
+      "uk": "Екологічна асоціація з Ломбардії, що займається бджільництвом і захистом бджіл.",
+      "it": "Associazione ambientalista lombarda dedicata all’apicoltura e alla tutela delle api."
     },
-    "website": "https://artemilo1941association.com"
+    "website": "https://apincitta.it",
+    "image": {
+      "src": "/media/partners/apincitta.png",
+      "width": 128,
+      "height": 155
+    },
+    "imageLayout": "thumb"
   },
   {
     "id": "wood-processing-association",
@@ -99,21 +125,35 @@
     "description": {
       "uk": "Провідна асоціація учасників ринку деревини: компаній деревообробної та суміжних галузей.",
       "it": "Principale associazione degli operatori del mercato del legno: aziende della lavorazione del legno e dei settori affini."
-    }
+    },
+    "website": "https://aweu.org.ua",
+    "image": {
+      "src": "/media/partners/wood-processing-association.jpg",
+      "width": 483,
+      "height": 184
+    },
+    "imageLayout": "cover"
   },
   {
-    "id": "quarta-partners",
+    "id": "artemilo1941",
     "order": 8,
     "published": true,
     "category": "association",
     "name": {
-      "uk": "Quarta & Partners — Studio Legale Tributario",
-      "it": "Quarta & Partners — Studio Legale Tributario"
+      "uk": "Artemilo1941 Association",
+      "it": "Artemilo1941 Association"
     },
     "description": {
-      "uk": "Юридична та податкова фірма в Мілані: податки, кіберправо, захист персональних даних, протидія відмиванню коштів і судові спори.",
-      "it": "Studio legale tributario a Milano: consulenza in materia fiscale, cyber law, privacy, antiriciclaggio e contenzioso."
-    }
+      "uk": "Мистецька асоціація, що виросла з досвіду, накопиченого у сфері мистецтва з 1990 року, за ініціативи засновника — маестро Міло.",
+      "it": "Associazione nata dall’esperienza maturata nel settore dell’arte dal 1990 per volere del fondatore, il Maestro Milo."
+    },
+    "website": "https://artemilo1941association.com",
+    "image": {
+      "src": "/media/partners/artemilo1941.png",
+      "width": 156,
+      "height": 160
+    },
+    "imageLayout": "thumb"
   },
   {
     "id": "kbu",
@@ -131,8 +171,29 @@
     "website": "https://kbu.org.ua"
   },
   {
-    "id": "hrun-development-fund",
+    "id": "quarta-partners",
     "order": 10,
+    "published": true,
+    "category": "association",
+    "name": {
+      "uk": "Quarta & Partners — Studio Legale Tributario",
+      "it": "Quarta & Partners — Studio Legale Tributario"
+    },
+    "description": {
+      "uk": "Юридична та податкова фірма в Мілані: податки, кіберправо, захист персональних даних, протидія відмиванню коштів і судові спори.",
+      "it": "Studio legale tributario a Milano: consulenza in materia fiscale, cyber law, privacy, antiriciclaggio e contenzioso."
+    },
+    "website": "https://www.studioquarta.partners",
+    "image": {
+      "src": "/media/partners/quarta-partners.jpg",
+      "width": 384,
+      "height": 217
+    },
+    "imageLayout": "cover"
+  },
+  {
+    "id": "hrun-development-fund",
+    "order": 11,
     "published": true,
     "category": "association",
     "name": {
@@ -142,11 +203,17 @@
     "description": {
       "uk": "Простір підтримки та змін, що об’єднує зусилля задля розбудови спроможної громади.",
       "it": "Uno spazio di sostegno e di cambiamento che unisce gli sforzi per costruire una comunità capace."
-    }
+    },
+    "image": {
+      "src": "/media/partners/hrun-development-fund.png",
+      "width": 130,
+      "height": 129
+    },
+    "imageLayout": "thumb"
   },
   {
     "id": "studio-quirino",
-    "order": 11,
+    "order": 12,
     "published": true,
     "category": "association",
     "name": {
@@ -156,7 +223,14 @@
     "description": {
       "uk": "Консультації з корпоративних, податкових, бухгалтерських і комерційних питань.",
       "it": "Consulenza in materia societaria, fiscale, contabile e commerciale."
-    }
+    },
+    "website": "https://www.studioquirino.com",
+    "image": {
+      "src": "/media/partners/studio-quirino.jpg",
+      "width": 386,
+      "height": 258
+    },
+    "imageLayout": "cover"
   },
   {
     "id": "russo-alluminio",
@@ -186,7 +260,13 @@
       "uk": "Виготовлення, монтаж і обслуговування тентів і штор.",
       "it": "Realizzazione, installazione e manutenzione di tende."
     },
-    "website": "https://lepiubelletende.it"
+    "website": "https://lepiubelletende.it",
+    "image": {
+      "src": "/media/partners/le-piu-belle-tende.jpg",
+      "width": 470,
+      "height": 353
+    },
+    "imageLayout": "cover"
   },
   {
     "id": "penta-group",
@@ -200,7 +280,8 @@
     "description": {
       "uk": "Будівельна компанія, для якої головне — якість послуг і задоволення потреб клієнта.",
       "it": "Impresa di costruzioni guidata dalla volontà di offrire un servizio di assoluta qualità."
-    }
+    },
+    "website": "https://www.pentacostruzioni.com/pentagroup/"
   },
   {
     "id": "verrastro-group",
@@ -229,7 +310,14 @@
     "description": {
       "uk": "Вікна з ПВХ, дерева та алюмінію від провідних постачальників.",
       "it": "Finestre in PVC, legno e alluminio dei migliori fornitori."
-    }
+    },
+    "website": "https://www.innova-serramenti.it",
+    "image": {
+      "src": "/media/partners/innova-serramenti.png",
+      "width": 160,
+      "height": 160
+    },
+    "imageLayout": "thumb"
   },
   {
     "id": "bioclimatica-pergole",
@@ -243,7 +331,14 @@
     "description": {
       "uk": "Біокліматичні перголи на замовлення.",
       "it": "Pergole bioclimatiche su misura."
-    }
+    },
+    "website": "https://bioclimatica.eu",
+    "image": {
+      "src": "/media/partners/bioclimatica-pergole.png",
+      "width": 139,
+      "height": 160
+    },
+    "imageLayout": "thumb"
   },
   {
     "id": "gruppo-centanni",
@@ -258,7 +353,13 @@
       "uk": "Технічні штори та рішення для інтер’єру.",
       "it": "Tende tecniche e soluzioni d’arredo."
     },
-    "website": "https://www.centotendetecniche.com"
+    "website": "https://www.centotendetecniche.com",
+    "image": {
+      "src": "/media/partners/gruppo-centanni.jpg",
+      "width": 534,
+      "height": 243
+    },
+    "imageLayout": "cover"
   },
   {
     "id": "mfa-ukraine",
@@ -269,7 +370,13 @@
       "uk": "Міністерство закордонних справ України",
       "it": "Ministero degli Affari Esteri dell’Ucraina"
     },
-    "website": "https://mfa.gov.ua"
+    "website": "https://mfa.gov.ua",
+    "image": {
+      "src": "/media/partners/mfa-ukraine.jpg",
+      "width": 575,
+      "height": 302
+    },
+    "imageLayout": "cover"
   },
   {
     "id": "embassy-of-ukraine-in-italy",
@@ -284,7 +391,13 @@
       "uk": "За сумісництвом — також у Республіці Мальта та Республіці Сан-Марино.",
       "it": "Accreditata anche presso la Repubblica di Malta e la Repubblica di San Marino."
     },
-    "website": "https://italy.mfa.gov.ua"
+    "website": "https://italy.mfa.gov.ua",
+    "image": {
+      "src": "/media/partners/embassy-of-ukraine-in-italy.jpg",
+      "width": 576,
+      "height": 349
+    },
+    "imageLayout": "cover"
   },
   {
     "id": "luhansk-regional-administration",
@@ -306,7 +419,13 @@
       "uk": "Грунська об’єднана територіальна громада",
       "it": "Comunità territoriale unita di Hrun’"
     },
-    "website": "https://grunska-gromada.gov.ua"
+    "website": "https://grunska-gromada.gov.ua",
+    "image": {
+      "src": "/media/partners/hrun-community.png",
+      "width": 105,
+      "height": 147
+    },
+    "imageLayout": "thumb"
   },
   {
     "id": "knu",

@@ -103,7 +103,10 @@
       }
     },
     "link": {
-      "label": { "uk": "Календар заходів", "it": "Calendario degli eventi" },
+      "label": {
+        "uk": "Календар заходів",
+        "it": "Calendario degli eventi"
+      },
       "href": "/events"
     }
   }

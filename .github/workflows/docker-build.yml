@@ -7,7 +7,10 @@ on:
     paths:
       - "src/**"
       - "public/**"
+      - "content/**"
+      - "drizzle/**"
       - "Dockerfile"
+      - ".dockerignore"
       - "package.json"
       - "package-lock.json"
       - "next.config.ts"

@@ -33,8 +33,6 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 !.env.example
-
-# vercel
 .vercel
 
 # typescript
@@ -47,3 +45,5 @@ k8s/secret.yaml
 .claude/
 .idea/
 README.md
+# local PGlite database (development only)
+/.data

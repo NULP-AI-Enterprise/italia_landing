@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PartnerGroups } from "@/components/partners/PartnerGroups";
+import { PartnerList } from "@/components/partners/PartnerList";
 import { JoinButton } from "@/components/ui/JoinButton";
 import { PageHero } from "@/components/ui/PageHero";
 import { getPage, getPartners } from "@/content/repository";
@@ -15,16 +15,16 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function PartnersPage() {
   const locale = await getLocale();
-  const [page, groups, dict] = await Promise.all([
+  const [page, partners, dict] = await Promise.all([
     getPage("partners", locale),
-    getPartners(locale),
+    getPartners("association", locale),
     getDictionary(),
   ]);
 
   return (
     <>
       <PageHero title={page.hero.title} lead={page.hero.lead} logoAlt={dict.a11y.logoAlt} />
-      <PartnerGroups groups={groups} sections={page.sections} newTabLabel={dict.a11y.newTab} />
+      <PartnerList partners={partners} newTabLabel={dict.a11y.newTab} />
       <JoinButton href={localePath(locale, "/join")} label={dict.actions.join} />
     </>
   );

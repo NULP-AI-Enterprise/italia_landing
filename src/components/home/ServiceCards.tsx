@@ -1,3 +1,4 @@
+import { serviceAnchor } from "@/content/anchors";
 import type { ServiceItem } from "@/content/repository";
 import { ContentImage } from "@/components/ui/ContentImage";
 import { Reveal } from "@/components/ui/Reveal";
@@ -7,8 +8,6 @@ type ServiceCardsProps = {
   heading: string;
   services: ServiceItem[];
 };
-
-export const serviceAnchor = (id: string) => `service-${id}`;
 
 /** Three service teasers. Each card jumps (smooth scroll) to its detailed block below. */
 export function ServiceCards({ heading, services }: ServiceCardsProps) {
@@ -36,6 +35,7 @@ export function ServiceCards({ heading, services }: ServiceCardsProps) {
                 {service.title}
               </h3>
               <p className={styles.text}>{service.summary}</p>
+              {/* Shows that the card scrolls down to its detailed block */}
               <span className={styles.more} aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 5v14M6 13l6 6 6-6" />

@@ -17,6 +17,22 @@ spec:
       labels:
         app: italia-landing
     spec:
+      # Give PostgreSQL up to a minute to accept connections, so the first pages
+      # are rendered from the edited content, not from the bundled fallback.
+      initContainers:
+        - name: wait-for-postgres
+          image: postgres:16-alpine
+          command:
+            - sh
+            - -c
+            - for i in $(seq 1 30); do pg_isready -q -h italia-landing-postgres -p 5432 && exit 0; sleep 2; done; exit 0
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
       containers:
         - name: italia-landing
           image: ghcr.io/nulp-ai-enterprise/italia-landing:sha-10be720
@@ -27,13 +43,23 @@ spec:
           env:
             - name: NODE_ENV
               value: production
+            # Canonical and hreflang links (read at request time)
+            - name: SITE_URL
+              value: https://italia.thesis-i.com
+          # From the secret: DATABASE_URL, ADMIN_EMAIL, ADMIN_PASSWORD, ADMIN_NAME,
+          # IP_HASH_SALT, TURNSTILE_SITE_KEY, TURNSTILE_SECRET_KEY (see .env.example)
+          envFrom:
+            - secretRef:
+                name: italia-landing-secret
+                optional: true
           resources:
             requests:
               cpu: 100m
-              memory: 128Mi
+              memory: 192Mi
+            # Image uploads and the image optimizer (sharp) need headroom
             limits:
               cpu: 500m
-              memory: 256Mi
+              memory: 512Mi
           startupProbe:
             httpGet:
               path: /api/health

@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Montserrat, Noto_Sans } from "next/font/google";
+import { FormDialogProvider } from "@/components/forms/FormDialog";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
-import { locales } from "@/i18n/config";
+import { buildNavigation } from "@/config/navigation";
 import { getDictionary, getLocale } from "@/i18n/get-dictionary";
+import { turnstileSiteKey } from "@/server/forms/turnstile";
 import "../globals.css";
 
 const montserrat = Montserrat({
@@ -19,16 +21,23 @@ const notoSans = Noto_Sans({
   variable: "--font-noto-sans",
 });
 
-export const dynamicParams = false;
-
+/*
+ * Content is edited in the admin panel, so pages are not built ahead of time:
+ * each page is rendered on its first visit from the current content and cached.
+ * A save in the admin panel rebuilds them (revalidatePath); the hourly
+ * revalidation is only a safety net. Unknown locales end in notFound().
+ */
 export function generateStaticParams() {
-  return locales.map((lang) => ({ lang }));
+  return [];
 }
+
+export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   const dict = await getDictionary();
   return {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+    // Read at request time: pages render on the server, so the deployment sets it (k8s/deployment.yaml).
+    metadataBase: new URL(process.env.SITE_URL ?? "http://localhost:3000"),
     title: {
       default: dict.siteName,
       template: `%s — ${dict.siteName}`,
@@ -43,6 +52,8 @@ export const viewport: Viewport = {
 export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
   const locale = await getLocale();
   const dict = await getDictionary();
+  const navigation = buildNavigation(locale, dict.nav);
+  const brandName = "Made in Ukraine for Italy";
 
   return (
     <html
@@ -54,11 +65,19 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
         <a className="skip-link" href="#main">
           {dict.a11y.skipToContent}
         </a>
-        <SiteHeader locale={locale} siteName={dict.siteName} nav={dict.nav} a11y={dict.a11y} />
+        <FormDialogProvider locale={locale} labels={dict.form} turnstileSiteKey={turnstileSiteKey()}>
+        <SiteHeader
+          locale={locale}
+          brandName={brandName}
+          navigation={navigation}
+          joinLabel={dict.actions.join}
+          a11y={dict.a11y}
+        />
         <main id="main" tabIndex={-1}>
           {children}
         </main>
-        <SiteFooter locale={locale} dict={dict} />
+        <SiteFooter navigation={navigation} brandName={brandName} dict={dict} />
+        </FormDialogProvider>
       </body>
     </html>
   );

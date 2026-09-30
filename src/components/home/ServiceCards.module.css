@@ -53,27 +53,43 @@
 }
 
 .text {
-  margin-bottom: clamp(12px, 1vw, 20px);
+  margin-bottom: 20px;
   font-size: clamp(15px, 1.2vw, 24px);
   line-height: 1.45;
   color: var(--ink);
 }
 
+/* Justified as in the design; hyphenation keeps word gaps even */
+@media (min-width: 1024px) {
+  .text {
+    text-align: justify;
+    hyphens: auto;
+  }
+}
+
 .more {
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
+  /* auto top margin lines the arrows up at the bottom of the row */
   margin: auto auto 0;
+  padding: 0;
   border-radius: 50%;
-  color: var(--indigo);
   background: var(--mist);
-  transition: transform 0.35s var(--ease), background-color 0.25s ease;
+  color: var(--indigo);
+  transition: translate 0.35s var(--ease), background-color 0.25s ease;
 }
 
 .more svg {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
+}
+
+.card:hover .more,
+.card:focus-visible .more {
+  translate: 0 4px;
+  background: #ffe7c2;
 }
 
 .card:hover .media img {
@@ -83,12 +99,6 @@
 .card:hover .title,
 .card:focus-visible .title {
   text-decoration-color: var(--orange);
-}
-
-.card:hover .more,
-.card:focus-visible .more {
-  transform: translateY(3px);
-  background: #ffe7c2;
 }
 
 @media (max-width: 1100px) {

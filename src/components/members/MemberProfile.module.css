@@ -1,0 +1,152 @@
+.profile {
+  display: grid;
+  gap: 8px;
+  color: #fff;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 20px;
+  padding: 20px;
+  background: #00004a;
+}
+
+.photo {
+  width: clamp(110px, 12vw, 160px);
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #0a2463;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photoPlaceholder {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  font-weight: 700;
+  font-size: 44px;
+}
+
+.info {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  min-width: 0;
+}
+
+.company {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.name {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.tagline {
+  font-size: 14px;
+  color: var(--on-dark-soft);
+}
+
+.facts {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  font-size: 15px;
+}
+
+.facts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.person,
+.position {
+  display: block;
+}
+
+.person {
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.profile a {
+  color: #fff;
+  text-underline-offset: 3px;
+}
+
+.profile a:hover {
+  color: #ffd79a;
+}
+
+.profile :focus-visible {
+  outline-color: #ffd79a;
+}
+
+.badge {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 10px;
+}
+
+/* Small Italian flags above and below the emblem, as in the design */
+.flag {
+  width: 30px;
+  height: 12px;
+  background: linear-gradient(90deg, var(--it-green) 0 33.33%, #fff 33.33% 66.66%, var(--it-red) 66.66%);
+}
+
+.emblem {
+  width: clamp(90px, 9vw, 120px);
+  height: auto;
+}
+
+.panel {
+  min-height: 150px;
+  padding: 16px 20px;
+  background: url("../../assets/images/network-bg.jpg") center / cover no-repeat, #00123f;
+}
+
+.panelTitle {
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.panel ul {
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+.pending {
+  font-size: 14px;
+  color: var(--on-dark-soft);
+}
+
+@media (max-width: 640px) {
+  .card {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .badge {
+    display: none;
+  }
+}

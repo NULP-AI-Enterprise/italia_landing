@@ -29,7 +29,7 @@
 
   --gutter: clamp(16px, 5.2vw, 100px);
   --container: 1480px;
-  --header-h: clamp(60px, 4.5vw, 84px);
+  --header-h: 72px;
 
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -81,6 +81,11 @@ blockquote {
 :focus-visible {
   outline: 3px solid var(--orange);
   outline-offset: 3px;
+}
+
+/* Page behind an open dialog does not scroll */
+html:has(dialog[open]) {
+  overflow: hidden;
 }
 
 /* Skip-link target: focus moves here, no ring needed around the whole page */
@@ -143,6 +148,12 @@ main:focus {
   line-height: 1.18;
   letter-spacing: -0.01em;
   color: var(--navy);
+}
+
+@media (max-width: 1100px) {
+  :root {
+    --header-h: 64px;
+  }
 }
 
 /* Explicit line breaks in titles ("\n" in content) — only on wider screens */

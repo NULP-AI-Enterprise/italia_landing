@@ -11,7 +11,7 @@ const dictionaries: Record<Locale, () => Promise<Dictionary>> = {
 /** Resolves the current locale from the `[lang]` root segment. */
 export async function getLocale(): Promise<Locale> {
   const locale = await lang();
-  if (!hasLocale(locale)) notFound();
+  if (!locale || !hasLocale(locale)) notFound();
   return locale;
 }
 

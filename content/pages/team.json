@@ -18,5 +18,21 @@
       "uk": "Наша команда поєднує глибоку експертизу в торгівлі, праві, дипломатії та бізнес-розвитку з двох боків Адріатики.",
       "it": "Il nostro team unisce una profonda esperienza nel commercio, nel diritto, nella diplomazia e nello sviluppo d’impresa sulle due sponde dell’Adriatico."
     }
+  },
+  "rows": {
+    "leadership": [
+      1,
+      1,
+      1
+    ],
+    "departments": [
+      3,
+      2,
+      1
+    ],
+    "regions": [
+      3,
+      3
+    ]
   }
 }

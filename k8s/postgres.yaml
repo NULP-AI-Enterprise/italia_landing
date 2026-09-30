@@ -1,0 +1,85 @@
+# PostgreSQL for the site: form submissions, admin users, edited content and uploaded images.
+# Password comes from the secret "italia-landing-postgres" (created by hand, not stored in git):
+#   kubectl -n italia-landing create secret generic italia-landing-postgres \
+#     --from-literal=POSTGRES_PASSWORD='<password>'
+apiVersion: v1
+kind: Service
+metadata:
+  name: italia-landing-postgres
+  namespace: italia-landing
+  labels:
+    app: italia-landing-postgres
+spec:
+  clusterIP: None
+  selector:
+    app: italia-landing-postgres
+  ports:
+    - name: postgres
+      port: 5432
+      targetPort: 5432
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: italia-landing-postgres
+  namespace: italia-landing
+  labels:
+    app: italia-landing-postgres
+spec:
+  serviceName: italia-landing-postgres
+  replicas: 1
+  selector:
+    matchLabels:
+      app: italia-landing-postgres
+  template:
+    metadata:
+      labels:
+        app: italia-landing-postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16-alpine
+          ports:
+            - name: postgres
+              containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: miufi
+            - name: POSTGRES_USER
+              value: miufi
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: italia-landing-postgres
+                  key: POSTGRES_PASSWORD
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          readinessProbe:
+            exec:
+              command: ["pg_isready", "-U", "miufi", "-d", "miufi"]
+            periodSeconds: 10
+            timeoutSeconds: 5
+          livenessProbe:
+            exec:
+              command: ["pg_isready", "-U", "miufi", "-d", "miufi"]
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 5
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 5Gi

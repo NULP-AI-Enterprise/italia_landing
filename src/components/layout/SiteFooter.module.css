@@ -6,62 +6,83 @@
 
 .inner {
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 20px 40px;
-  padding-block: 32px;
+  grid-template-columns: minmax(220px, 1fr) minmax(0, 3fr);
+  gap: 40px clamp(32px, 5vw, 96px);
+  padding-block: clamp(40px, 4vw, 64px) 28px;
+}
+
+.brandBlock {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 20px;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   color: #fff;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 17px;
+  line-height: 1.2;
   text-decoration: none;
 }
 
 .logo {
-  width: 48px;
+  width: 56px;
   height: auto;
   border-radius: 50%;
   background: #fff;
 }
 
-.nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px 28px;
+.join {
+  min-height: 44px;
+  font-size: 16px;
+}
+
+.join:focus-visible {
+  outline-color: #fff;
+}
+
+.links {
+  columns: 3 200px;
+  column-gap: 32px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.nav a {
+.links li {
+  break-inside: avoid;
+}
+
+.links a {
   display: inline-block;
-  padding: 4px 0;
+  padding: 6px 0;
   text-decoration: none;
   text-underline-offset: 4px;
 }
 
-.nav a:hover {
+.links a:hover {
   color: #fff;
   text-decoration: underline;
 }
 
+.footer :focus-visible {
+  outline-color: #ffd79a;
+}
+
 .copy {
-  white-space: nowrap;
+  grid-column: 1 / -1;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 14px;
 }
 
 @media (max-width: 960px) {
   .inner {
     grid-template-columns: 1fr;
-    justify-items: start;
-  }
-
-  .nav {
-    justify-content: flex-start;
   }
 }
+

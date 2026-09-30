@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { Closing } from "@/components/about/Closing";
+import { ExportSectors } from "@/components/about/ExportSectors";
 import { History } from "@/components/about/History";
 import { Intro } from "@/components/about/Intro";
-import { MarketEntry } from "@/components/about/MarketEntry";
 import { JoinButton } from "@/components/ui/JoinButton";
 import { PageHero } from "@/components/ui/PageHero";
 import { getPage } from "@/content/repository";
@@ -23,8 +24,9 @@ export default async function AboutPage() {
     <>
       <PageHero title={page.hero.title} lead={page.hero.lead} logoAlt={dict.a11y.logoAlt} />
       <Intro intro={page.intro} />
-      <MarketEntry market={page.market} />
+      <ExportSectors sectors={page.sectors} locale={locale} heading={dict.about.sectorsHeading} />
       <History history={page.history} />
+      <Closing title={page.closing.title} />
       <JoinButton href={localePath(locale, "/join")} label={dict.actions.join} />
     </>
   );

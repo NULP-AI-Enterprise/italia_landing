@@ -1,0 +1,25 @@
+.wrap {
+  padding-top: clamp(32px, 3.5vw, 72px);
+}
+
+/* Two staggered columns, as in the design (no row alignment between them) */
+.columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(20px, 3.4vw, 56px);
+}
+
+.list {
+  display: grid;
+  gap: clamp(20px, 2.6vw, 44px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (max-width: 767px) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+}

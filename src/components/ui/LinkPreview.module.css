@@ -1,0 +1,123 @@
+/* Link-preview card from the design: thin grey frame, square corners */
+.card {
+  position: relative;
+  display: grid;
+  height: 100%;
+  border: 1px solid var(--line);
+  background: #fff;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.25s ease;
+}
+
+.linked:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 14px 32px -18px rgba(10, 36, 99, 0.35);
+}
+
+/* Logo on the left */
+.thumb {
+  grid-template-columns: clamp(92px, 26%, 160px) minmax(0, 1fr);
+}
+
+.media {
+  overflow: hidden;
+  background: #fff;
+}
+
+.media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.thumb .media {
+  display: grid;
+  place-items: center;
+}
+
+.thumb .media img {
+  max-height: 160px;
+  object-fit: contain;
+}
+
+.body {
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  min-width: 0;
+  padding: clamp(14px, 1.3vw, 20px) clamp(16px, 1.5vw, 24px);
+  text-align: start;
+}
+
+.title {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(15px, 1.05vw, 18px);
+  line-height: 1.35;
+  color: var(--ink-black);
+}
+
+.link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+/* The title link covers the whole card */
+.link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.link:focus-visible {
+  outline: none;
+}
+
+.link:focus-visible::after {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+
+.linked:hover .link,
+.link:focus-visible {
+  text-decoration-color: var(--orange);
+}
+
+.description {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  font-size: clamp(14px, 0.95vw, 15px);
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.source {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  font-size: 13px;
+  color: var(--ink-soft);
+  overflow-wrap: anywhere;
+}
+
+.source svg {
+  flex: none;
+  width: 13px;
+  height: 13px;
+}
+
+@media (max-width: 420px) {
+  .thumb {
+    grid-template-columns: 84px minmax(0, 1fr);
+  }
+}

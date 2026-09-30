@@ -1,61 +1,45 @@
 .intro {
   display: grid;
-  padding-top: clamp(16px, 1vw, 24px);
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: stretch;
+  grid-template-columns: minmax(0, 55fr) minmax(0, 45fr);
+  align-items: center;
+  padding-top: clamp(16px, 1.6vw, 32px);
 }
 
 .content {
-  align-self: center;
   width: 100%;
-  max-width: calc(var(--container) / 2 + var(--gutter));
+  max-width: calc(var(--container) * 0.55 + var(--gutter));
   margin-left: auto;
-  padding: clamp(32px, 1.8vw, 48px) clamp(24px, 3.2vw, 64px) clamp(32px, 1.8vw, 48px) var(--gutter);
+  padding: clamp(28px, 2.4vw, 48px) clamp(24px, 2.4vw, 48px) clamp(28px, 2.4vw, 48px) var(--gutter);
 }
 
 .title {
-  max-width: 16.5em;
-  margin-bottom: clamp(18px, 1.5vw, 28px);
-  font-size: clamp(26px, 2.35vw, 46px);
+  max-width: 16em;
+  margin-bottom: clamp(18px, 2.4vw, 40px);
+  font-size: clamp(24px, 2.4vw, 42px);
 }
 
-.pillar {
-  padding-left: clamp(14px, 1.2vw, 20px);
-  border-left: 2px solid var(--line-strong);
+.text {
+  display: grid;
+  gap: 0.6em;
 }
 
-.pillar + .pillar {
-  margin-top: clamp(16px, 1.5vw, 26px);
+.text p {
+  font-size: clamp(17px, 1.85vw, 30px);
+  line-height: 1.45;
+  color: var(--ink-black);
 }
 
-.accent {
-  border-left-color: var(--orange);
-}
-
-.pillarTitle {
-  margin-bottom: 6px;
-  font-weight: 700;
-  font-size: clamp(16px, 1.1vw, 21px);
-  line-height: 1.35;
-  color: var(--navy);
-}
-
-.pillarText {
-  max-width: 62ch;
-  font-size: clamp(14.5px, 0.98vw, 18px);
-  line-height: 1.62;
-  color: var(--ink-soft);
-}
-
-.pillarText strong {
-  font-weight: 700;
-  color: #2c3650;
+@media (min-width: 1024px) {
+  .text p {
+    text-align: justify;
+    hyphens: auto;
+  }
 }
 
 .media {
   position: relative;
-  min-height: 100%;
-  aspect-ratio: 16 / 9;
+  align-self: stretch;
+  min-height: clamp(260px, 33vw, 620px);
   overflow: hidden;
 }
 
@@ -75,10 +59,11 @@
   .content {
     max-width: none;
     margin: 0;
-    padding: 40px var(--gutter);
+    padding: 36px var(--gutter);
   }
 
   .media {
     min-height: 0;
+    aspect-ratio: 16 / 10;
   }
 }

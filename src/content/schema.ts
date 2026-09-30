@@ -1,13 +1,14 @@
 /**
- * Content model for everything an editor may change (the future admin panel).
+ * Content model for everything an editor may change in the admin panel.
  *
  * - Every translatable field is a `Localized` object: { uk, it }.
  * - Inline emphasis inside text fields uses <b>…</b> and <i>…</i>.
  * - Line breaks inside titles use "\n".
- * - Images live in /public/media and are referenced by path.
+ * - Images are referenced by path: /media/… (files in /public/media or uploads).
  *
- * The same schemas validate the JSON files in /content at build time and can
- * later validate admin form input or CMS responses.
+ * The same schemas validate the starting JSON in /content, the documents stored
+ * in the database and every save from the admin forms (src/content/registry.ts).
+ * Messages are in Ukrainian because editors see them.
  */
 import { z } from "zod";
 
@@ -15,11 +16,13 @@ const text = z.string().trim().min(1);
 
 export const Localized = z.object({ uk: text, it: text });
 
-export const Id = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Use lowercase-kebab-case");
+export const Id = z
+  .string()
+  .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Лише малі латинські літери, цифри й дефіси, наприклад: my-company");
 
 export const IsoDate = z.iso.date();
 
-export const RegionCode = z.string().regex(/^(UA|IT)-\d{2}$/, "Use an ISO 3166-2 code, e.g. UA-46 or IT-25");
+export const RegionCode = z.string().regex(/^(UA|IT)-\d{2}$/, "Код регіону ISO 3166-2, наприклад UA-46 або IT-25");
 
 export const Media = z.object({
   src: z.string().startsWith("/media/"),
@@ -101,13 +104,19 @@ export const Member = z.object({
       name: text,
       position: Localized.optional(),
       email: z.email().optional(),
-      phone: z.string().regex(/^\+\d{8,15}$/, "Use E.164, e.g. +380501234567").optional(),
+      phone: z.string().regex(/^\+\d{8,15}$/, "Міжнародний формат без пробілів, наприклад +380501234567").optional(),
       photo: Media.optional(),
     })
     .optional(),
   offers: z.array(Localized),
   seeks: z.array(Localized),
 });
+
+/** Link-preview picture, as in the design: a wide photo on top ("cover") or a logo on the left ("thumb"). */
+const LinkPreviewImage = {
+  image: Media.optional(),
+  imageLayout: z.enum(["cover", "thumb"]).default("cover"),
+};
 
 export const PartnerCategory = z.enum(["association", "rebuild", "institutional"]);
 
@@ -119,7 +128,7 @@ export const Partner = z.object({
   name: Localized,
   description: Localized.optional(),
   website: z.url().optional(),
-  logo: Media.optional(),
+  ...LinkPreviewImage,
 });
 
 export const Event = z
@@ -133,8 +142,12 @@ export const Event = z
     startDate: IsoDate,
     endDate: IsoDate,
     website: z.url().optional(),
+    ...LinkPreviewImage,
   })
-  .refine((event) => event.endDate >= event.startDate, "endDate must not be before startDate");
+  .refine((event) => event.endDate >= event.startDate, {
+    message: "Дата завершення не може бути раніше за дату початку",
+    path: ["endDate"],
+  });
 
 /* ---------- Page documents ---------- */
 
@@ -150,23 +163,30 @@ export const AboutPage = z.object({
   hero: Hero,
   intro: z.object({
     title: Localized,
-    vision: z.object({ title: Localized, text: Localized }),
-    mission: z.object({ title: Localized, text: Localized }),
-    image: Media,
+    paragraphs: z.array(Localized).min(1),
+    /** Photo for this block; until it is provided the page shows a placeholder. */
+    image: Media.optional(),
   }),
-  market: z.object({ title: Localized, text: Localized, image: Media }),
+  sectors: z.object({
+    image: Media,
+    paragraphs: z.array(Localized).min(1),
+    highlights: z.array(Localized),
+    link: InternalLink.optional(),
+  }),
   history: z.object({
     eyebrow: Localized,
     title: Localized,
     paragraphs: z.array(Localized).min(1),
     images: z.array(Media),
   }),
+  closing: z.object({ title: Localized }),
 });
 
 export const SimplePage = z.object({ seo: Seo, hero: Hero });
 
-export const PartnersPage = SimplePage.extend({
-  sections: z.record(PartnerCategory, z.object({ title: Localized, intro: Localized.optional() })),
+export const TeamPage = SimplePage.extend({
+  /** People per row for each group, top to bottom (as in the design). */
+  rows: z.record(TeamGroup, z.array(z.number().int().positive())).optional(),
 });
 
 export const ArticleBlock = z.discriminatedUnion("type", [
@@ -183,9 +203,5 @@ export const ArticlePage = SimplePage.extend({
   blocks: z.array(ArticleBlock).min(1),
 });
 
-export const Settings = z.object({
-  /** Where "Contact" buttons lead when a person has no e-mail yet. */
-  contactHref: z.string().startsWith("/"),
-});
 
 export type LocalizedText = z.infer<typeof Localized>;

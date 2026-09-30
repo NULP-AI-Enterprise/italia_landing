@@ -1,38 +1,18 @@
 {
   "seo": {
     "title": {
-      "uk": "Партнери",
-      "it": "Partner"
+      "uk": "Партнери асоціації",
+      "it": "Partner dell’associazione"
     },
     "description": {
-      "uk": "Партнери асоціації Made in Ukraine for Italy: галузеві об’єднання, учасники програми Rebuild Ukraine Better та інституційні партнери.",
-      "it": "I partner dell’associazione Made in Ukraine for Italy: associazioni di settore, partecipanti al programma Rebuild Ukraine Better e partner istituzionali."
+      "uk": "Партнери асоціації Made in Ukraine for Italy: галузеві об’єднання, фонди та компанії України та Італії.",
+      "it": "I partner dell’associazione Made in Ukraine for Italy: associazioni di settore, fondazioni e aziende di Ucraina e Italia."
     }
   },
   "hero": {
     "title": {
-      "uk": "Наші партнери",
-      "it": "I nostri partner"
-    }
-  },
-  "sections": {
-    "association": {
-      "title": {
-        "uk": "Партнери асоціації",
-        "it": "Partner dell’associazione"
-      }
-    },
-    "rebuild": {
-      "title": {
-        "uk": "Учасники програми Rebuild Ukraine Better",
-        "it": "Partecipanti al programma Rebuild Ukraine Better"
-      }
-    },
-    "institutional": {
-      "title": {
-        "uk": "Інституційні партнери",
-        "it": "Partner istituzionali"
-      }
+      "uk": "Партнери асоціації",
+      "it": "Partner dell’associazione"
     }
   }
 }

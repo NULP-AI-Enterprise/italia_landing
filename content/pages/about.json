@@ -1,6 +1,9 @@
 {
   "seo": {
-    "title": { "uk": "Асоціація", "it": "Associazione" },
+    "title": {
+      "uk": "Асоціація",
+      "it": "Associazione"
+    },
     "description": {
       "uk": "Асоціація Made in Ukraine for Italy (MIUFI) — інституційний міст між підприємницькими спільнотами України та Італії. Бачення, місія та історія асоціації.",
       "it": "L’associazione Made in Ukraine for Italy (MIUFI) è un ponte istituzionale tra le comunità imprenditoriali di Ucraina e Italia. Visione, missione e storia dell’associazione."
@@ -21,36 +24,14 @@
       "uk": "Асоціація, яка з’єднує українські бізнеси з італійським ринком, партнерами та інвесторами.",
       "it": "Un’associazione che collega le imprese ucraine con il mercato italiano, i partner e gli investitori."
     },
-    "vision": {
-      "title": { "uk": "Бачення", "it": "Visione" },
-      "text": {
-        "uk": "Світ, де українська якість має своє постійне місце <b>в Італії</b>, а через неї — <b>у всій Європі</b>. Де кожен український виробник має рівний доступ до міжнародних ринків незалежно від розміру компанії.",
-        "it": "Un mondo in cui la qualità ucraina ha un posto stabile <b>in Italia</b> e, attraverso l’Italia, <b>in tutta Europa</b>. In cui ogni produttore ucraino ha pari accesso ai mercati internazionali, indipendentemente dalle dimensioni dell’azienda."
+    "paragraphs": [
+      {
+        "uk": "Економічне співробітництво між Італією та Україною вже є суттєвим. За даними Міністерства закордонних справ Італії, двосторонній товарообіг Італії з Україною у 2025 році досяг 4,5 млрд євро, а Конференція з питань відновлення України 2025 року зібрала в Римі близько 2000 підприємств.",
+        "it": "La cooperazione economica tra Italia e Ucraina è già significativa. Secondo il Ministero degli Affari Esteri italiano, nel 2025 l’interscambio commerciale dell’Italia con l’Ucraina ha raggiunto 4,5 miliardi di euro e la Conferenza sulla ripresa dell’Ucraina 2025 ha riunito a Roma circa 2000 imprese."
       }
-    },
-    "mission": {
-      "title": { "uk": "Місія", "it": "Missione" },
-      "text": {
-        "uk": "<b>Знижуємо бар’єри виходу на ринок</b>: через представленість вашої компанії в Італії 365 днів на рік, інституційні партнерства, колективну участь у міжнародних виставках і пряме B2B-знайомство з перевіреними партнерами та інвесторами.",
-        "it": "<b>Riduciamo le barriere di accesso al mercato</b>: grazie alla presenza della vostra azienda in Italia 365 giorni all’anno, a partnership istituzionali, alla partecipazione collettiva a fiere internazionali e al contatto diretto B2B con partner e investitori verificati."
-      }
-    },
-    "image": {
-      "src": "/media/about/flags.jpg",
-      "width": 800,
-      "height": 450,
-      "alt": { "uk": "Тканинні прапори Італії та України", "it": "Bandiere in tessuto di Italia e Ucraina" }
-    }
+    ]
   },
-  "market": {
-    "title": {
-      "uk": "Вихід на ринок Італії та Європи. Без зайвих кроків.",
-      "it": "Accesso al mercato italiano ed europeo. Senza passaggi superflui."
-    },
-    "text": {
-      "uk": "Асоціація <b>Made in Ukraine for Italy</b> відкриває двері для українських бізнесів до італійського ринку та інвестицій через перевірену мережу партнерів, інвестиційну підтримку та живу мережу ділових контактів.",
-      "it": "L’associazione <b>Made in Ukraine for Italy</b> apre alle imprese ucraine le porte del mercato italiano e degli investimenti grazie a una rete di partner verificati, al supporto agli investimenti e a una rete viva di contatti d’affari."
-    },
+  "sectors": {
     "image": {
       "src": "/media/about/arches.jpg",
       "width": 958,
@@ -59,10 +40,48 @@
         "uk": "Вечірнє подвір’я історичної італійської вілли з арками, де збираються учасники заходу",
         "it": "Cortile serale di una storica villa italiana con portici, dove si riuniscono i partecipanti a un evento"
       }
+    },
+    "paragraphs": [
+      {
+        "uk": "Основні експортні сектори України — <b>сільське господарство та залізна руда</b>.",
+        "it": "I principali settori di esportazione dell’Ucraina sono <b>l’agricoltura e il minerale di ferro</b>."
+      },
+      {
+        "uk": "Загалом у 2025 році Україна експортувала товарів приблизно на <b>40,3 млрд доларів</b>, а дані за початок 2026 року вказують на незначну стабілізацію та зростання в окремих секторах.",
+        "it": "Complessivamente, nel 2025 l’Ucraina ha esportato beni per circa <b>40,3 miliardi di dollari</b> e i dati di inizio 2026 indicano una leggera stabilizzazione e una crescita in alcuni settori."
+      },
+      {
+        "uk": "<b>Продовольство та сільське господарство.</b> Сільськогосподарський сектор щорічно генерує понад 24 млрд доларів — майже 60% загального експорту товарів.",
+        "it": "<b>Alimentare e agricoltura.</b> Il settore agricolo genera ogni anno oltre 24 miliardi di dollari, quasi il 60% dell’export totale di beni."
+      }
+    ],
+    "highlights": [
+      {
+        "uk": "Логістика та відновлення",
+        "it": "Logistica e ripresa"
+      },
+      {
+        "uk": "Машини та електротехнічне обладнання",
+        "it": "Macchinari e apparecchiature elettriche"
+      },
+      {
+        "uk": "IT та технологічний аутсорсинг",
+        "it": "IT e outsourcing tecnologico"
+      }
+    ],
+    "link": {
+      "label": {
+        "uk": "Детальніше про економіку України та Італії",
+        "it": "Approfondisci l’economia di Ucraina e Italia"
+      },
+      "href": "/ukraine-italy"
     }
   },
   "history": {
-    "eyebrow": { "uk": "Наша історія", "it": "La nostra storia" },
+    "eyebrow": {
+      "uk": "Наша історія",
+      "it": "La nostra storia"
+    },
     "title": {
       "uk": "Заснована з метою.\nПобудована на партнерстві.",
       "it": "Fondata con uno scopo.\nCostruita sulla partnership."
@@ -82,7 +101,10 @@
         "src": "/media/history/signing.jpg",
         "width": 361,
         "height": 271,
-        "alt": { "uk": "Підписання документів про партнерство", "it": "Firma di documenti di partenariato" }
+        "alt": {
+          "uk": "Підписання документів про партнерство",
+          "it": "Firma di documenti di partenariato"
+        }
       },
       {
         "src": "/media/history/conference.jpg",
@@ -106,8 +128,17 @@
         "src": "/media/history/members.jpg",
         "width": 361,
         "height": 271,
-        "alt": { "uk": "Учасники асоціації на вечірньому заході", "it": "Soci dell’associazione a un evento serale" }
+        "alt": {
+          "uk": "Учасники асоціації на вечірньому заході",
+          "it": "Soci dell’associazione a un evento serale"
+        }
       }
     ]
+  },
+  "closing": {
+    "title": {
+      "uk": "Вихід на ринок Італії та Європи. Без зайвих кроків.",
+      "it": "Accesso al mercato italiano ed europeo. Senza passaggi superflui."
+    }
   }
 }

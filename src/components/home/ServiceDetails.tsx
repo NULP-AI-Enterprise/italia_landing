@@ -1,10 +1,10 @@
 import Link from "next/link";
+import { serviceAnchor } from "@/content/anchors";
 import type { ServiceItem } from "@/content/repository";
 import { ContentImage } from "@/components/ui/ContentImage";
 import { Reveal } from "@/components/ui/Reveal";
 import { RichText } from "@/components/ui/RichText";
 import { localePath, type Locale } from "@/i18n/config";
-import { serviceAnchor } from "./ServiceCards";
 import styles from "./ServiceDetails.module.css";
 
 type ServiceDetailsProps = {

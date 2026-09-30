@@ -1,0 +1,9 @@
+.closing {
+  padding-top: clamp(40px, 5vw, 96px);
+}
+
+.title {
+  max-width: 14em;
+  font-size: clamp(26px, 2.8vw, 48px);
+  line-height: 1.12;
+}

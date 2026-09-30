@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { MemberDirectory } from "@/components/members/MemberDirectory";
-import { MemberList } from "@/components/members/MemberList";
+import { MemberDirectory, MemberSearch } from "@/components/members/MemberDirectory";
 import { JoinButton } from "@/components/ui/JoinButton";
 import { PageHero } from "@/components/ui/PageHero";
 import { getMembersDirectory, getPage } from "@/content/repository";
@@ -29,19 +28,7 @@ export default async function MembersPage() {
     <>
       <PageHero title={page.hero.title} lead={page.hero.lead} logoAlt={dict.a11y.logoAlt} />
       {/* Filters read the URL on the client; the static HTML already lists every member */}
-      <Suspense
-        fallback={
-          <div className="container">
-            <h2 className="visually-hidden">{dict.members.resultsTitle}</h2>
-            <MemberList
-              members={directory.members}
-              locale={locale}
-              labels={dict.members}
-              newTabLabel={dict.a11y.newTab}
-            />
-          </div>
-        }
-      >
+      <Suspense fallback={<MemberSearch {...directoryProps} search="" />}>
         <MemberDirectory {...directoryProps} />
       </Suspense>
       <JoinButton href={localePath(locale, "/join")} label={dict.actions.join} />

@@ -1,0 +1,13 @@
+# Keep local state, secrets and build output out of the image context
+node_modules
+.next
+.data
+.env
+.env.*
+!.env.example
+.git
+.github
+.claude
+static-prototype
+*.log
+.DS_Store

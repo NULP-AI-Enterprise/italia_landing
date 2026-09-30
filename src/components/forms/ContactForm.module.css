@@ -1,0 +1,107 @@
+.form {
+  display: grid;
+  gap: 20px;
+}
+
+.trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.note {
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.alert {
+  padding: 12px 14px;
+  border-left: 4px solid #b3261e;
+  background: #fdecea;
+  color: #7a1712;
+  font-weight: 700;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+/* Labels as in the design: small caps with wide tracking */
+.label {
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.control {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  background: #fff;
+  color: var(--ink-black);
+  font: inherit;
+  font-size: 16px;
+}
+
+textarea.control {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.control::placeholder {
+  color: #6b7280; /* 4.8:1 on white */
+}
+
+.control:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 1px;
+  border-color: var(--ink-black);
+}
+
+.control[aria-invalid="true"] {
+  border: 2px solid #b3261e;
+}
+
+.error {
+  font-size: 14px;
+  font-weight: 700;
+  color: #b3261e; /* 6.5:1 on white */
+}
+
+.submit {
+  width: 100%;
+  min-height: 56px;
+  font-size: 18px;
+  border-radius: 0;
+}
+
+.submit:disabled {
+  cursor: progress;
+  opacity: 0.8;
+}
+
+.privacy {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.success {
+  display: grid;
+  gap: 12px;
+  padding: 8px 0;
+  outline: none;
+}
+
+.successTitle {
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--navy);
+}

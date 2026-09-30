@@ -1,0 +1,60 @@
+.map {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(300px, 60vw);
+  margin-inline: auto;
+  overflow: visible;
+}
+
+/* Italy is tall: keep it the same height as Ukraine rather than the same width */
+.it {
+  max-height: 320px;
+}
+
+.map path {
+  fill: #cdd2ea;
+  stroke: #fff;
+  stroke-width: 1;
+  stroke-linejoin: round;
+  cursor: pointer;
+  transition: fill 0.2s ease;
+}
+
+.map path:hover {
+  fill: #a9b2de;
+}
+
+/* Regions where members are, under the other filters */
+.map path.has {
+  fill: #3f4aa8;
+}
+
+.map path.has:hover {
+  fill: #2b358c;
+}
+
+.map path.selected,
+.map path.selected:hover {
+  fill: var(--orange);
+  stroke: var(--navy);
+  stroke-width: 1.5;
+}
+
+@media (max-width: 639px) {
+  .map,
+  .it {
+    max-height: 240px;
+  }
+}
+
+@media (forced-colors: active) {
+  .map path {
+    fill: Canvas;
+    stroke: CanvasText;
+  }
+
+  .map path.selected {
+    fill: Highlight;
+  }
+}

@@ -2,7 +2,7 @@ import Image from "next/image";
 import { ContentImage } from "@/components/ui/ContentImage";
 import { ExternalLink, displayDomain } from "@/components/ui/ExternalLink";
 import type { Dictionary } from "@/i18n/get-dictionary";
-import emblemGold from "@/assets/images/emblem-gold.png";
+import emblem from "@/assets/images/emblem.png";
 import type { MemberItem } from "./MemberResults";
 import styles from "./MemberProfile.module.css";
 
@@ -38,7 +38,7 @@ export function MemberProfile({ member, labels, newTabLabel, titleId }: MemberPr
                 {member.name}
               </h2>
               {member.tagline && <p className={styles.tagline}>{member.tagline}</p>}
-              {member.rebuildProgram && <p className={styles.badge}>{labels.rebuildBadge}</p>}
+              {member.rebuildProgram && <p className={styles.programBadge}>{labels.rebuildBadge}</p>}
             </div>
           </div>
 
@@ -91,7 +91,8 @@ export function MemberProfile({ member, labels, newTabLabel, titleId }: MemberPr
 
         <div className={styles.badge} aria-hidden="true">
           <span className={styles.flag} />
-          <Image src={emblemGold} alt="" sizes="120px" className={styles.emblem} />
+          {/* The same emblem as in the page banner */}
+          <Image src={emblem} alt="" sizes="120px" className={styles.emblem} />
           <span className={styles.flag} />
         </div>
       </div>

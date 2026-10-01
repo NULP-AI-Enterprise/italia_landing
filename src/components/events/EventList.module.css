@@ -1,6 +1,6 @@
 .calendar {
   display: grid;
-  gap: clamp(28px, 3vw, 48px);
+  gap: clamp(28px, 3vw, 44px);
   min-width: 0;
 }
 
@@ -9,8 +9,6 @@
   align-items: baseline;
   gap: 10px;
   margin-bottom: 14px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--line);
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(20px, 1.6vw, 26px);
@@ -25,83 +23,198 @@
 
 .list {
   display: grid;
-  gap: 16px;
+  gap: 14px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-/* Date column on the left, the event card on the right */
 .event {
-  display: grid;
-  grid-template-columns: 112px minmax(0, 1fr);
-  align-items: start;
-  gap: clamp(14px, 1.6vw, 24px);
   scroll-margin-top: calc(var(--header-h) + 24px);
 }
 
-.when {
+/* One card for every event: date block | text | picture */
+.card {
+  position: relative;
   display: grid;
-  gap: 4px;
-  padding-top: 6px;
+  grid-template-columns: 112px minmax(0, 1fr) 120px;
+  align-items: stretch;
+  min-height: 132px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(10, 36, 99, 0.05), 0 12px 28px -22px rgba(10, 36, 99, 0.4);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, translate 0.2s var(--ease);
 }
 
-.when time {
+.card[data-linked]:hover {
+  border-color: var(--navy);
+  box-shadow: 0 18px 36px -22px rgba(10, 36, 99, 0.55);
+  translate: 0 -1px;
+}
+
+/* Filled navy, so it reads as part of the card and not as the calendar */
+.date {
   display: grid;
+  place-items: center;
+  padding: 14px 10px;
+  background: var(--navy);
+  color: #fff;
+  text-align: center;
+}
+
+.date time {
+  display: grid;
+  gap: 6px;
   line-height: 1;
 }
 
 .days {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(26px, 2.2vw, 34px);
+  font-size: 28px;
   letter-spacing: -0.02em;
-  color: var(--navy);
   font-variant-numeric: tabular-nums;
 }
 
 .month {
-  margin-top: 4px;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--ink-soft);
+  color: #d6dcf5;
 }
 
 .span {
   font-weight: 700;
   font-size: 15px;
   line-height: 1.3;
-  color: var(--navy);
+}
+
+.body {
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  min-width: 0;
+  padding: 16px 20px;
 }
 
 .city {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
   font-size: 14px;
+  letter-spacing: 0.02em;
+  color: #9a5200;
+}
+
+.city svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+
+.title {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(16px, 1.15vw, 19px);
+  line-height: 1.3;
+  color: var(--ink-black);
+}
+
+.link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+/* The title link covers the whole card */
+.link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.link:focus-visible {
+  outline: none;
+}
+
+.link:focus-visible::after {
+  border-radius: 16px;
+  outline: 3px solid var(--orange);
+  outline-offset: 2px;
+}
+
+.card:hover .link,
+.link:focus-visible {
+  text-decoration-color: var(--orange);
+}
+
+.description {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  font-size: 14px;
+  line-height: 1.5;
   color: var(--ink);
 }
 
-@media (max-width: 560px) {
-  .event {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 8px;
+.source {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+/* Same square for everyone: the picture or the first letter */
+.media {
+  display: grid;
+  place-items: center;
+  padding: 14px;
+  border-left: 1px solid var(--line);
+  background: #fff;
+}
+
+.media img {
+  width: 100%;
+  height: 100%;
+  max-height: 96px;
+  object-fit: contain;
+}
+
+.media span {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  background: var(--mist);
+  color: var(--navy);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+}
+
+@media (max-width: 640px) {
+  .card {
+    grid-template-columns: 88px minmax(0, 1fr);
   }
 
-  .when {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 10px;
-    padding-top: 0;
+  .media {
+    display: none;
   }
 
-  .when time {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
+  .days {
+    font-size: 24px;
   }
 
-  .month {
-    margin-top: 0;
+  .body {
+    padding: 14px 16px;
   }
 }

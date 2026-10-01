@@ -128,6 +128,25 @@ export function mergeBundled(key: CollectionKey, stored: Item[], bundled: Item[]
   return { items, changed };
 }
 
+/**
+ * One-off changes to collections that are already stored in the database (the
+ * bundled JSON only reaches them as new items). Each runs once per database;
+ * applied ids are kept in the row "content-migrations".
+ */
+const contentMigrations: { id: string; collection: CollectionKey; run: (items: Item[]) => boolean }[] = [
+  {
+    id: "2026-10-pin-thesis-i",
+    collection: "members",
+    run: (items) => {
+      const thesis = items.find((item) => item.id === "thesis-i");
+      if (!thesis || thesis.pinned !== undefined) return false;
+      thesis.pinned = true;
+      return true;
+    },
+  },
+];
+const MIGRATIONS_KEY = "content-migrations";
+
 let bundledSync: Promise<void> | undefined;
 
 /** Once per server process: merge bundled additions into collections stored in the database. */
@@ -138,8 +157,13 @@ function syncBundledContent() {
     const rows = await db
       .select({ key: schema.contentDocuments.key, data: schema.contentDocuments.data })
       .from(schema.contentDocuments)
-      .where(inArray(schema.contentDocuments.key, [...keys, ...keys.map(seedStateKey)]));
+      .where(inArray(schema.contentDocuments.key, [...keys, ...keys.map(seedStateKey), MIGRATIONS_KEY]));
     const stored = new Map(rows.map((row) => [row.key, row.data]));
+    const write = (key: CollectionKey, items: Item[]) =>
+      db
+        .update(schema.contentDocuments)
+        .set({ data: items, updatedAt: sql`now()` })
+        .where(inArray(schema.contentDocuments.key, [key]));
 
     for (const key of keys) {
       const current = stored.get(key);
@@ -154,14 +178,34 @@ function syncBundledContent() {
           console.error(`Content: bundled additions for "${key}" do not fit the stored data; skipped.`);
           continue;
         }
-        await db
-          .update(schema.contentDocuments)
-          .set({ data: items, updatedAt: sql`now()` })
-          .where(inArray(schema.contentDocuments.key, [key]));
+        await write(key, items);
+        stored.set(key, items);
         console.info(`Content: added bundled items to "${key}".`);
       }
       const ids = [...new Set([...(applied ?? []), ...bundled.map((item) => String(item[collectionDef(key).idKey]))])];
       if (!applied || ids.length !== applied.size) await rememberBundled(key, ids);
+    }
+
+    const done = new Set(((stored.get(MIGRATIONS_KEY) as { ids?: string[] } | undefined)?.ids ?? []) as string[]);
+    const pending = contentMigrations.filter((migration) => !done.has(migration.id));
+    for (const migration of pending) {
+      const current = stored.get(migration.collection);
+      if (Array.isArray(current)) {
+        const items = structuredClone(current) as Item[];
+        if (migration.run(items) && parseCollection(migration.collection, items).success) {
+          await write(migration.collection, items);
+          stored.set(migration.collection, items);
+          console.info(`Content: applied "${migration.id}".`);
+        }
+      }
+      done.add(migration.id);
+    }
+    if (pending.length) {
+      const data = { ids: [...done] };
+      await db
+        .insert(schema.contentDocuments)
+        .values({ key: MIGRATIONS_KEY, data })
+        .onConflictDoUpdate({ target: schema.contentDocuments.key, set: { data, updatedAt: sql`now()` } });
     }
   })().catch((error: unknown) => {
     bundledSync = undefined;

@@ -1,51 +1,56 @@
-/* Filters in one bar on top; the map on the left, the companies on the right */
-.directory {
-  display: grid;
-  gap: clamp(24px, 2.6vw, 40px);
-  padding-block: clamp(32px, 3.5vw, 64px) clamp(24px, 2vw, 40px);
+/* Tinted band, so white cards stand out */
+.band {
+  background: #f3f5fa;
+  border-block: 1px solid var(--line);
 }
 
-.filters {
+/* Filters in a column on the left; name search above the results on the right */
+.directory {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr) minmax(0, 1.7fr);
+  grid-template-columns: minmax(320px, 460px) minmax(0, 1fr);
+  grid-template-areas:
+    "filters search"
+    "filters results";
+  grid-template-rows: auto 1fr;
+  align-items: start;
+  gap: 20px clamp(24px, 3.5vw, 56px);
+  padding-block: clamp(28px, 3vw, 56px) clamp(32px, 3.5vw, 64px);
+}
+
+.searchBar {
+  grid-area: search;
+  display: grid;
+  gap: 8px;
+  padding: 18px 20px;
   border: 1px solid var(--line);
   border-radius: 16px;
   background: #fff;
-  box-shadow: 0 24px 48px -36px rgba(10, 36, 99, 0.3);
+  box-shadow: 0 1px 2px rgba(10, 36, 99, 0.05), 0 18px 36px -28px rgba(10, 36, 99, 0.35);
+}
+
+.filters {
+  grid-area: filters;
+  position: sticky;
+  top: calc(var(--header-h) + 20px);
+  display: grid;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(10, 36, 99, 0.05), 0 18px 36px -28px rgba(10, 36, 99, 0.35);
 }
 
 .block {
   display: grid;
-  align-content: start;
-  gap: 10px;
-  min-width: 0;
-  margin: 0;
-  padding: 20px 22px;
-  border: 0;
+  gap: 8px;
+  padding: 18px 20px;
 }
 
-.block + .block {
-  border-left: 1px solid var(--line);
-}
-
-.layout {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-  align-items: start;
-  gap: clamp(24px, 3vw, 48px);
-}
-
-.mapCard {
-  position: sticky;
-  top: calc(var(--header-h) + 20px);
-  padding: clamp(16px, 2vw, 28px);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background: #fff;
+.block + .block,
+.block + .map {
+  border-top: 1px solid var(--line);
 }
 
 .label {
-  padding: 0;
   font: 700 13px/1.2 var(--font-body);
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -71,7 +76,9 @@
 }
 
 .searchField input {
-  padding: 0 48px 0 46px;
+  min-height: 56px;
+  padding: 0 52px 0 50px;
+  font-size: 17px;
 }
 
 .searchField input::placeholder {
@@ -85,9 +92,9 @@
 .searchIcon {
   position: absolute;
   top: 50%;
-  left: 17px;
-  width: 20px;
-  height: 20px;
+  left: 19px;
+  width: 21px;
+  height: 21px;
   translate: 0 -50%;
   color: var(--ink-soft);
   pointer-events: none;
@@ -96,7 +103,7 @@
 .clear {
   position: absolute;
   top: 50%;
-  right: 6px;
+  right: 8px;
   display: grid;
   place-items: center;
   width: 40px;
@@ -120,7 +127,6 @@
   color: var(--ink-black);
 }
 
-/* Industry and region lists */
 .select {
   appearance: none;
   padding: 0 46px 0 18px;
@@ -149,22 +155,12 @@
   color: var(--ink-soft);
 }
 
-/* Region */
-.regionBlock {
-  grid-template-columns: minmax(0, 1fr);
-}
-
-/* A floated legend behaves like an ordinary grid item (still names the fieldset) */
-.regionBlock > legend {
-  float: left;
-  grid-column: 1 / -1;
-}
-
-.regionControls {
+/* Map with its country switch on top */
+.map {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
-  align-items: center;
-  gap: 10px;
+  gap: 12px;
+  margin: 0;
+  padding: 16px 20px 20px;
 }
 
 .countries {
@@ -219,12 +215,6 @@
   outline-offset: 2px;
 }
 
-.map {
-  display: grid;
-  gap: 12px;
-  margin: 0;
-}
-
 .mapCaption {
   min-height: 2.7em;
   font-size: 14px;
@@ -268,8 +258,9 @@
 
 /* Results */
 .results {
+  grid-area: results;
   display: grid;
-  gap: 20px;
+  gap: 18px;
   min-width: 0;
 }
 
@@ -279,8 +270,6 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 6px 20px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--line);
 }
 
 .resultsTitle {
@@ -289,6 +278,10 @@
   font-size: clamp(24px, 2vw, 34px);
   letter-spacing: -0.01em;
   color: var(--navy);
+}
+
+.resultsTitle:focus {
+  outline: none;
 }
 
 .count {
@@ -320,7 +313,7 @@
   padding: 0 10px 0 14px;
   border: 1px solid #c9cfea;
   border-radius: 999px;
-  background: #eef0fa;
+  background: #fff;
   color: var(--navy);
   font: 600 14px/1.2 var(--font-body);
   cursor: pointer;
@@ -329,7 +322,7 @@
 
 .chip:hover {
   border-color: var(--navy);
-  background: #e1e5f6;
+  background: #eef0fa;
 }
 
 .chip:active {
@@ -370,7 +363,7 @@
   padding: 36px 28px;
   border: 1px dashed var(--line-strong);
   border-radius: 16px;
-  background: var(--mist);
+  background: #fff;
   text-align: center;
 }
 
@@ -379,51 +372,33 @@
   font-size: 18px;
 }
 
-@media (max-width: 1100px) {
-  .filters {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  }
-
-  .regionBlock {
-    grid-column: 1 / -1;
-    border-top: 1px solid var(--line);
-    border-left: 0 !important;
-  }
-}
-
-/* The map only follows the scroll when it fits the screen */
+/* The filter column only follows the scroll when it fits the screen */
 @media (max-height: 819px) {
-  .mapCard {
+  .filters {
     position: static;
   }
 }
 
 @media (max-width: 900px) {
-  .layout {
+  .directory {
     grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "search"
+      "filters"
+      "results";
+    grid-template-rows: auto;
   }
 
-  .mapCard {
+  .filters {
     position: static;
   }
 }
 
-@media (max-width: 639px) {
-  .filters {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .block {
-    padding: 16px 18px;
-  }
-
-  .block + .block {
-    border-top: 1px solid var(--line);
-    border-left: 0;
-  }
-
-  .regionControls {
-    grid-template-columns: minmax(0, 1fr);
+@media (max-width: 480px) {
+  .block,
+  .searchBar,
+  .map {
+    padding-inline: 16px;
   }
 }
 

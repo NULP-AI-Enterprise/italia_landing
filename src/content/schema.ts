@@ -124,6 +124,8 @@ export const Member = z.object({
   seeks: z.array(Localized),
   /** Also takes part in the Rebuild Ukraine Better programme (shown as a badge). */
   rebuildProgram: z.boolean().default(false),
+  /** Shown first in the directory, before the alphabetical list. */
+  pinned: z.boolean().default(false),
 });
 
 /** Link-preview picture, as in the design: a wide photo on top ("cover") or a logo on the left ("thumb"). */

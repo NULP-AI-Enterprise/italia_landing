@@ -12,19 +12,25 @@ type MemberResultsProps = {
   openLabel: string;
   /** Badge for members of the Rebuild Ukraine Better programme. */
   rebuildLabel: string;
+  /** Heading of the pinned group (read by screen readers only). */
+  pinnedLabel: string;
   /** Opens the profile card. Without it (no JavaScript yet) cards are static. */
   onOpen?: (id: string) => void;
 };
 
-/** Groups members by first letter, keeping the locale's alphabetical order. */
+/** Pinned members first, then the rest by first letter in the locale's alphabetical order. */
 function groupByLetter(members: MemberItem[], locale: string) {
   const groups = new Map<string, MemberItem[]>();
-  for (const member of members) {
+  for (const member of members.filter((item) => !item.pinned)) {
     const first = member.name.trim().charAt(0).toLocaleUpperCase(locale);
     const letter = /\p{L}/u.test(first) ? first : "#";
     groups.set(letter, [...(groups.get(letter) ?? []), member]);
   }
-  return [...groups.entries()].map(([letter, items]) => ({ letter, items }));
+  const pinned = members.filter((item) => item.pinned);
+  return [
+    ...(pinned.length ? [{ letter: "", items: pinned }] : []),
+    ...[...groups.entries()].map(([letter, items]) => ({ letter, items })),
+  ];
 }
 
 /** Companies as rows of a directory, grouped by first letter. */
@@ -35,14 +41,15 @@ export function MemberResults({
   regionNames,
   openLabel,
   rebuildLabel,
+  pinnedLabel,
   onOpen,
 }: MemberResultsProps) {
   return (
     <div className={styles.letters}>
       {groupByLetter(members, locale).map(({ letter, items }) => (
-        <section className={styles.group} aria-labelledby={`letter-${letter}`} key={letter}>
-          <h3 className={styles.letter} id={`letter-${letter}`}>
-            {letter}
+        <section className={styles.group} aria-labelledby={`letter-${letter || "pinned"}`} key={letter || "pinned"}>
+          <h3 className={letter ? styles.letter : "visually-hidden"} id={`letter-${letter || "pinned"}`}>
+            {letter || pinnedLabel}
           </h3>
           <ul className={styles.list}>
             {items.map((member) => {
@@ -89,6 +96,7 @@ export function MemberResults({
                     <button
                       type="button"
                       className={styles.row}
+                      data-pinned={member.pinned || undefined}
                       aria-haspopup="dialog"
                       onClick={() => onOpen(member.id)}
                     >

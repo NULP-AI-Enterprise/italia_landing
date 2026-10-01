@@ -118,86 +118,88 @@ export function EventCalendarView({
   ] as const;
 
   return (
-    <div className={`container ${styles.wrap}`}>
-      <div className={styles.layout}>
-        <aside className={styles.aside} aria-label={labels.calendarLabel}>
-          <MonthCalendar
-            month={month}
-            events={events}
-            from={hasRange ? from : ""}
-            to={hasRange ? to : ""}
-            today={today}
-            locale={locale}
-            labels={labels}
-            onMonthChange={setMonth}
-            onSelectDay={selectDay}
-            disabled={disabled}
-          />
-          <p className={styles.hint} id={ids.hint}>
-            {labels.calendarHint}
-          </p>
-        </aside>
+    <div className={styles.band}>
+      <div className={`container ${styles.wrap}`}>
+        <div className={styles.layout}>
+          <aside className={styles.aside} aria-label={labels.calendarLabel}>
+            <MonthCalendar
+              month={month}
+              events={events}
+              from={hasRange ? from : ""}
+              to={hasRange ? to : ""}
+              today={today}
+              locale={locale}
+              labels={labels}
+              onMonthChange={setMonth}
+              onSelectDay={selectDay}
+              disabled={disabled}
+            />
+            <p className={styles.hint} id={ids.hint}>
+              {labels.calendarHint}
+            </p>
+          </aside>
 
-        <section className={styles.results} aria-labelledby={ids.list}>
-          <div className={styles.head}>
-            <div className={styles.headText}>
-              <h2 className={styles.title} id={ids.list}>
-                {title}
-              </h2>
-              <p className={styles.count} role="status">
-                {countText}
-              </p>
+          <section className={styles.results} aria-labelledby={ids.list}>
+            <div className={styles.head}>
+              <div className={styles.headText}>
+                <h2 className={styles.title} id={ids.list}>
+                  {title}
+                </h2>
+                <p className={styles.count} role="status">
+                  {countText}
+                </p>
+              </div>
+              <div className={styles.tools}>
+                {hasRange && (
+                  <button type="button" className={styles.reset} onClick={onReset} disabled={disabled}>
+                    {labels.reset}
+                  </button>
+                )}
+                <fieldset className={styles.sort} disabled={disabled}>
+                  <legend className="visually-hidden">{labels.sort}</legend>
+                  {sortOptions.map((option) => (
+                    <label className={styles.segment} key={option.value}>
+                      <input
+                        type="radio"
+                        name={ids.sort}
+                        value={option.value}
+                        checked={sort === option.value}
+                        onChange={() => onSortChange?.(option.value)}
+                      />
+                      <span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                          <path
+                            d={option.value === "asc" ? "M12 19V5m-6 6 6-6 6 6" : "M12 5v14m-6-6 6 6 6-6"}
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                        {option.label}
+                      </span>
+                    </label>
+                  ))}
+                </fieldset>
+              </div>
             </div>
-            <div className={styles.tools}>
-              {hasRange && (
-                <button type="button" className={styles.reset} onClick={onReset} disabled={disabled}>
-                  {labels.reset}
-                </button>
-              )}
-              <fieldset className={styles.sort} disabled={disabled}>
-                <legend className="visually-hidden">{labels.sort}</legend>
-                {sortOptions.map((option) => (
-                  <label className={styles.segment} key={option.value}>
-                    <input
-                      type="radio"
-                      name={ids.sort}
-                      value={option.value}
-                      checked={sort === option.value}
-                      onChange={() => onSortChange?.(option.value)}
-                    />
-                    <span>
-                      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                        <path
-                          d={option.value === "asc" ? "M12 19V5m-6 6 6-6 6 6" : "M12 5v14m-6-6 6 6 6-6"}
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                      {option.label}
-                    </span>
-                  </label>
-                ))}
-              </fieldset>
-            </div>
-          </div>
 
-          {results.length > 0 ? (
-            <EventList events={results} locale={locale} newTabLabel={newTabLabel} />
-          ) : (
-            <div className={styles.empty}>
-              <p className={styles.emptyTitle}>{labels.empty}</p>
-              <p>{labels.emptyHint}</p>
-              {hasRange && (
-                <button type="button" className={styles.reset} onClick={onReset}>
-                  {labels.reset}
-                </button>
-              )}
-            </div>
-          )}
-        </section>
+            {results.length > 0 ? (
+              <EventList events={results} locale={locale} newTabLabel={newTabLabel} />
+            ) : (
+              <div className={styles.empty}>
+                <p className={styles.emptyTitle}>{labels.empty}</p>
+                <p>{labels.emptyHint}</p>
+                {hasRange && (
+                  <button type="button" className={styles.reset} onClick={onReset}>
+                    {labels.reset}
+                  </button>
+                )}
+              </div>
+            )}
+          </section>
+        </div>
       </div>
     </div>
   );

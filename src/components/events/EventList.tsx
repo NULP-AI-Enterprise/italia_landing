@@ -1,5 +1,6 @@
 import type { EventItem } from "@/content/repository";
-import { LinkPreview } from "@/components/ui/LinkPreview";
+import { ContentImage } from "@/components/ui/ContentImage";
+import { displayDomain } from "@/components/ui/ExternalLink";
 import styles from "./EventList.module.css";
 
 /** An event with its dates already written out in the page language ("1–6 жовтня"). */
@@ -27,7 +28,10 @@ function groupByMonth(events: EventView[]) {
   return groups;
 }
 
-/** Month headings; each event as a date column next to its link preview. */
+/**
+ * Month headings; every event as the same card: the date block on the left,
+ * city, name, text and site in the middle, the logo or picture on the right.
+ */
 export function EventList({ events, locale, newTabLabel }: EventListProps) {
   const monthTitle = new Intl.DateTimeFormat(locale, { month: "long", timeZone: "UTC" });
   const monthShort = new Intl.DateTimeFormat(locale, { month: "short", timeZone: "UTC" });
@@ -46,33 +50,57 @@ export function EventList({ events, locale, newTabLabel }: EventListProps) {
               const endDay = Number(event.endDate.slice(8));
               return (
                 <li className={styles.event} key={event.id} id={`event-${event.id}`}>
-                  <p className={styles.when}>
-                    <time dateTime={event.startDate}>
-                      {sameMonth ? (
-                        <>
-                          <span className={styles.days} aria-hidden="true">
-                            {startDay === endDay ? startDay : `${startDay}–${endDay}`}
+                  <article className={styles.card} data-linked={event.website ? true : undefined}>
+                    <p className={styles.date}>
+                      <time dateTime={event.startDate}>
+                        <span className="visually-hidden">{event.dateLabel}</span>
+                        <span aria-hidden="true" className={sameMonth ? styles.days : styles.span}>
+                          {sameMonth ? (startDay === endDay ? startDay : `${startDay}–${endDay}`) : event.dateLabel}
+                        </span>
+                        {sameMonth && (
+                          <span aria-hidden="true" className={styles.month}>
+                            {monthShort.format(asDate(event.startDate))} {event.startDate.slice(0, 4)}
                           </span>
-                          <span className={styles.month} aria-hidden="true">
-                            {monthShort.format(asDate(event.startDate))}
-                          </span>
-                          <span className="visually-hidden">{event.dateLabel}</span>
-                        </>
+                        )}
+                      </time>
+                    </p>
+
+                    <div className={styles.body}>
+                      <p className={styles.city}>
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                          <path
+                            d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinejoin="round"
+                          />
+                          <circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" strokeWidth="2" />
+                        </svg>
+                        {event.city}
+                      </p>
+                      <h4 className={styles.title}>
+                        {event.website ? (
+                          <a className={styles.link} href={event.website} target="_blank" rel="noopener noreferrer">
+                            {event.title}
+                            <span className="visually-hidden"> ({newTabLabel})</span>
+                          </a>
+                        ) : (
+                          event.title
+                        )}
+                      </h4>
+                      {event.description && <p className={styles.description}>{event.description}</p>}
+                      {event.website && <p className={styles.source}>{displayDomain(event.website)} ↗</p>}
+                    </div>
+
+                    <div className={styles.media} aria-hidden="true">
+                      {event.image ? (
+                        <ContentImage media={{ ...event.image, alt: undefined }} sizes="120px" />
                       ) : (
-                        <span className={styles.span}>{event.dateLabel}</span>
+                        <span>{event.title.charAt(0)}</span>
                       )}
-                    </time>
-                    <span className={styles.city}>{event.city}</span>
-                  </p>
-                  <LinkPreview
-                    title={event.title}
-                    heading="h4"
-                    description={event.description}
-                    href={event.website}
-                    image={event.image}
-                    imageLayout={event.imageLayout}
-                    newTabLabel={newTabLabel}
-                  />
+                    </div>
+                  </article>
                 </li>
               );
             })}

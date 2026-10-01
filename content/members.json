@@ -104,7 +104,8 @@
       }
     },
     "offers": [],
-    "seeks": []
+    "seeks": [],
+    "pinned": true
   },
   {
     "id": "russo-alluminio",

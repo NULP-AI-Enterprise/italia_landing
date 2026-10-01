@@ -6,6 +6,7 @@ import type { MembersDirectory } from "@/content/repository";
 import type { Dictionary } from "@/i18n/get-dictionary";
 import { MemberProfile } from "./MemberProfile";
 import { MemberResults, type MemberItem } from "./MemberResults";
+import { RegionCombobox } from "./RegionCombobox";
 import { RegionMap } from "./RegionMap";
 import styles from "./MemberDirectory.module.css";
 
@@ -45,10 +46,9 @@ export function MemberDirectory(props: MemberDirectoryProps) {
 }
 
 /**
- * Member search. One filter panel on the left, in the order of the design:
- * name (text field), industry (drop-down), region (country switch, region list
- * and a clickable map); results on the right. Filters live in the URL:
- * ?q=…&industry=…&country=…&region=…
+ * Member search: the name field above the results; industry, region (typed with
+ * suggestions) and the clickable map with its country switch in a column on the
+ * left. Filters live in the URL: ?q=…&industry=…&country=…&region=…
  */
 export function MemberSearch({
   members,
@@ -130,9 +130,6 @@ export function MemberSearch({
   const collator = new Intl.Collator(locale);
   const regionNames = Object.fromEntries(regions.map((r) => [r.code, r.name]));
   const industryNames = Object.fromEntries(industries.map((i) => [i.id, i.name]));
-  const countryRegions = regions
-    .filter((r) => r.code.startsWith(country))
-    .sort((a, b) => collator.compare(a.name, b.name));
   const countryName = country === "UA" ? labels.ukraine : labels.italy;
   const industryIncludes = industries.find((item) => item.id === industry)?.includes;
 
@@ -149,11 +146,13 @@ export function MemberSearch({
   const hasFilters = chips.length > 0 || Boolean(params.get("country"));
   const profile = members.find((member) => member.id === profileId);
 
+  const allRegions = [...regions].sort((a, b) => collator.compare(a.name, b.name));
+
   return (
-    <div className={`container ${styles.directory}`}>
-      <div className={styles.filters} role="search" aria-label={labels.filtersLabel}>
-        {/* 1. Name */}
-        <div className={styles.block}>
+    <div className={styles.band}>
+      <div className={`container ${styles.directory}`}>
+        {/* Name search right above the results, so what you type and what you get are together */}
+        <div className={styles.searchBar} role="search" aria-label={labels.byName}>
           <label className={styles.label} htmlFor={ids.name}>
             {labels.byName}
           </label>
@@ -191,37 +190,58 @@ export function MemberSearch({
           </div>
         </div>
 
-        {/* 2. Industry: the 20 industries in a drop-down */}
-        <div className={styles.block}>
-          <label className={styles.label} htmlFor={ids.industry}>
-            {labels.byIndustry}
-          </label>
-          <select
-            id={ids.industry}
-            className={styles.select}
-            value={industry}
-            disabled={disabled}
-            aria-describedby={industryIncludes ? ids.industryHint : undefined}
-            onChange={(event) => updateUrl({ industry: event.target.value })}
-          >
-            <option value="">{labels.allIndustries}</option>
-            {industries.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-          {industryIncludes && (
-            <p className={styles.hint} id={ids.industryHint}>
-              {industryIncludes}
-            </p>
-          )}
-        </div>
+        {/* Filters in a column: industry, region, map */}
+        <aside className={styles.filters} role="search" aria-label={labels.filtersLabel}>
+          <div className={styles.block}>
+            <label className={styles.label} htmlFor={ids.industry}>
+              {labels.byIndustry}
+            </label>
+            <select
+              id={ids.industry}
+              className={styles.select}
+              value={industry}
+              disabled={disabled}
+              aria-describedby={industryIncludes ? ids.industryHint : undefined}
+              onChange={(event) => updateUrl({ industry: event.target.value })}
+            >
+              <option value="">{labels.allIndustries}</option>
+              {industries.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+            {industryIncludes && (
+              <p className={styles.hint} id={ids.industryHint}>
+                {industryIncludes}
+              </p>
+            )}
+          </div>
 
-        {/* 3. Region: country, then a region from the list or from the map below */}
-        <fieldset className={`${styles.block} ${styles.regionBlock}`} disabled={disabled}>
-          <legend className={styles.label}>{labels.byRegion}</legend>
-          <div className={styles.regionControls}>
+          <div className={styles.block}>
+            <label className={styles.label} htmlFor={ids.region}>
+              {labels.byRegion}
+            </label>
+            <RegionCombobox
+              id={ids.region}
+              regions={allRegions}
+              value={region}
+              onChange={setRegion}
+              locale={locale}
+              disabled={disabled}
+              labels={{
+                placeholder: labels.regionPlaceholder,
+                noMatch: labels.regionNoMatch,
+                clear: labels.clearRegion,
+                ukraine: labels.ukraine,
+                italy: labels.italy,
+                suggestions: labels.regionSuggestions,
+              }}
+            />
+          </div>
+
+          <figure className={styles.map} aria-label={labels.mapLabel.replace("{country}", countryName)}>
+            {/* Country switch on the map itself */}
             <div className={styles.countries} role="radiogroup" aria-label={labels.country}>
               {(["UA", "IT"] as const).map((value) => (
                 <label key={value} className={styles.country}>
@@ -230,43 +250,14 @@ export function MemberSearch({
                     name={ids.region + "-country"}
                     value={value}
                     checked={country === value}
+                    disabled={disabled}
                     onChange={() => setCountry(value)}
                   />
                   <span>{value === "UA" ? labels.ukraine : labels.italy}</span>
                 </label>
               ))}
             </div>
-            <label className="visually-hidden" htmlFor={ids.region}>
-              {labels.regionLabel}
-            </label>
-            <select
-              id={ids.region}
-              className={styles.select}
-              value={region}
-              onChange={(event) => setRegion(event.target.value)}
-            >
-              <option value="">{labels.allRegions}</option>
-              {countryRegions.map((r) => (
-                <option key={r.code} value={r.code}>
-                  {r.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        </fieldset>
-      </div>
-
-      <div className={styles.layout}>
-        <div className={styles.mapCard}>
-          <figure className={styles.map} aria-label={labels.byRegion}>
-            <p className="visually-hidden">{labels.mapLabel.replace("{country}", countryName)}</p>
-            <RegionMap
-              country={country}
-              selected={region}
-              counts={counts}
-              onSelect={setRegion}
-              onHover={setHovered}
-            />
+            <RegionMap country={country} selected={region} counts={counts} onSelect={setRegion} onHover={setHovered} />
             <figcaption className={styles.mapCaption} aria-hidden="true">
               {mapCaption}
             </figcaption>
@@ -281,7 +272,7 @@ export function MemberSearch({
               </li>
             </ul>
           </figure>
-        </div>
+        </aside>
 
         <section className={styles.results} aria-labelledby={ids.results}>
           <div className={styles.resultsHead}>
@@ -324,6 +315,7 @@ export function MemberSearch({
               regionNames={regionNames}
               openLabel={labels.openProfile}
               rebuildLabel={labels.rebuildShort}
+              pinnedLabel={labels.pinnedTitle}
               onOpen={disabled ? undefined : setProfileId}
             />
           ) : (

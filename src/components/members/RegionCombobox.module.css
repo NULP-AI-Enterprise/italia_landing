@@ -1,0 +1,124 @@
+.combo {
+  position: relative;
+}
+
+.combo input {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 46px 0 46px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink-black);
+  font: inherit;
+  font-size: 16px;
+  transition: border-color 0.2s ease;
+}
+
+.combo input::placeholder {
+  color: #6b7488;
+}
+
+.combo input:hover {
+  border-color: #8a93b8;
+}
+
+.combo input:focus-visible {
+  border-color: var(--navy);
+  outline: 3px solid var(--orange);
+  outline-offset: 2px;
+}
+
+.icon {
+  position: absolute;
+  top: 26px;
+  left: 17px;
+  width: 20px;
+  height: 20px;
+  translate: 0 -50%;
+  color: var(--ink-soft);
+  pointer-events: none;
+}
+
+.clear {
+  position: absolute;
+  top: 26px;
+  right: 6px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  translate: 0 -50%;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.clear svg {
+  width: 18px;
+  height: 18px;
+}
+
+.clear:hover {
+  background: var(--mist);
+  color: var(--ink-black);
+}
+
+.list {
+  position: absolute;
+  z-index: 5;
+  top: calc(100% + 6px);
+  right: 0;
+  left: 0;
+  max-height: 300px;
+  margin: 0;
+  padding: 6px;
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  list-style: none;
+  box-shadow: 0 24px 48px -24px rgba(10, 36, 99, 0.45);
+}
+
+.list[hidden] {
+  display: none;
+}
+
+.option,
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 42px;
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+
+.option {
+  cursor: pointer;
+}
+
+.option[data-active] {
+  background: var(--mist);
+}
+
+.option[aria-selected="true"] {
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.country {
+  flex: none;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.empty {
+  color: var(--ink-soft);
+}

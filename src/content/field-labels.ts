@@ -47,6 +47,7 @@ const byName: Record<string, FieldText> = {
   contact: { label: "Контактна особа" },
   offers: { label: "Ми пропонуємо", item: "пункт" },
   rebuildProgram: { label: "Учасник програми Rebuild Ukraine Better" },
+  pinned: { label: "Закріпити вгорі списку членів" },
   seeks: { label: "Ми шукаємо", item: "пункт" },
   category: { label: "Сторінка партнерів" },
   imageLayout: { label: "Як показати зображення" },

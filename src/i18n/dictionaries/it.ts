@@ -36,7 +36,7 @@ export const it: Dictionary = {
     groups: {
       leadership: "Direzione dell’associazione",
       departments: "Dipartimenti",
-      regions: "Regioni",
+      regions: "Rappresentanze regionali",
     },
   },
   members: {
@@ -86,6 +86,11 @@ export const it: Dictionary = {
     pending: "Le informazioni saranno disponibili a breve.",
     rebuildBadge: "Partecipante al programma Rebuild Ukraine Better",
     rebuildShort: "Rebuild Ukraine Better",
+    pinnedTitle: "Aziende in evidenza",
+    regionPlaceholder: "Inizia a scrivere: Lombardia, Leopoli…",
+    regionNoMatch: "Nessuna regione trovata",
+    clearRegion: "Cancella la regione",
+    regionSuggestions: "Opzioni: {count}",
   },
   events: {
     filtersLabel: "Eventi per data",

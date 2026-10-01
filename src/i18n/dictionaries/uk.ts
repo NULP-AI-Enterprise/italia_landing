@@ -40,7 +40,7 @@ export const uk = {
     groups: {
       leadership: "Керівництво асоціації",
       departments: "Департаменти",
-      regions: "Регіони",
+      regions: "Регіональні представництва",
     },
   },
   members: {
@@ -90,6 +90,11 @@ export const uk = {
     pending: "Інформація з’явиться згодом.",
     rebuildBadge: "Учасник програми Rebuild Ukraine Better",
     rebuildShort: "Rebuild Ukraine Better",
+    pinnedTitle: "Закріплені компанії",
+    regionPlaceholder: "Почніть вводити: Львівська, Ломбардія…",
+    regionNoMatch: "Такого регіону не знайдено",
+    clearRegion: "Очистити регіон",
+    regionSuggestions: "Варіантів: {count}",
   },
   events: {
     filtersLabel: "Події за датами",

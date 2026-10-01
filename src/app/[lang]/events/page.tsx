@@ -30,7 +30,9 @@ export default async function EventsPage() {
     ...event,
     dateLabel: formatRange(event.startDate, event.endDate, locale),
   }));
-  const calendarProps = { events: items, locale, labels: dict.events, newTabLabel: dict.a11y.newTab };
+  // Today in Italy, where the events take place
+  const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Rome" }).format(new Date());
+  const calendarProps = { events: items, locale, labels: dict.events, newTabLabel: dict.a11y.newTab, today };
 
   return (
     <>

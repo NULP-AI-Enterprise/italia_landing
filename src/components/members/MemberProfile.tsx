@@ -38,6 +38,7 @@ export function MemberProfile({ member, labels, newTabLabel, titleId }: MemberPr
                 {member.name}
               </h2>
               {member.tagline && <p className={styles.tagline}>{member.tagline}</p>}
+              {member.rebuildProgram && <p className={styles.badge}>{labels.rebuildBadge}</p>}
             </div>
           </div>
 

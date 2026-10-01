@@ -1,0 +1,73 @@
+/* Text column of the design: about 880 px wide, centred */
+.intro,
+.story {
+  display: grid;
+  gap: clamp(20px, 2vw, 32px);
+  max-width: calc(900px + 2 * var(--gutter));
+}
+
+.intro {
+  padding-block: clamp(36px, 3.6vw, 64px) clamp(36px, 4vw, 72px);
+}
+
+/* Three statements, one per line, in the brand blue */
+.statement {
+  display: grid;
+  gap: 0.15em;
+  margin-bottom: clamp(8px, 1vw, 16px);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(24px, 2.6vw, 40px);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #24307d;
+  text-wrap: balance;
+}
+
+.lead,
+.text {
+  font-size: clamp(17px, 1.35vw, 21px);
+  line-height: 1.6;
+  color: var(--ink-black);
+}
+
+.lead {
+  font-weight: 700;
+}
+
+.lead + .text {
+  margin-top: clamp(18px, 1.8vw, 28px);
+}
+
+/* Justified as in the design, only where lines are long enough */
+@media (min-width: 1024px) {
+  .lead,
+  .text {
+    text-align: justify;
+    hyphens: auto;
+  }
+}
+
+/* Photo across the whole width */
+.photo {
+  margin: 0;
+  aspect-ratio: 2.15 / 1;
+  overflow: hidden;
+  background: var(--mist);
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.story {
+  padding-block: clamp(40px, 4.5vw, 80px) clamp(8px, 1vw, 16px);
+}
+
+@media (max-width: 767px) {
+  .photo {
+    aspect-ratio: 4 / 3;
+  }
+}

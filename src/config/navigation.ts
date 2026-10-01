@@ -10,7 +10,6 @@ export const pagePaths = {
   partners: "/partners",
   rebuild: "/rebuild-ukraine-better",
   institutional: "/institutional-partners",
-  ukraineItaly: "/ukraine-italy",
   events: "/events",
   join: "/join",
 } as const;

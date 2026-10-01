@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import { AdminPageHeader, AdminShell } from "@/components/admin/AdminShell";
 import { ContentEditor } from "@/components/admin/ContentEditor";
+import { SectionTabs } from "@/components/admin/SectionTabs";
 import { emptyValue } from "@/content/form-model";
-import { collectionDef, isCollectionKey } from "@/content/registry";
+import { collectionDef, isCollectionKey, sectionFor } from "@/content/registry";
 import { loadContent } from "@/content/store";
 import { requireAdmin } from "@/server/auth/session";
-import { AdminHeader } from "../../../AdminHeader";
+
 
 type Item = Record<string, unknown>;
 
@@ -47,29 +48,37 @@ export default async function ItemEditorPage({ params, searchParams }: PageProps
       : {};
 
   const listHref = `/admin/content/${collection}`;
+  const section = sectionFor("collection", collection);
+  const title = isNew ? "Новий запис" : def.label(existing!);
+  const back =
+    collection === "partners" && typeof initial.category === "string" ? `${listHref}?category=${initial.category}` : listHref;
   return (
-    <>
-      <AdminHeader admin={admin} current="content" />
-      <main className="admin-main admin-narrow" id="main">
-        <p className="admin-muted">
-          <Link href="/admin/content">Контент сайту</Link> / <Link href={listHref}>{def.title}</Link>
+    <AdminShell admin={admin}>
+      <AdminPageHeader
+        crumbs={[
+          { label: "Огляд", href: "/admin" },
+          { label: section?.title ?? def.title, href: back },
+          { label: title },
+        ]}
+        title={title}
+        description={def.details && !isNew ? def.details(existing!) : def.description}
+      />
+      <SectionTabs kind="collection" docKey={collection} />
+      {query.created && (
+        <p className="admin-notice" role="status">
+          Створено. Сайт оновлено.
         </p>
-        <h1>{isNew ? "Новий запис" : def.label(existing!)}</h1>
-        {query.created && (
-          <p className="admin-notice" role="status">
-            Створено. Сайт оновлено.
-          </p>
-        )}
-        <ContentEditor
-          mode="item"
-          collection={collection}
-          originalId={isNew ? null : id}
-          initial={initial}
-          refs={refs}
-          backHref={listHref}
-          siteHref={def.sitePath}
-        />
-      </main>
-    </>
+      )}
+      <ContentEditor
+        mode="item"
+        collection={collection}
+        originalId={isNew ? null : id}
+        initial={initial}
+        refs={refs}
+        backHref={listHref}
+        siteHref={def.sitePath}
+        itemLabel={isNew ? undefined : title}
+      />
+    </AdminShell>
   );
 }

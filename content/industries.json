@@ -1,98 +1,242 @@
 [
   {
-    "id": "construction-materials",
+    "id": "agri-food",
     "order": 1,
     "name": {
-      "uk": "Будівництво та матеріали",
-      "it": "Edilizia e materiali"
+      "uk": "Агропродовольчий сектор",
+      "it": "Agroalimentare"
+    },
+    "includes": {
+      "uk": "Сільське господарство, виробництво продуктів харчування, вино, напої, агротехнології",
+      "it": "Agricoltura, produzione alimentare, vino, bevande, agritech"
     }
   },
   {
-    "id": "sun-protection-textiles",
+    "id": "manufacturing-engineering",
     "order": 2,
     "name": {
-      "uk": "Сонцезахист і тканини",
-      "it": "Protezione solare e tessuti"
+      "uk": "Виробництво та машинобудування",
+      "it": "Manifattura e ingegneria"
+    },
+    "includes": {
+      "uk": "Машини, промислове обладнання, мехатроніка",
+      "it": "Macchinari, attrezzature industriali, meccatronica"
     }
   },
   {
-    "id": "furniture-interior",
+    "id": "automotive-mobility",
     "order": 3,
     "name": {
-      "uk": "Меблі та інтер’єр",
-      "it": "Arredamento e interni"
+      "uk": "Автомобілі та мобільність",
+      "it": "Automotive e mobilità"
+    },
+    "includes": {
+      "uk": "Транспортні засоби, комплектуючі, розумна мобільність",
+      "it": "Veicoli, componenti, smart mobility"
     }
   },
   {
-    "id": "ventilation-heat-recovery",
+    "id": "energy-environment",
     "order": 4,
     "name": {
-      "uk": "Вентиляція та рекуперація",
-      "it": "Ventilazione e recupero di calore"
+      "uk": "Енергетика та довкілля",
+      "it": "Energia e ambiente"
+    },
+    "includes": {
+      "uk": "Відновлювана енергетика, енергоефективність, циркулярна економіка",
+      "it": "Rinnovabili, efficienza energetica, economia circolare"
     }
   },
   {
-    "id": "consumer-goods",
+    "id": "construction-real-estate",
     "order": 5,
     "name": {
-      "uk": "Споживчі товари",
-      "it": "Beni di consumo"
+      "uk": "Будівництво та нерухомість",
+      "it": "Edilizia e immobiliare"
+    },
+    "includes": {
+      "uk": "Будівництво, архітектура, нерухомість, інфраструктура",
+      "it": "Costruzioni, architettura, immobili, infrastrutture"
     }
   },
   {
-    "id": "windows-doors",
+    "id": "ict-digital",
     "order": 6,
     "name": {
-      "uk": "Вікна та двері",
-      "it": "Finestre e porte"
+      "uk": "ІКТ та цифрові технології",
+      "it": "ICT e digitale"
+    },
+    "includes": {
+      "uk": "Програмне забезпечення, ШІ, кібербезпека, цифрові послуги",
+      "it": "Software, IA, cybersecurity, servizi digitali"
     }
   },
   {
-    "id": "sport-leisure",
+    "id": "life-sciences-healthcare",
     "order": 7,
     "name": {
-      "uk": "Спорт і відпочинок",
-      "it": "Sport e tempo libero"
+      "uk": "Науки про життя та охорона здоров’я",
+      "it": "Scienze della vita e sanità"
+    },
+    "includes": {
+      "uk": "Фармацевтика, біотехнології, медичні вироби, охорона здоров’я",
+      "it": "Farmaceutica, biotecnologie, dispositivi medici, sanità"
     }
   },
   {
-    "id": "media-communications",
+    "id": "fashion-design-luxury",
     "order": 8,
     "name": {
-      "uk": "Медіа та комунікації",
-      "it": "Media e comunicazione"
+      "uk": "Мода, дизайн і люкс",
+      "it": "Moda, design e lusso"
+    },
+    "includes": {
+      "uk": "Мода, текстиль, меблі, інтер’єр, предмети розкоші",
+      "it": "Moda, tessile, arredamento, interior design, lusso"
     }
   },
   {
-    "id": "medicine-beauty",
+    "id": "maritime-logistics",
     "order": 9,
     "name": {
-      "uk": "Медицина та краса",
-      "it": "Medicina e bellezza"
+      "uk": "Морська галузь і логістика",
+      "it": "Marittimo e logistica"
+    },
+    "includes": {
+      "uk": "Судноплавство, порти, логістика, транспорт, яхти й човни",
+      "it": "Shipping, porti, logistica, trasporti, nautica"
     }
   },
   {
-    "id": "light-industry-fashion",
+    "id": "finance-investment",
     "order": 10,
     "name": {
-      "uk": "Легка промисловість і мода",
-      "it": "Industria leggera e moda"
+      "uk": "Фінанси та інвестиції",
+      "it": "Finanza e investimenti"
+    },
+    "includes": {
+      "uk": "Банківська справа, інвестиції, страхування, фінтех",
+      "it": "Banche, investimenti, assicurazioni, FinTech"
     }
   },
   {
-    "id": "metalworking",
+    "id": "professional-services",
     "order": 11,
     "name": {
-      "uk": "Металообробка",
-      "it": "Lavorazione dei metalli"
+      "uk": "Професійні послуги",
+      "it": "Servizi professionali"
+    },
+    "includes": {
+      "uk": "Право, бухгалтерський облік, консалтинг, бізнес-послуги",
+      "it": "Legale, contabilità, consulenza, servizi alle imprese"
     }
   },
   {
-    "id": "tourism",
+    "id": "tourism-hospitality",
     "order": 12,
     "name": {
-      "uk": "Туризм",
-      "it": "Turismo"
+      "uk": "Туризм і гостинність",
+      "it": "Turismo e ospitalità"
+    },
+    "includes": {
+      "uk": "Готелі, подорожі, туризм, ресторани",
+      "it": "Hotel, viaggi, turismo, ristoranti"
+    }
+  },
+  {
+    "id": "culture-creative",
+    "order": 13,
+    "name": {
+      "uk": "Культура та креативні індустрії",
+      "it": "Cultura e industrie creative"
+    },
+    "includes": {
+      "uk": "Медіа, видавнича справа, мистецтво, розваги",
+      "it": "Media, editoria, arte, intrattenimento"
+    }
+  },
+  {
+    "id": "education-training",
+    "order": 14,
+    "name": {
+      "uk": "Освіта та навчання",
+      "it": "Istruzione e formazione"
+    },
+    "includes": {
+      "uk": "Освіта, професійне навчання, дослідження",
+      "it": "Istruzione, formazione professionale, ricerca"
+    }
+  },
+  {
+    "id": "beauty-wellness",
+    "order": 15,
+    "name": {
+      "uk": "Краса та велнес",
+      "it": "Bellezza e benessere"
+    },
+    "includes": {
+      "uk": "Косметика, краса, велнес, особистий догляд",
+      "it": "Cosmetica, bellezza, benessere, cura della persona"
+    }
+  },
+  {
+    "id": "retail-consumer-goods",
+    "order": 16,
+    "name": {
+      "uk": "Роздрібна торгівля та споживчі товари",
+      "it": "Retail e beni di consumo"
+    },
+    "includes": {
+      "uk": "Роздрібна торгівля, електронна комерція, споживчі товари",
+      "it": "Commercio al dettaglio, e-commerce, prodotti di consumo"
+    }
+  },
+  {
+    "id": "chemicals-materials",
+    "order": 17,
+    "name": {
+      "uk": "Хімія та матеріали",
+      "it": "Chimica e materiali"
+    },
+    "includes": {
+      "uk": "Хімічна продукція, пластмаси, метали, сировина",
+      "it": "Chimica, plastica, metalli, materie prime"
+    }
+  },
+  {
+    "id": "aerospace-defense",
+    "order": 18,
+    "name": {
+      "uk": "Аерокосмічна галузь і оборона",
+      "it": "Aerospazio e difesa"
+    },
+    "includes": {
+      "uk": "Аерокосмічна галузь, авіація, оборона, безпека",
+      "it": "Aerospazio, aviazione, difesa, sicurezza"
+    }
+  },
+  {
+    "id": "science-innovation",
+    "order": 19,
+    "name": {
+      "uk": "Наука та інновації",
+      "it": "Scienza e innovazione"
+    },
+    "includes": {
+      "uk": "Дослідження й розробки, трансфер технологій, стартапи",
+      "it": "R&S, trasferimento tecnologico, startup"
+    }
+  },
+  {
+    "id": "international-trade",
+    "order": 20,
+    "name": {
+      "uk": "Міжнародна торгівля",
+      "it": "Commercio internazionale"
+    },
+    "includes": {
+      "uk": "Імпорт та експорт, дистрибуція, торговельні послуги",
+      "it": "Import/export, distribuzione, servizi commerciali"
     }
   }
 ]

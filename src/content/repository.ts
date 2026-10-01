@@ -82,7 +82,6 @@ export async function getEvents(locale: Locale) {
 
 export type HomePageContent = Awaited<ReturnType<typeof getPage<"home">>>;
 export type AboutPageContent = Awaited<ReturnType<typeof getPage<"about">>>;
-export type ArticlePageContent = Awaited<ReturnType<typeof getPage<"ukraineItaly">>>;
 export type ServiceItem = Awaited<ReturnType<typeof getServices>>[number];
 export type TeamGroupEntry = Awaited<ReturnType<typeof getTeam>>[number];
 export type MembersDirectory = Awaited<ReturnType<typeof getMembersDirectory>>;

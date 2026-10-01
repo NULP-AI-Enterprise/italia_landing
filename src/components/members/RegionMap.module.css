@@ -2,14 +2,14 @@
   display: block;
   width: 100%;
   height: auto;
-  max-height: min(300px, 60vw);
+  max-height: min(520px, 70vw);
   margin-inline: auto;
   overflow: visible;
 }
 
 /* Italy is tall: keep it the same height as Ukraine rather than the same width */
 .it {
-  max-height: 320px;
+  max-height: min(600px, 90vw);
 }
 
 .map path {
@@ -44,7 +44,7 @@
 @media (max-width: 639px) {
   .map,
   .it {
-    max-height: 240px;
+    max-height: 320px;
   }
 }
 

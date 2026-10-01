@@ -66,7 +66,7 @@ export const collections = {
   },
   team: {
     title: "Команда",
-    description: "Люди на сторінці «Команда»: фото, посада, цитата.",
+    description: "Люди на сторінці «Команда»: фото, посада, цитата, контакти.",
     item: S.TeamMember,
     idKey: "id",
     ordered: true,
@@ -89,7 +89,7 @@ export const collections = {
   },
   industries: {
     title: "Галузі",
-    description: "Список галузей у пошуку членів.",
+    description: "Галузі для пошуку членів і те, що до них входить.",
     item: S.Industry,
     idKey: "id",
     ordered: true,
@@ -139,7 +139,7 @@ export const pages = {
   home: { title: "Головна", description: "Шапка, міста, заголовки блоків.", schema: S.HomePage, sitePath: "/uk" },
   about: {
     title: "Асоціація (Візія)",
-    description: "Вступ, експортні сектори, історія, завершальний блок.",
+    description: "Шапка з містами, головні тези, тексти, широке фото.",
     schema: S.AboutPage,
     sitePath: "/uk/about",
   },
@@ -169,12 +169,6 @@ export const pages = {
     sitePath: "/uk/institutional-partners",
   },
   events: { title: "Календар", description: "Шапка сторінки.", schema: S.SimplePage, sitePath: "/uk/events" },
-  ukraineItaly: {
-    title: "Україна та Італія",
-    description: "Стаття про економічну співпрацю (посилання зі сторінки «Асоціація»).",
-    schema: S.ArticlePage,
-    sitePath: "/uk/ukraine-italy",
-  },
 } satisfies Record<string, PageDef>;
 
 export type CollectionKey = keyof typeof collections;
@@ -195,8 +189,84 @@ export const enumLabels: Record<string, string> = {
   ...partnerCategoryNames,
   cover: "Фото зверху",
   thumb: "Логотип зліва",
-  paragraph: "Абзац",
-  heading: "Підзаголовок",
-  list: "Список",
-  figures: "Ключові цифри",
 };
+
+/* ---------- Admin navigation: content grouped by the page of the site ---------- */
+
+export type SectionLink =
+  | { kind: "collection"; key: CollectionKey; label: string }
+  | { kind: "page"; key: PageKey; label: string };
+
+export type SiteSection = { id: string; title: string; description: string; sitePath: string; links: SectionLink[] };
+
+export const siteSections: SiteSection[] = [
+  {
+    id: "home",
+    title: "Головна",
+    description: "Міні-статті з фото, детальні блоки, міста в шапці.",
+    sitePath: "/uk",
+    links: [
+      { kind: "collection", key: "services", label: "Міні-статті" },
+      { kind: "page", key: "home", label: "Шапка і заголовки" },
+    ],
+  },
+  {
+    id: "about",
+    title: "Асоціація",
+    description: "Тези, тексти й широке фото.",
+    sitePath: "/uk/about",
+    links: [{ kind: "page", key: "about", label: "Сторінка" }],
+  },
+  {
+    id: "team",
+    title: "Команда",
+    description: "Люди: фото, посади, цитати, контакти.",
+    sitePath: "/uk/team",
+    links: [
+      { kind: "collection", key: "team", label: "Люди" },
+      { kind: "page", key: "team", label: "Шапка і ряди" },
+    ],
+  },
+  {
+    id: "members",
+    title: "Члени",
+    description: "Компанії в пошуку, галузі та регіони.",
+    sitePath: "/uk/members",
+    links: [
+      { kind: "collection", key: "members", label: "Компанії" },
+      { kind: "collection", key: "industries", label: "Галузі" },
+      { kind: "collection", key: "regions", label: "Регіони" },
+      { kind: "page", key: "members", label: "Шапка сторінки" },
+    ],
+  },
+  {
+    id: "partners",
+    title: "Партнери",
+    description: "Картки на трьох сторінках партнерів.",
+    sitePath: "/uk/partners",
+    links: [
+      { kind: "collection", key: "partners", label: "Картки партнерів" },
+      { kind: "page", key: "partners", label: "Шапка: партнери асоціації" },
+      { kind: "page", key: "rebuild", label: "Шапка: Rebuild Ukraine Better" },
+      { kind: "page", key: "institutional", label: "Шапка: інституційні" },
+    ],
+  },
+  {
+    id: "events",
+    title: "Календар",
+    description: "Виставки й події.",
+    sitePath: "/uk/events",
+    links: [
+      { kind: "collection", key: "events", label: "Події" },
+      { kind: "page", key: "events", label: "Шапка сторінки" },
+    ],
+  },
+];
+
+export const sectionLinkHref = (link: SectionLink) =>
+  link.kind === "collection" ? `/admin/content/${link.key}` : `/admin/content/pages/${link.key}`;
+
+/** The section a collection or page belongs to. */
+export function sectionFor(kind: SectionLink["kind"], key: string) {
+  return siteSections.find((section) => section.links.some((link) => link.kind === kind && link.key === key));
+}

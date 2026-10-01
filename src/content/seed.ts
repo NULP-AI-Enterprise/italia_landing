@@ -20,7 +20,6 @@ import partnersPageJson from "@content/pages/partners.json";
 import rebuildPageJson from "@content/pages/rebuild-ukraine-better.json";
 import institutionalPageJson from "@content/pages/institutional-partners.json";
 import eventsPageJson from "@content/pages/events.json";
-import ukraineItalyPageJson from "@content/pages/ukraine-italy.json";
 
 export const seedCollections: Record<CollectionKey, unknown> = {
   services: servicesJson,
@@ -41,5 +40,4 @@ export const seedPages: Record<PageKey, unknown> = {
   rebuild: rebuildPageJson,
   institutional: institutionalPageJson,
   events: eventsPageJson,
-  ukraineItaly: ukraineItalyPageJson,
 };

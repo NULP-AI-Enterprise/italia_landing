@@ -30,14 +30,13 @@ In Kubernetes these come from the secret `italia-landing-secret` (`envFrom` in `
 | Route (`/uk`, `/it`) | Page | Content source |
 |---|---|---|
 | `/` | Home: hero, service cards (jump to details), join button, service details | `content/pages/home.json`, `content/services.json` |
-| `/about` | Association (Візія): intro with photo, export sectors, history, closing | `content/pages/about.json` |
-| `/team` | Team, grouped by leadership, departments, regions | `content/pages/team.json`, `content/team.json` |
-| `/members` | Member directory: industry drop-down, name search, region (Ukraine/Italy map); a result opens the profile card | `content/pages/members.json`, `content/members.json`, `industries.json`, `regions.json` |
+| `/about` | Association: header with cities, three statements, lead, wide photo, story of MIUFI | `content/pages/about.json` |
+| `/team` | Team in three groups with photos, quotes and contacts (phones, e-mail, Telegram); “Зв’язатися” where switched on | `content/pages/team.json`, `content/team.json` |
+| `/members` | Member directory: filters in one bar (name, 20 industries, country and region), a large clickable map on the left, companies as rows on the right; a row opens the profile. Rebuild Ukraine Better participants carry a badge | `content/pages/members.json`, `content/members.json`, `industries.json`, `regions.json` |
 | `/partners` | Partners of the association | `content/pages/partners.json`, `content/partners.json` (`category: association`) |
 | `/rebuild-ukraine-better` | Rebuild Ukraine Better participants | `content/pages/rebuild-ukraine-better.json`, `content/partners.json` (`category: rebuild`) |
 | `/institutional-partners` | Institutional partner organizations | `content/pages/institutional-partners.json`, `content/partners.json` (`category: institutional`) |
-| `/events` | Calendar: date-range filter and sort direction (kept in the URL), grouped by year | `content/pages/events.json`, `content/events.json` |
-| `/ukraine-italy` | Article: economic cooperation (linked from the Association page, not in the menu) | `content/pages/ukraine-italy.json` |
+| `/events` | Month calendar on the left (a day shows its events, a second day makes a period; keyboard as in a date picker), upcoming events on the right by month with sort direction; the choice is kept in the URL | `content/pages/events.json`, `content/events.json` |
 | `/join` | The join form as a page; `?to=<team id>` turns it into a message to that person. Without JavaScript every "Приєднатися" / "Зв’язатися" button leads here | interface strings |
 
 The menu has exactly the eight pages from the design: Головна, Асоціація, Команда, Члени, Партнери (a drop-down with the three partner pages) and Календар. "Приєднатися" is a button, not a page in the menu.
@@ -82,7 +81,9 @@ static-prototype/           # first static HTML version, kept for reference
 
 ### Editing content in the admin panel
 
-Everything in `content/` is editable at **/admin → Контент сайту**: the pages (headers, texts, SEO), the home page mini-articles, team, members, industries, region names, partners and events.
+Everything in `content/` is editable in the admin panel. The sidebar follows the pages of the site (Головна, Асоціація, Команда, Члени, Партнери, Календар); each page has tabs for its parts, e.g. Команда → Люди / Шапка і ряди. Lists are cards with the item's photo, a search field and ↑ ↓ buttons that set the order on the site.
+
+The editor: fields in cards (rarely used ones such as SEO and the id folded), Ukrainian and Italian side by side or one language at a time with a counter of missing translations, drag-and-drop image upload, “show on the site” switch, save with the button or Ctrl+S / ⌘S, a warning before leaving with unsaved changes, and errors listed at the top with links to the fields.
 
 - **Storage.** A saved document goes to the table `content_documents` (one row per collection or page, key as in `src/content/registry.ts`). Anything never saved is read from the JSON in `content/`, which is the starting point of a fresh database. The JSON files are therefore not updated by the admin panel.
 - **Validation.** The admin forms are generated from the zod schemas in `src/content/schema.ts`: a new field in the schema appears in the form. Every save is validated with the same schema, plus checks across collections (unique ids, a member may only use existing industries and regions, an industry in use cannot be deleted). A broken row can never break the site: it is logged and the bundled JSON is shown instead.

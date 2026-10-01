@@ -5,6 +5,8 @@ import { useEffect, useRef, type CSSProperties, type ReactNode, type RefObject }
 type RevealProps = {
   as?: "div" | "article" | "figure" | "li" | "section";
   className?: string;
+  /** For in-page links to this element. */
+  id?: string;
   /** Position in a group; staggers the entrance by 90ms per step. */
   index?: number;
   children: ReactNode;
@@ -16,7 +18,7 @@ type RevealProps = {
  * hydration, so the first screen never waits for JavaScript. Opacity does not
  * hide content from assistive technology.
  */
-export function Reveal({ as = "div", className, index = 0, children }: RevealProps) {
+export function Reveal({ as = "div", className, id, index = 0, children }: RevealProps) {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -51,6 +53,7 @@ export function Reveal({ as = "div", className, index = 0, children }: RevealPro
     <Tag
       ref={ref as RefObject<HTMLDivElement>}
       className={className}
+      id={id}
       data-reveal=""
       style={{ "--i": index } as CSSProperties}
     >

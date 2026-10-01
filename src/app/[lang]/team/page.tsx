@@ -19,11 +19,12 @@ export default async function TeamPage() {
   return (
     <>
       <PageHero title={page.hero.title} lead={page.hero.lead} logoAlt={dict.a11y.logoAlt} />
-      {/* No "Join" button here: every card already has "Contact" (THE-7) */}
+      {/* No "Join" button here (THE-7); the leadership has "Contact" buttons, everyone has contacts */}
       <TeamDirectory
         groups={groups}
         rows={page.rows}
         labels={dict.team.groups}
+        contactLabels={dict.contacts}
         contactLabel={dict.actions.contact}
         contactHref={localePath(locale, "/join")}
       />

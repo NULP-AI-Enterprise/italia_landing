@@ -5,7 +5,7 @@ import styles from "./LinkPreview.module.css";
 type LinkPreviewProps = {
   title: string;
   /** Keep the page outline: h2 under the page title, h3 under a section heading. */
-  heading: "h2" | "h3";
+  heading: "h2" | "h3" | "h4";
   description?: string;
   /** External site. With it, the whole card is a link that opens in a new tab. */
   href?: string;

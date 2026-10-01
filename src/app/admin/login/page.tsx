@@ -10,8 +10,8 @@ export default async function LoginPage() {
 
   return (
     <main className="admin-login">
-      <h1>CRM Made in Ukraine for Italy</h1>
-      <p className="admin-muted">Вхід для адміністраторів асоціації.</p>
+      <h1>Адмін-панель Made in Ukraine for Italy</h1>
+      <p className="admin-muted">Заявки та всі тексти, фото й списки сайту.</p>
       <LoginForm />
     </main>
   );

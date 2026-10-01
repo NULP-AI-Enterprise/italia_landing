@@ -72,7 +72,17 @@ export const TeamMember = z.object({
   name: Localized,
   role: Localized,
   quote: Localized.optional(),
+  phones: z
+    .array(z.string().trim().regex(/^\+?[\d\s()-]{6,24}$/, "Номер телефону, наприклад +39 331 34 37 100"))
+    .default([]),
   email: z.email().optional(),
+  telegram: z
+    .string()
+    .trim()
+    .regex(/^@?[A-Za-z0-9_]{5,32}$/, "Нік у Telegram, наприклад @miufi")
+    .optional(),
+  /** "Contact" button that opens the message form addressed to this person. */
+  contactButton: z.boolean().default(false),
   photo: Media.optional(),
 });
 
@@ -80,6 +90,8 @@ export const Industry = z.object({
   id: Id,
   order: z.number().int(),
   name: Localized,
+  /** What the industry covers, shown under the industry filter. */
+  includes: Localized.optional(),
 });
 
 export const Region = z.object({
@@ -110,6 +122,8 @@ export const Member = z.object({
     .optional(),
   offers: z.array(Localized),
   seeks: z.array(Localized),
+  /** Also takes part in the Rebuild Ukraine Better programme (shown as a badge). */
+  rebuildProgram: z.boolean().default(false),
 });
 
 /** Link-preview picture, as in the design: a wide photo on top ("cover") or a logo on the left ("thumb"). */
@@ -160,26 +174,16 @@ export const HomePage = z.object({
 
 export const AboutPage = z.object({
   seo: Seo,
-  hero: Hero,
-  intro: z.object({
-    title: Localized,
-    paragraphs: z.array(Localized).min(1),
-    /** Photo for this block; until it is provided the page shows a placeholder. */
-    image: Media.optional(),
-  }),
-  sectors: z.object({
-    image: Media,
-    paragraphs: z.array(Localized).min(1),
-    highlights: z.array(Localized),
-    link: InternalLink.optional(),
-  }),
-  history: z.object({
-    eyebrow: Localized,
-    title: Localized,
-    paragraphs: z.array(Localized).min(1),
-    images: z.array(Media),
-  }),
-  closing: z.object({ title: Localized }),
+  hero: Hero.extend({ cities: z.array(Localized).default([]) }),
+  /** Short statements in large type, one per line. */
+  statement: z.array(Localized).min(1),
+  /** Paragraph in bold under the statements. */
+  lead: Localized,
+  paragraphs: z.array(Localized),
+  /** Wide photo across the page. */
+  image: Media.optional(),
+  /** Paragraphs under the photo. */
+  story: z.array(Localized).min(1),
 });
 
 export const SimplePage = z.object({ seo: Seo, hero: Hero });
@@ -188,20 +192,5 @@ export const TeamPage = SimplePage.extend({
   /** People per row for each group, top to bottom (as in the design). */
   rows: z.record(TeamGroup, z.array(z.number().int().positive())).optional(),
 });
-
-export const ArticleBlock = z.discriminatedUnion("type", [
-  z.object({ type: z.literal("paragraph"), text: Localized }),
-  z.object({ type: z.literal("heading"), text: Localized }),
-  z.object({ type: z.literal("list"), items: z.array(Localized).min(1) }),
-  z.object({
-    type: z.literal("figures"),
-    items: z.array(z.object({ value: Localized, label: Localized })).min(1),
-  }),
-]);
-
-export const ArticlePage = SimplePage.extend({
-  blocks: z.array(ArticleBlock).min(1),
-});
-
 
 export type LocalizedText = z.infer<typeof Localized>;

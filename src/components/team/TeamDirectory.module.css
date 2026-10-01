@@ -3,7 +3,17 @@
 }
 
 .group + .group {
-  margin-top: clamp(48px, 6vw, 120px);
+  margin-top: clamp(56px, 6vw, 120px);
+}
+
+.groupTitle {
+  margin-bottom: clamp(24px, 2.6vw, 44px);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(20px, 1.6vw, 28px);
+  line-height: 1.25;
+  text-align: center;
+  color: var(--ink-black);
 }
 
 .row {
@@ -28,17 +38,18 @@
   text-align: center;
 }
 
+/* Portrait photos as in the design */
 .photo,
 .placeholder {
-  width: clamp(112px, 8vw, 140px);
-  height: clamp(112px, 8vw, 140px);
+  width: clamp(170px, 14vw, 220px);
+  height: auto;
+  aspect-ratio: 4 / 5;
   margin-bottom: 14px;
-  border-radius: 50%;
 }
 
 .photo {
   object-fit: cover;
-  object-position: center top;
+  object-position: center 25%;
 }
 
 /* Initials in the brand colours until a real photo is provided */
@@ -61,6 +72,32 @@
   font-size: clamp(16px, 1.1vw, 20px);
   line-height: 1.35;
   color: var(--ink-black);
+}
+
+.contacts {
+  display: grid;
+  gap: 0;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: clamp(15px, 1.05vw, 18px);
+  line-height: 1.45;
+}
+
+/* Each contact is a tap target of at least 28 px (WCAG 2.5.8) */
+.contacts a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  color: var(--ink-black);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.contacts a:hover {
+  color: var(--navy);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .quote {

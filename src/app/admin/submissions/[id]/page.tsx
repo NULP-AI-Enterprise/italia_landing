@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { z } from "zod";
 import { requireAdmin } from "@/server/auth/session";
 import { getSubmission, SUBMISSION_STATUSES } from "@/server/submissions";
 import { deleteSubmissionAction, updateSubmissionAction } from "../../actions";
-import { AdminHeader } from "../../AdminHeader";
+import { AdminPageHeader, AdminShell } from "@/components/admin/AdminShell";
 import { formatDateTime, kindLabels, statusLabels } from "../../labels";
 import { DeleteButton } from "./DeleteButton";
 
@@ -19,16 +18,18 @@ export default async function SubmissionPage({ params, searchParams }: PageProps
   if (!submission) notFound();
 
   return (
-    <>
-      <AdminHeader admin={admin} />
-      <main className="admin-main admin-narrow" id="main">
-        <p>
-          <Link href="/admin">← До всіх заявок</Link>
-        </p>
-        <h1>{submission.contactName}</h1>
-        <p className="admin-muted">
-          {kindLabels[submission.kind]} · <time dateTime={submission.createdAt.toISOString()}>{formatDateTime(submission.createdAt)}</time>
-        </p>
+    <AdminShell admin={admin}>
+      <div className="admin-narrow">
+        <AdminPageHeader
+          crumbs={[{ label: "Заявки", href: "/admin/submissions" }, { label: submission.contactName }]}
+          title={submission.contactName}
+          description={
+            <>
+              {kindLabels[submission.kind]} ·{" "}
+              <time dateTime={submission.createdAt.toISOString()}>{formatDateTime(submission.createdAt)}</time>
+            </>
+          }
+        />
 
         {query.saved && (
           <p className="admin-notice" role="status">
@@ -95,7 +96,7 @@ export default async function SubmissionPage({ params, searchParams }: PageProps
           <input type="hidden" name="id" value={submission.id} />
           <DeleteButton />
         </form>
-      </main>
-    </>
+      </div>
+    </AdminShell>
   );
 }

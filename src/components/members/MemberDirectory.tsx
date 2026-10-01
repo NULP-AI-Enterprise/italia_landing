@@ -62,7 +62,14 @@ export function MemberSearch({
 }: MemberSearchProps) {
   const params = new URLSearchParams(search);
   const disabled = !navigate;
-  const ids = { name: useId(), industry: useId(), region: useId(), regionTitle: useId(), results: useId() };
+  const ids = {
+    name: useId(),
+    industry: useId(),
+    industryHint: useId(),
+    region: useId(),
+    regionTitle: useId(),
+    results: useId(),
+  };
 
   const [query, setQuery] = useState(params.get("q") ?? "");
   const deferredQuery = useDeferredValue(query);
@@ -127,6 +134,7 @@ export function MemberSearch({
     .filter((r) => r.code.startsWith(country))
     .sort((a, b) => collator.compare(a.name, b.name));
   const countryName = country === "UA" ? labels.ukraine : labels.italy;
+  const industryIncludes = industries.find((item) => item.id === industry)?.includes;
 
   const focusRegion = hovered ?? (region || null);
   const mapCaption = focusRegion
@@ -143,7 +151,7 @@ export function MemberSearch({
 
   return (
     <div className={`container ${styles.directory}`}>
-      <div className={styles.panel} role="search" aria-label={labels.filtersLabel}>
+      <div className={styles.filters} role="search" aria-label={labels.filtersLabel}>
         {/* 1. Name */}
         <div className={styles.block}>
           <label className={styles.label} htmlFor={ids.name}>
@@ -183,7 +191,7 @@ export function MemberSearch({
           </div>
         </div>
 
-        {/* 2. Industry: the 12 industries in a drop-down */}
+        {/* 2. Industry: the 20 industries in a drop-down */}
         <div className={styles.block}>
           <label className={styles.label} htmlFor={ids.industry}>
             {labels.byIndustry}
@@ -193,6 +201,7 @@ export function MemberSearch({
             className={styles.select}
             value={industry}
             disabled={disabled}
+            aria-describedby={industryIncludes ? ids.industryHint : undefined}
             onChange={(event) => updateUrl({ industry: event.target.value })}
           >
             <option value="">{labels.allIndustries}</option>
@@ -202,9 +211,14 @@ export function MemberSearch({
               </option>
             ))}
           </select>
+          {industryIncludes && (
+            <p className={styles.hint} id={ids.industryHint}>
+              {industryIncludes}
+            </p>
+          )}
         </div>
 
-        {/* 3. Region: country, then a region from the list or the map */}
+        {/* 3. Region: country, then a region from the list or from the map below */}
         <fieldset className={`${styles.block} ${styles.regionBlock}`} disabled={disabled}>
           <legend className={styles.label}>{labels.byRegion}</legend>
           <div className={styles.regionControls}>
@@ -239,8 +253,12 @@ export function MemberSearch({
               ))}
             </select>
           </div>
+        </fieldset>
+      </div>
 
-          <figure className={styles.map}>
+      <div className={styles.layout}>
+        <div className={styles.mapCard}>
+          <figure className={styles.map} aria-label={labels.byRegion}>
             <p className="visually-hidden">{labels.mapLabel.replace("{country}", countryName)}</p>
             <RegionMap
               country={country}
@@ -263,58 +281,59 @@ export function MemberSearch({
               </li>
             </ul>
           </figure>
-        </fieldset>
-      </div>
-
-      <section className={styles.results} aria-labelledby={ids.results}>
-        <div className={styles.resultsHead}>
-          <h2 className={styles.resultsTitle} id={ids.results} ref={resultsHeadingRef} tabIndex={-1}>
-            {labels.resultsTitle}
-          </h2>
-          <p className={styles.count} role="status">
-            {plural(labels.count, results.length, locale)}
-          </p>
         </div>
 
-        {hasFilters && (
-          <div className={styles.active}>
-            {chips.length > 0 && (
-              <ul className={styles.chips}>
-                {chips.map((chip) => (
-                  <li key={chip.key}>
-                    <button type="button" className={styles.chip} onClick={() => removeFilter(chip.key)}>
-                      <span className="visually-hidden">{labels.removeFilter}: </span>
-                      <span className={styles.chipLabel}>{chip.label}:</span> {chip.value}
-                      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                        <path d="M7 7l10 10M17 7 7 17" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
-                      </svg>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            )}
-            <button type="button" className={styles.reset} onClick={reset}>
-              {labels.reset}
-            </button>
+        <section className={styles.results} aria-labelledby={ids.results}>
+          <div className={styles.resultsHead}>
+            <h2 className={styles.resultsTitle} id={ids.results} ref={resultsHeadingRef} tabIndex={-1}>
+              {labels.resultsTitle}
+            </h2>
+            <p className={styles.count} role="status">
+              {plural(labels.count, results.length, locale)}
+            </p>
           </div>
-        )}
 
-        {results.length > 0 ? (
-          <MemberResults
-            members={results}
-            locale={locale}
-            industryNames={industryNames}
-            regionNames={regionNames}
-            openLabel={labels.openProfile}
-            onOpen={disabled ? undefined : setProfileId}
-          />
-        ) : (
-          <div className={styles.empty}>
-            <p className={styles.emptyTitle}>{labels.empty}</p>
-            <p>{labels.emptyHint}</p>
-          </div>
-        )}
-      </section>
+          {hasFilters && (
+            <div className={styles.active}>
+              {chips.length > 0 && (
+                <ul className={styles.chips}>
+                  {chips.map((chip) => (
+                    <li key={chip.key}>
+                      <button type="button" className={styles.chip} onClick={() => removeFilter(chip.key)}>
+                        <span className="visually-hidden">{labels.removeFilter}: </span>
+                        <span className={styles.chipLabel}>{chip.label}:</span> {chip.value}
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                          <path d="M7 7l10 10M17 7 7 17" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+                        </svg>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <button type="button" className={styles.reset} onClick={reset}>
+                {labels.reset}
+              </button>
+            </div>
+          )}
+
+          {results.length > 0 ? (
+            <MemberResults
+              members={results}
+              locale={locale}
+              industryNames={industryNames}
+              regionNames={regionNames}
+              openLabel={labels.openProfile}
+              rebuildLabel={labels.rebuildShort}
+              onOpen={disabled ? undefined : setProfileId}
+            />
+          ) : (
+            <div className={styles.empty}>
+              <p className={styles.emptyTitle}>{labels.empty}</p>
+              <p>{labels.emptyHint}</p>
+            </div>
+          )}
+        </section>
+      </div>
 
       <dialog
         ref={dialogRef}

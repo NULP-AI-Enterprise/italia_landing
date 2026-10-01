@@ -19,8 +19,12 @@ import { enumLabels } from "@/content/registry";
 
 export type Option = { value: string; label: string };
 
+export type Language = "uk" | "it";
+
 export type EditorContext = {
   errors: FieldError[];
+  /** Languages shown in the form; the other one keeps its values. */
+  languages: Language[];
   /** Picks for fields that point to other content (a member's industries and regions). */
   refs: Record<string, Option[]>;
   /** The id field is read-only once the item exists. */
@@ -198,8 +202,8 @@ function LocalizedField({ schema, path, value, onChange, ctx }: FieldProps) {
         {optional && <span className="cms-optional"> — необов’язково</span>}
       </legend>
       <Hint id={`${id}-hint`} text={text.hint} />
-      <div className="cms-languages">
-        {(["uk", "it"] as const).map((language) => {
+      <div className="cms-languages" data-columns={ctx.languages.length}>
+        {ctx.languages.map((language) => {
           const inputId = `${id}-${language}`;
           const errors = ownErrors(ctx, [...path, language]);
           return (
@@ -241,6 +245,7 @@ function MediaField({ schema, path, value, onChange, ctx }: FieldProps) {
   const hasImage = Boolean(media?.src);
   const inputRef = useRef<HTMLInputElement>(null);
   const [state, setState] = useState<{ busy: boolean; error?: string }>({ busy: false });
+  const [dragging, setDragging] = useState(false);
   const errors = ctx.errors.filter((error) => error.path.startsWith(pathKey(path)) && !error.path.includes(".alt"));
   const altSchema = shapeOf(schema).alt;
 
@@ -263,17 +268,31 @@ function MediaField({ schema, path, value, onChange, ctx }: FieldProps) {
 
   return (
     <fieldset className="cms-media" id={id}>
-      <legend>
+      <legend className={path.length === 1 ? "visually-hidden" : undefined}>
         {text.label}
         {!optional && <span aria-hidden="true"> *</span>}
       </legend>
       <div className="cms-media-row">
-        <div className="cms-media-preview">
+        <div
+          className="cms-media-preview"
+          data-dragging={dragging || undefined}
+          onDragOver={(event) => {
+            event.preventDefault();
+            setDragging(true);
+          }}
+          onDragLeave={() => setDragging(false)}
+          onDrop={(event) => {
+            event.preventDefault();
+            setDragging(false);
+            const file = event.dataTransfer.files[0];
+            if (file) void upload(file);
+          }}
+        >
           {hasImage ? (
             // eslint-disable-next-line @next/next/no-img-element -- preview of an arbitrary uploaded file
             <img src={media!.src} alt="" />
           ) : (
-            <span>Немає зображення</span>
+            <span>Перетягніть фото сюди</span>
           )}
         </div>
         <div className="cms-media-actions">
@@ -346,7 +365,7 @@ function ObjectField({ schema, path, value, onChange, ctx }: FieldProps) {
 
   return (
     <fieldset className="cms-group" id={id} aria-describedby={describedBy(text.hint && `${id}-hint`)}>
-      <legend>{text.label}</legend>
+      <legend className={path.length === 1 ? "visually-hidden" : undefined}>{text.label}</legend>
       <Hint id={`${id}-hint`} text={text.hint} />
       {current === undefined ? (
         <button type="button" className="cms-button cms-button-quiet" onClick={() => onChange(emptyValue(unwrap(schema).base))}>
@@ -386,8 +405,9 @@ function ArrayField({ schema, path, value, onChange, ctx }: FieldProps) {
 
   return (
     <fieldset className="cms-group" id={id} aria-describedby={describedBy(text.hint && `${id}-hint`, errors.length > 0 && `${id}-error`)}>
-      <legend id={headingId}>
-        {text.label} <span className="cms-count">({items.length})</span>
+      <legend id={headingId} className={path.length === 1 ? "cms-legend-top" : undefined}>
+        <span className={path.length === 1 ? "visually-hidden" : undefined}>{text.label} </span>
+        <span className="cms-count">({items.length})</span>
       </legend>
       <Hint id={`${id}-hint`} text={text.hint} />
       <ErrorText id={`${id}-error`} messages={errors} />
@@ -418,7 +438,7 @@ function ArrayField({ schema, path, value, onChange, ctx }: FieldProps) {
         ))}
       </ol>
       <button type="button" className="cms-button cms-button-quiet" onClick={() => onChange([...items, emptyValue(element)])}>
-        + Додати пункт
+        + Додати {fieldText(pathKey(path)).item ?? "пункт"}
       </button>
     </fieldset>
   );
@@ -432,7 +452,7 @@ function RecordField({ schema, path, value, onChange, ctx }: FieldProps) {
   const current = (value ?? {}) as Record<string, unknown>;
   return (
     <fieldset className="cms-group" id={id}>
-      <legend>{text.label}</legend>
+      <legend className={path.length === 1 ? "visually-hidden" : undefined}>{text.label}</legend>
       <Hint id={`${id}-hint`} text={text.hint} />
       {keys.map((key) => (
         <div key={key} className="cms-subgroup">

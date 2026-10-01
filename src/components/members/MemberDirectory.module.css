@@ -1,31 +1,47 @@
-/* Filter panel on the left, results on the right */
+/* Filters in one bar on top; the map on the left, the companies on the right */
 .directory {
   display: grid;
-  grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
-  align-items: start;
-  gap: clamp(32px, 4vw, 72px);
+  gap: clamp(24px, 2.6vw, 40px);
   padding-block: clamp(32px, 3.5vw, 64px) clamp(24px, 2vw, 40px);
 }
 
-.panel {
+.filters {
   display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr) minmax(0, 1.7fr);
   border: 1px solid var(--line);
   border-radius: 16px;
   background: #fff;
-  box-shadow: 0 24px 48px -32px rgba(10, 36, 99, 0.28);
+  box-shadow: 0 24px 48px -36px rgba(10, 36, 99, 0.3);
 }
 
 .block {
   display: grid;
+  align-content: start;
   gap: 10px;
   min-width: 0;
   margin: 0;
-  padding: 22px 24px;
+  padding: 20px 22px;
   border: 0;
 }
 
 .block + .block {
-  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  align-items: start;
+  gap: clamp(24px, 3vw, 48px);
+}
+
+.mapCard {
+  position: sticky;
+  top: calc(var(--header-h) + 20px);
+  padding: clamp(16px, 2vw, 28px);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
 }
 
 .label {
@@ -127,6 +143,12 @@
   outline-offset: 2px;
 }
 
+.hint {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
 /* Region */
 .regionBlock {
   grid-template-columns: minmax(0, 1fr);
@@ -140,8 +162,9 @@
 
 .regionControls {
   display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  align-items: center;
   gap: 10px;
-  align-content: start;
 }
 
 .countries {
@@ -198,8 +221,8 @@
 
 .map {
   display: grid;
-  gap: 10px;
-  margin: 8px 0 0;
+  gap: 12px;
+  margin: 0;
 }
 
 .mapCaption {
@@ -356,55 +379,50 @@
   font-size: 18px;
 }
 
-/* The panel follows the results while they scroll, when the screen is tall enough */
-@media (min-width: 1024px) and (min-height: 920px) {
-  .panel {
-    position: sticky;
-    top: calc(var(--header-h) + 20px);
-  }
-}
-
-/* Tablet: panel above the results; name and industry side by side, map next to the region list */
-@media (max-width: 1023px) {
-  .directory {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .panel {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .block:nth-child(2) {
-    border-top: 0;
-    border-left: 1px solid var(--line);
+@media (max-width: 1100px) {
+  .filters {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
 
   .regionBlock {
     grid-column: 1 / -1;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
-    column-gap: 28px;
+    border-top: 1px solid var(--line);
+    border-left: 0 !important;
+  }
+}
+
+/* The map only follows the scroll when it fits the screen */
+@media (max-height: 819px) {
+  .mapCard {
+    position: static;
+  }
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .map {
-    margin: 0;
+  .mapCard {
+    position: static;
   }
 }
 
 @media (max-width: 639px) {
-  .panel {
+  .filters {
     grid-template-columns: minmax(0, 1fr);
   }
 
   .block {
-    padding: 18px;
+    padding: 16px 18px;
   }
 
-  .block:nth-child(2) {
+  .block + .block {
     border-top: 1px solid var(--line);
     border-left: 0;
   }
 
-  .regionBlock {
+  .regionControls {
     grid-template-columns: minmax(0, 1fr);
   }
 }

@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { Closing } from "@/components/about/Closing";
-import { ExportSectors } from "@/components/about/ExportSectors";
-import { History } from "@/components/about/History";
-import { Intro } from "@/components/about/Intro";
+import { AboutStory } from "@/components/about/AboutStory";
+import { HeroCities } from "@/components/ui/HeroCities";
 import { JoinButton } from "@/components/ui/JoinButton";
 import { PageHero } from "@/components/ui/PageHero";
 import { getPage } from "@/content/repository";
@@ -19,14 +17,21 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function AboutPage() {
   const locale = await getLocale();
   const [page, dict] = await Promise.all([getPage("about", locale), getDictionary()]);
+  const { hero } = page;
 
   return (
     <>
-      <PageHero title={page.hero.title} lead={page.hero.lead} logoAlt={dict.a11y.logoAlt} />
-      <Intro intro={page.intro} />
-      <ExportSectors sectors={page.sectors} locale={locale} heading={dict.about.sectorsHeading} />
-      <History history={page.history} />
-      <Closing title={page.closing.title} />
+      <PageHero title={hero.title} lead={hero.lead} logoAlt={dict.a11y.logoAlt}>
+        <HeroCities cities={hero.cities} />
+      </PageHero>
+      <AboutStory
+        statement={page.statement}
+        lead={page.lead}
+        paragraphs={page.paragraphs}
+        image={page.image}
+        story={page.story}
+      />
+      {/* Kept although the design ends without it (THE-6: keep the join call to action) */}
       <JoinButton href={localePath(locale, "/join")} label={dict.actions.join} />
     </>
   );

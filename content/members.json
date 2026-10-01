@@ -23,11 +23,30 @@
     "id": "bioclimatica",
     "published": true,
     "name": "Bioclimatica",
-    "industries": [],
-    "regions": [],
+    "tagline": {
+      "uk": "Біокліматичні перголи на замовлення.",
+      "it": "Pergole bioclimatiche su misura."
+    },
+    "industries": [
+      "construction-real-estate"
+    ],
+    "regions": [
+      "IT-72"
+    ],
     "expertise": [],
+    "website": "https://bioclimatica.eu",
+    "logo": {
+      "src": "/media/partners/bioclimatica-pergole.png",
+      "width": 139,
+      "height": 160,
+      "alt": {
+        "uk": "Логотип Bioclimatica",
+        "it": "Logo di Bioclimatica"
+      }
+    },
     "offers": [],
-    "seeks": []
+    "seeks": [],
+    "rebuildProgram": true
   },
   {
     "id": "bioplast",
@@ -49,27 +68,172 @@
     },
     "industries": [],
     "regions": [],
-    "expertise": ["AI", "IoT", "DeepTech", "MedTech", "AgroTech"],
+    "expertise": [
+      "AI",
+      "IoT",
+      "DeepTech",
+      "MedTech",
+      "AgroTech"
+    ],
     "website": "https://www.thesis-i.com",
     "logo": {
       "src": "/media/members/thesis-i-logo.png",
       "width": 72,
       "height": 72,
-      "alt": { "uk": "Логотип Thesis-I", "it": "Logo di Thesis-I" }
+      "alt": {
+        "uk": "Логотип Thesis-I",
+        "it": "Logo di Thesis-I"
+      }
     },
     "contact": {
       "name": "Vitalii Bretsko",
-      "position": { "uk": "Засновник і генеральний директор", "it": "Fondatore e CEO" },
+      "position": {
+        "uk": "Засновник і генеральний директор",
+        "it": "Fondatore e CEO"
+      },
       "email": "vbretsko@thesis-i.com",
       "phone": "+380509925337",
       "photo": {
         "src": "/media/members/thesis-i-bretsko.jpg",
         "width": 203,
         "height": 253,
-        "alt": { "uk": "Віталій Брецько", "it": "Vitalii Bretsko" }
+        "alt": {
+          "uk": "Віталій Брецько",
+          "it": "Vitalii Bretsko"
+        }
       }
     },
     "offers": [],
     "seeks": []
+  },
+  {
+    "id": "russo-alluminio",
+    "published": true,
+    "name": "Russo Alluminio",
+    "tagline": {
+      "uk": "Продаж вікон і дверей з дерева та дерево-алюмінію.",
+      "it": "Vendita di infissi in legno e legno-alluminio."
+    },
+    "industries": [
+      "construction-real-estate"
+    ],
+    "regions": [
+      "IT-72"
+    ],
+    "expertise": [],
+    "website": "https://www.russo-alluminio.it",
+    "offers": [],
+    "seeks": [],
+    "rebuildProgram": true
+  },
+  {
+    "id": "le-piu-belle-tende",
+    "published": true,
+    "name": "Le Più Belle Tende",
+    "tagline": {
+      "uk": "Виготовлення, монтаж і обслуговування тентів і штор.",
+      "it": "Realizzazione, installazione e manutenzione di tende."
+    },
+    "industries": [
+      "construction-real-estate"
+    ],
+    "regions": [
+      "IT-72",
+      "IT-25"
+    ],
+    "expertise": [],
+    "website": "https://lepiubelletende.it",
+    "offers": [],
+    "seeks": [],
+    "rebuildProgram": true
+  },
+  {
+    "id": "penta-group",
+    "published": true,
+    "name": "Penta Group",
+    "tagline": {
+      "uk": "Будівельна компанія, для якої головне — якість послуг і задоволення потреб клієнта.",
+      "it": "Impresa di costruzioni guidata dalla volontà di offrire un servizio di assoluta qualità."
+    },
+    "industries": [
+      "construction-real-estate"
+    ],
+    "regions": [
+      "IT-25"
+    ],
+    "expertise": [],
+    "website": "https://www.pentacostruzioni.com/pentagroup/",
+    "offers": [],
+    "seeks": [],
+    "rebuildProgram": true
+  },
+  {
+    "id": "verrastro-group",
+    "published": true,
+    "name": "Verrastro Group",
+    "tagline": {
+      "uk": "Виробництво бітумних і цементних сумішей, проєктування та будівництво доріг, залізниць і аеропортів.",
+      "it": "Produzione di conglomerati bituminosi e cementizi, progettazione e costruzione di strade, ferrovie e aeroporti."
+    },
+    "industries": [
+      "construction-real-estate"
+    ],
+    "regions": [
+      "IT-77"
+    ],
+    "expertise": [],
+    "website": "https://verrastrogroup.it",
+    "offers": [],
+    "seeks": [],
+    "rebuildProgram": true
+  },
+  {
+    "id": "innova-serramenti",
+    "published": true,
+    "name": "Innova Serramenti",
+    "tagline": {
+      "uk": "Вікна з ПВХ, дерева та алюмінію від провідних постачальників.",
+      "it": "Finestre in PVC, legno e alluminio dei migliori fornitori."
+    },
+    "industries": [
+      "construction-real-estate"
+    ],
+    "regions": [
+      "IT-25"
+    ],
+    "expertise": [],
+    "website": "https://www.innova-serramenti.it",
+    "logo": {
+      "src": "/media/partners/innova-serramenti.png",
+      "width": 160,
+      "height": 160,
+      "alt": {
+        "uk": "Логотип Innova Serramenti",
+        "it": "Logo di Innova Serramenti"
+      }
+    },
+    "offers": [],
+    "seeks": [],
+    "rebuildProgram": true
+  },
+  {
+    "id": "gruppo-centanni",
+    "published": true,
+    "name": "Gruppo Centanni",
+    "tagline": {
+      "uk": "Технічні штори та рішення для інтер’єру.",
+      "it": "Tende tecniche e soluzioni d’arredo."
+    },
+    "industries": [
+      "fashion-design-luxury"
+    ],
+    "regions": [
+      "IT-72"
+    ],
+    "expertise": [],
+    "website": "https://www.centotendetecniche.com",
+    "offers": [],
+    "seeks": [],
+    "rebuildProgram": true
   }
 ]

@@ -254,3 +254,49 @@ export function slugify(value: string) {
     .slice(0, 60)
     .replace(/-+$/, "");
 }
+
+/* ---------- Translations ---------- */
+
+/** How many texts are filled in one language but not the other. */
+export function countMissing(schema: z.ZodType, value: unknown): { uk: number; it: number } {
+  const total = { uk: 0, it: 0 };
+  const walk = (field: z.ZodType, current: unknown) => {
+    if (current === undefined || current === null) return;
+    const base = unwrap(field).base;
+    switch (kindOf(base)) {
+      case "localized": {
+        const text = current as { uk?: string; it?: string };
+        const uk = Boolean(text.uk?.trim());
+        const it = Boolean(text.it?.trim());
+        if (uk && !it) total.it += 1;
+        if (it && !uk) total.uk += 1;
+        return;
+      }
+      case "object":
+      case "media":
+        for (const [key, inner] of Object.entries(shapeOf(base))) walk(inner, (current as Record<string, unknown>)[key]);
+        return;
+      case "array":
+        if (Array.isArray(current)) current.forEach((item) => walk(elementOf(base), item));
+        return;
+      case "union": {
+        const { discriminator, options } = unionOptions(base);
+        const option = options.find((o) => o.value === (current as Record<string, unknown>)[discriminator]);
+        if (option) walk(option.schema, current);
+        return;
+      }
+      case "record": {
+        const { value: inner } = recordParts(base);
+        for (const item of Object.values(current as Record<string, unknown>)) walk(inner, item);
+        return;
+      }
+      default:
+        return;
+    }
+  };
+  walk(schema, value);
+  return total;
+}
+
+const SIMPLE_KINDS: FieldKind[] = ["string", "number", "boolean", "enum", "localized"];
+export const isSimpleField = (schema: z.ZodType) => SIMPLE_KINDS.includes(kindOf(schema));

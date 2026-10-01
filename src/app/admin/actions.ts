@@ -57,7 +57,7 @@ export async function updateSubmissionAction(formData: FormData) {
     note: String(formData.get("note") ?? ""),
   });
   await updateSubmission(data.id, { status: data.status, note: data.note.trim() });
-  revalidatePath("/admin");
+  revalidatePath("/admin", "layout");
   redirect(`/admin/submissions/${data.id}?saved=1`);
 }
 
@@ -65,6 +65,6 @@ export async function deleteSubmissionAction(formData: FormData) {
   await requireAdmin();
   const id = z.uuid().parse(formData.get("id"));
   await deleteSubmission(id);
-  revalidatePath("/admin");
-  redirect("/admin?deleted=1");
+  revalidatePath("/admin", "layout");
+  redirect("/admin/submissions?deleted=1");
 }

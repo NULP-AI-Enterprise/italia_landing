@@ -5,140 +5,87 @@
       "it": "Associazione"
     },
     "description": {
-      "uk": "Асоціація Made in Ukraine for Italy (MIUFI) — інституційний міст між підприємницькими спільнотами України та Італії. Бачення, місія та історія асоціації.",
-      "it": "L’associazione Made in Ukraine for Italy (MIUFI) è un ponte istituzionale tra le comunità imprenditoriali di Ucraina e Italia. Visione, missione e storia dell’associazione."
+      "uk": "Асоціація Made in Ukraine for Italy (MIUFI) — інституційний міст між українською та італійською бізнес-спільнотами: довіра, місцева присутність і доступ до потрібних людей.",
+      "it": "L’associazione Made in Ukraine for Italy (MIUFI) è un ponte istituzionale tra le comunità d’impresa ucraina e italiana: fiducia, presenza locale e accesso alle persone giuste."
     }
   },
   "hero": {
     "title": {
-      "uk": "Об’єднуємо український бізнес та італійський ринок",
-      "it": "Uniamo le imprese ucraine e il mercato italiano"
+      "uk": "Асоціація Made in Ukraine for Italy",
+      "it": "Associazione Made in Ukraine for Italy"
     },
-    "lead": {
-      "uk": "Ми є інституційним мостом між підприємницькою спільнотою України та Італії, заснованим на цінностях довіри, взаємної вигоди та відданості розвитку.",
-      "it": "Siamo un ponte istituzionale tra le comunità imprenditoriali di Ucraina e Italia, fondato sui valori di fiducia, reciproco vantaggio e impegno per lo sviluppo."
-    }
-  },
-  "intro": {
-    "title": {
-      "uk": "Асоціація, яка з’єднує українські бізнеси з італійським ринком, партнерами та інвесторами.",
-      "it": "Un’associazione che collega le imprese ucraine con il mercato italiano, i partner e gli investitori."
-    },
-    "paragraphs": [
+    "cities": [
       {
-        "uk": "Економічне співробітництво між Італією та Україною вже є суттєвим. За даними Міністерства закордонних справ Італії, двосторонній товарообіг Італії з Україною у 2025 році досяг 4,5 млрд євро, а Конференція з питань відновлення України 2025 року зібрала в Римі близько 2000 підприємств.",
-        "it": "La cooperazione economica tra Italia e Ucraina è già significativa. Secondo il Ministero degli Affari Esteri italiano, nel 2025 l’interscambio commerciale dell’Italia con l’Ucraina ha raggiunto 4,5 miliardi di euro e la Conferenza sulla ripresa dell’Ucraina 2025 ha riunito a Roma circa 2000 imprese."
+        "uk": "Мілан",
+        "it": "Milano"
+      },
+      {
+        "uk": "Венеція",
+        "it": "Venezia"
+      },
+      {
+        "uk": "Рим",
+        "it": "Roma"
+      },
+      {
+        "uk": "Барі",
+        "it": "Bari"
+      },
+      {
+        "uk": "Неаполь",
+        "it": "Napoli"
+      },
+      {
+        "uk": "Палермо",
+        "it": "Palermo"
       }
     ]
   },
-  "sectors": {
-    "image": {
-      "src": "/media/about/arches.jpg",
-      "width": 958,
-      "height": 708,
-      "alt": {
-        "uk": "Вечірнє подвір’я історичної італійської вілли з арками, де збираються учасники заходу",
-        "it": "Cortile serale di una storica villa italiana con portici, dove si riuniscono i partecipanti a un evento"
-      }
+  "statement": [
+    {
+      "uk": "Ми знаємо обидва ринки.",
+      "it": "Conosciamo entrambi i mercati."
     },
-    "paragraphs": [
-      {
-        "uk": "Основні експортні сектори України — <b>сільське господарство та залізна руда</b>.",
-        "it": "I principali settori di esportazione dell’Ucraina sono <b>l’agricoltura e il minerale di ferro</b>."
-      },
-      {
-        "uk": "Загалом у 2025 році Україна експортувала товарів приблизно на <b>40,3 млрд доларів</b>, а дані за початок 2026 року вказують на незначну стабілізацію та зростання в окремих секторах.",
-        "it": "Complessivamente, nel 2025 l’Ucraina ha esportato beni per circa <b>40,3 miliardi di dollari</b> e i dati di inizio 2026 indicano una leggera stabilizzazione e una crescita in alcuni settori."
-      },
-      {
-        "uk": "<b>Продовольство та сільське господарство.</b> Сільськогосподарський сектор щорічно генерує понад 24 млрд доларів — майже 60% загального експорту товарів.",
-        "it": "<b>Alimentare e agricoltura.</b> Il settore agricolo genera ogni anno oltre 24 miliardi di dollari, quasi il 60% dell’export totale di beni."
-      }
-    ],
-    "highlights": [
-      {
-        "uk": "Логістика та відновлення",
-        "it": "Logistica e ripresa"
-      },
-      {
-        "uk": "Машини та електротехнічне обладнання",
-        "it": "Macchinari e apparecchiature elettriche"
-      },
-      {
-        "uk": "IT та технологічний аутсорсинг",
-        "it": "IT e outsourcing tecnologico"
-      }
-    ],
-    "link": {
-      "label": {
-        "uk": "Детальніше про економіку України та Італії",
-        "it": "Approfondisci l’economia di Ucraina e Italia"
-      },
-      "href": "/ukraine-italy"
+    {
+      "uk": "Ми розуміємо бізнес-культуру.",
+      "it": "Comprendiamo la cultura d’impresa."
+    },
+    {
+      "uk": "Ми поєднуємо потрібних людей.",
+      "it": "Mettiamo in contatto le persone giuste."
+    }
+  ],
+  "lead": {
+    "uk": "Асоціація — це інституційний міст між українською та італійською бізнес-спільнотами, побудований на довірчих відносинах, місцевій присутності та практичному доступі до потрібних людей.",
+    "it": "L’associazione è un ponte istituzionale tra le comunità d’impresa ucraina e italiana, costruito su rapporti di fiducia, presenza sul territorio e accesso concreto alle persone giuste."
+  },
+  "paragraphs": [
+    {
+      "uk": "Економічне співробітництво між Італією та Україною вже є суттєвим. За даними Міністерства закордонних справ Італії, двосторонній товарообіг Італії з Україною у 2025 році досяг 4,5 млрд євро, а Конференція з питань відновлення України 2025 року зібрала в Римі близько 2000 підприємств.",
+      "it": "La cooperazione economica tra Italia e Ucraina è già significativa. Secondo il Ministero degli Affari Esteri italiano, nel 2025 l’interscambio commerciale tra Italia e Ucraina ha raggiunto 4,5 miliardi di euro e la Conferenza sulla ripresa dell’Ucraina 2025 ha riunito a Roma circa 2000 imprese."
+    }
+  ],
+  "image": {
+    "src": "/media/about/courtyard.jpg",
+    "width": 1382,
+    "height": 922,
+    "alt": {
+      "uk": "Вечірній захід асоціації на подвір’ї історичної італійської вілли з арками",
+      "it": "Evento serale dell’associazione nel cortile porticato di una storica villa italiana"
     }
   },
-  "history": {
-    "eyebrow": {
-      "uk": "Наша історія",
-      "it": "La nostra storia"
+  "story": [
+    {
+      "uk": "Асоціація Made in Ukraine for Italy (MIUFI) заснована у 2020 році з місією гідно представляти найкращих українських експортерів на одному з найвимогливіших ринків Європи — італійському — та доводити, що бренд Made in Ukraine може гідно стояти в одному ряду з Made in Italy.",
+      "it": "L’associazione Made in Ukraine for Italy (MIUFI) è nata nel 2020 con la missione di rappresentare con dignità i migliori esportatori ucraini su uno dei mercati più esigenti d’Europa, quello italiano, e di dimostrare che il marchio Made in Ukraine può stare con orgoglio accanto al Made in Italy."
     },
-    "title": {
-      "uk": "Заснована з метою.\nПобудована на партнерстві.",
-      "it": "Fondata con uno scopo.\nCostruita sulla partnership."
+    {
+      "uk": "За шість років роботи Асоціація об’єднала понад 50 активних членів та організувала понад 30 виставок і бізнес-заходів. Ми працюємо в різних регіонах Італії та Україні, розвиваємо співпрацю з Торгово-промисловими палатами обох країн, Confindustria, Італійським торговельним агентством ICE та іншими провідними інституціями.",
+      "it": "In sei anni di attività l’associazione ha riunito oltre 50 soci attivi e ha organizzato più di 30 fiere ed eventi d’affari. Operiamo in diverse regioni d’Italia e in Ucraina e collaboriamo con le Camere di commercio dei due Paesi, Confindustria, l’Agenzia ICE e altre istituzioni di primo piano."
     },
-    "paragraphs": [
-      {
-        "uk": "Асоціація Made in Ukraine for Italy (<b>MIUFI</b>) заснована у 2020 році з місією гідно представити найкращих українських експортерів на одному з найвимогливіших ринків Європи — <i>італійському</i> — і довести, що бренд <b>Made in Ukraine</b> здатний стояти в одному ряду з Made in Italy.",
-        "it": "L’associazione Made in Ukraine for Italy (<b>MIUFI</b>) è stata fondata nel 2020 con la missione di rappresentare degnamente i migliori esportatori ucraini in uno dei mercati più esigenti d’Europa, <i>quello italiano</i>, e di dimostrare che il marchio <b>Made in Ukraine</b> può stare al fianco del Made in Italy."
-      },
-      {
-        "uk": "За 6 років роботи Рада об’єднала <b>понад 50</b> активних членів, організувала понад 30 виставок і заходів. Ми діємо в <i>Мілані, Римі, Венеції, Неаполі, Палермо, Києві</i> та співпрацюємо з ТПП обох країн, Confindustria, ICE та іншими провідними установами.",
-        "it": "In 6 anni di attività il Consiglio ha riunito <b>oltre 50</b> soci attivi e organizzato più di 30 fiere ed eventi. Operiamo a <i>Milano, Roma, Venezia, Napoli, Palermo e Kyiv</i> e collaboriamo con le Camere di commercio di entrambi i Paesi, Confindustria, ICE e altre importanti istituzioni."
-      }
-    ],
-    "images": [
-      {
-        "src": "/media/history/signing.jpg",
-        "width": 361,
-        "height": 271,
-        "alt": {
-          "uk": "Підписання документів про партнерство",
-          "it": "Firma di documenti di partenariato"
-        }
-      },
-      {
-        "src": "/media/history/conference.jpg",
-        "width": 361,
-        "height": 270,
-        "alt": {
-          "uk": "Бейдж учасника Двосторонньої конференції з відновлення України",
-          "it": "Badge della Conferenza bilaterale sulla ricostruzione dell’Ucraina"
-        }
-      },
-      {
-        "src": "/media/history/expo.jpg",
-        "width": 361,
-        "height": 271,
-        "alt": {
-          "uk": "Представниці асоціації на стенді міжнародної виставки",
-          "it": "Rappresentanti dell’associazione allo stand di una fiera internazionale"
-        }
-      },
-      {
-        "src": "/media/history/members.jpg",
-        "width": 361,
-        "height": 271,
-        "alt": {
-          "uk": "Учасники асоціації на вечірньому заході",
-          "it": "Soci dell’associazione a un evento serale"
-        }
-      }
-    ]
-  },
-  "closing": {
-    "title": {
-      "uk": "Вихід на ринок Італії та Європи. Без зайвих кроків.",
-      "it": "Accesso al mercato italiano ed europeo. Senza passaggi superflui."
+    {
+      "uk": "Сьогодні MIUFI продовжує зростати, розширюючи свою мережу, зміцнюючи присутність в Італії та Україні та розвиваючи нові партнерства й амбіції. Наша мета — не просто створювати контакти між українським та італійським бізнесом, а формувати довгострокові зв’язки, відкривати нові можливості та сприяти взаємному розвитку двох підприємницьких спільнот.",
+      "it": "Oggi MIUFI continua a crescere: amplia la sua rete, rafforza la presenza in Italia e in Ucraina e sviluppa nuove partnership e nuove ambizioni. Il nostro obiettivo non è solo creare contatti tra imprese ucraine e italiane, ma costruire legami duraturi, aprire nuove opportunità e favorire la crescita reciproca delle due comunità imprenditoriali."
     }
-  }
+  ]
 }

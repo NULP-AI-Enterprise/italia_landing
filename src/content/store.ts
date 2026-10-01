@@ -6,10 +6,11 @@
  * in /content. Every document is validated with its schema, so a broken row can
  * never break the site: it is logged and the bundled version is used instead.
  */
+import { inArray, sql } from "drizzle-orm";
 import { cache } from "react";
 import { z } from "zod";
 import { getDb, schema } from "@/server/db/client";
-import { collections, pageDocumentKey, pages, type CollectionKey, type PageKey } from "./registry";
+import { collectionDef, collections, pageDocumentKey, pages, type CollectionKey, type PageKey } from "./registry";
 import { seedCollections, seedPages } from "./seed";
 
 export type CollectionData = { [K in CollectionKey]: z.output<(typeof collections)[K]["item"]>[] };
@@ -81,12 +82,124 @@ export function crossCheck(content: ContentData): ContentProblem[] {
   return problems;
 }
 
+/* ---------- Bundled additions reach edited collections ---------- */
+
+type Item = Record<string, unknown>;
+
+/** Row that remembers which bundled items a stored collection has already received. */
+export const seedStateKey = (key: CollectionKey) => `seed-state:${key}`;
+
+const isEmpty = (value: unknown) =>
+  value === undefined || value === null || value === "" || (Array.isArray(value) && value.length === 0);
+
+/**
+ * Adds items that were added to the bundled JSON after the collection was edited
+ * in the admin panel. Items an editor deleted stay deleted: their ids are in
+ * `applied`. On the very first merge (no record yet) existing items also get the
+ * fields they lack, without touching anything an editor filled in.
+ */
+export function mergeBundled(key: CollectionKey, stored: Item[], bundled: Item[], applied: Set<string> | null) {
+  const { idKey, ordered } = collectionDef(key);
+  const storedIds = new Set(stored.map((item) => String(item[idKey])));
+  let changed = false;
+
+  const items = stored.map((item) => {
+    if (applied) return item;
+    const fresh = bundled.find((candidate) => candidate[idKey] === item[idKey]);
+    if (!fresh) return item;
+    const filled = { ...item };
+    for (const [field, value] of Object.entries(fresh)) {
+      if (field === "order" || field === "published") continue;
+      if (isEmpty(filled[field]) && !isEmpty(value)) {
+        filled[field] = value;
+        changed = true;
+      }
+    }
+    return filled;
+  });
+
+  let nextOrder = Math.max(0, ...items.map((item) => Number(item.order) || 0));
+  for (const item of bundled) {
+    const id = String(item[idKey]);
+    if (storedIds.has(id) || applied?.has(id)) continue;
+    items.push(ordered ? { ...item, order: ++nextOrder } : { ...item });
+    changed = true;
+  }
+  return { items, changed };
+}
+
+let bundledSync: Promise<void> | undefined;
+
+/** Once per server process: merge bundled additions into collections stored in the database. */
+function syncBundledContent() {
+  bundledSync ??= (async () => {
+    const db = await getDb();
+    const keys = Object.keys(collections) as CollectionKey[];
+    const rows = await db
+      .select({ key: schema.contentDocuments.key, data: schema.contentDocuments.data })
+      .from(schema.contentDocuments)
+      .where(inArray(schema.contentDocuments.key, [...keys, ...keys.map(seedStateKey)]));
+    const stored = new Map(rows.map((row) => [row.key, row.data]));
+
+    for (const key of keys) {
+      const current = stored.get(key);
+      if (!Array.isArray(current)) continue;
+      const bundled = seedCollections[key] as Item[];
+      const state = stored.get(seedStateKey(key)) as { ids?: string[] } | undefined;
+      const applied = state?.ids ? new Set(state.ids) : null;
+      const { items, changed } = mergeBundled(key, current as Item[], bundled, applied);
+
+      if (changed) {
+        if (!parseCollection(key, items).success) {
+          console.error(`Content: bundled additions for "${key}" do not fit the stored data; skipped.`);
+          continue;
+        }
+        await db
+          .update(schema.contentDocuments)
+          .set({ data: items, updatedAt: sql`now()` })
+          .where(inArray(schema.contentDocuments.key, [key]));
+        console.info(`Content: added bundled items to "${key}".`);
+      }
+      const ids = [...new Set([...(applied ?? []), ...bundled.map((item) => String(item[collectionDef(key).idKey]))])];
+      if (!applied || ids.length !== applied.size) await rememberBundled(key, ids);
+    }
+  })().catch((error: unknown) => {
+    bundledSync = undefined;
+    console.error("Content: could not merge bundled additions.", error);
+  });
+  return bundledSync;
+}
+
+/** Records the bundled items a stored collection has seen (called on every save from the admin panel too). */
+export async function rememberBundled(key: CollectionKey, ids?: string[]) {
+  const db = await getDb();
+  const data = { ids: ids ?? (seedCollections[key] as Item[]).map((item) => String(item[collectionDef(key).idKey])) };
+  await db
+    .insert(schema.contentDocuments)
+    .values({ key: seedStateKey(key), data })
+    .onConflictDoUpdate({ target: schema.contentDocuments.key, set: { data, updatedAt: sql`now()` } });
+}
+
+/**
+ * After the first save of a collection: items bundled at that moment count as seen,
+ * so a later deploy does not bring back the ones the editor deleted.
+ */
+export async function rememberBundledIfNew(key: CollectionKey) {
+  const db = await getDb();
+  const ids = (seedCollections[key] as Item[]).map((item) => String(item[collectionDef(key).idKey]));
+  await db
+    .insert(schema.contentDocuments)
+    .values({ key: seedStateKey(key), data: { ids } })
+    .onConflictDoNothing({ target: schema.contentDocuments.key });
+}
+
 /* ---------- Runtime loading ---------- */
 
 async function readStoredDocuments(): Promise<Map<string, unknown>> {
   // A production build has no database; it only needs the bundled content.
   if (!process.env.DATABASE_URL && process.env.NODE_ENV === "production") return new Map();
   try {
+    await syncBundledContent();
     const db = await getDb();
     const rows = await db
       .select({ key: schema.contentDocuments.key, data: schema.contentDocuments.data })

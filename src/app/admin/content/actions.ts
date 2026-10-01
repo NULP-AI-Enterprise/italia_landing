@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { cleanValue, toFieldErrors, type FieldError } from "@/content/form-model";
 import { collectionDef, isCollectionKey, isPageKey, pageDef, pageDocumentKey, type CollectionKey } from "@/content/registry";
-import { crossCheck, loadContent, parseCollection, parsePage, type ContentData } from "@/content/store";
+import { crossCheck, loadContent, parseCollection, parsePage, rememberBundledIfNew, type ContentData } from "@/content/store";
 import { requireAdmin } from "@/server/auth/session";
 import { saveDocument } from "@/server/content";
 
@@ -61,6 +61,7 @@ async function writeCollection(key: CollectionKey, items: Item[], adminId: strin
   }
 
   await saveDocument(key, parsed.data, adminId);
+  await rememberBundledIfNew(key);
   refreshSite();
   return null;
 }

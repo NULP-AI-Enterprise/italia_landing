@@ -40,7 +40,7 @@ spec:
               memory: 64Mi
       containers:
         - name: italia-landing
-          image: ghcr.io/nulp-ai-enterprise/italia-landing:sha-17b8ae4
+          image: ghcr.io/nulp-ai-enterprise/italia-landing:sha-624d71d
           imagePullPolicy: Always
           ports:
             - name: http

@@ -126,7 +126,7 @@ export const it: Dictionary = {
     telegram: "Telegram",
   },
   form: {
-    joinTitle: "Diventa socio",
+    joinTitle: "Aderisci",
     contactTitle: "Contatta",
     contactWith: "Messaggio per: {name}",
     fields: {

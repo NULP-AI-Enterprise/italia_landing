@@ -59,12 +59,10 @@
   color: var(--ink);
 }
 
-/* Justified as in the design; hyphenation keeps word gaps even */
-@media (min-width: 1024px) {
-  .text {
-    text-align: justify;
-    hyphens: auto;
-  }
+/* Justified on every screen; hyphenation keeps word gaps even on phones */
+.text {
+  text-align: justify;
+  hyphens: auto;
 }
 
 .more {

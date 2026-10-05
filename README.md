@@ -118,7 +118,7 @@ Checked with axe-core on every page in both languages: no violations. Built in:
 - Forms: visible labels, required fields marked in text, inline errors linked with `aria-describedby`, an error summary, and focus management in the dialog (focus goes to the first field and returns to the button on close).
 - Link-preview cards: the title is the link and stretches over the card, so a screen reader hears only the name and "opens in a new tab".
 - Animations respect `prefers-reduced-motion`; revealed content stays readable to screen readers and appears as soon as it receives keyboard focus.
-- Long text is justified only on wide screens (as in the design) with hyphenation, and left-aligned on phones.
+- Long text is justified on every screen (the client's request), with hyphenation so word gaps stay even on phones.
 
 ## Sources and licences
 

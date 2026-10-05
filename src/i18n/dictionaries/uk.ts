@@ -130,7 +130,7 @@ export const uk = {
     telegram: "Telegram",
   },
   form: {
-    joinTitle: "Стати учасником",
+    joinTitle: "Приєднатися",
     contactTitle: "Зв’язатися",
     contactWith: "Повідомлення для: {name}",
     fields: {

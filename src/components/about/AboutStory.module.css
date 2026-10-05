@@ -39,13 +39,11 @@
   margin-top: clamp(18px, 1.8vw, 28px);
 }
 
-/* Justified as in the design, only where lines are long enough */
-@media (min-width: 1024px) {
-  .lead,
-  .text {
-    text-align: justify;
-    hyphens: auto;
-  }
+/* Justified on every screen; hyphenation keeps word gaps even on phones */
+.lead,
+.text {
+  text-align: justify;
+  hyphens: auto;
 }
 
 /* Photo across the whole width */

@@ -75,12 +75,11 @@
   max-width: none;
 }
 
-@media (min-width: 1024px) {
-  .lead,
-  .body p {
-    text-align: justify;
-    hyphens: auto;
-  }
+/* Justified on every screen; hyphenation keeps word gaps even on phones */
+.lead,
+.body p {
+  text-align: justify;
+  hyphens: auto;
 }
 
 .link {

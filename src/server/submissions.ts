@@ -16,6 +16,19 @@ export async function createSubmission(values: NewSubmission) {
   return row.id;
 }
 
+/** Records what happened to the e-mail about a request. */
+export async function markNotified(id: string, result: { sent: true; to: string } | { sent: false; reason: string }) {
+  const db = await getDb();
+  await db
+    .update(schema.submissions)
+    .set(
+      result.sent
+        ? { notifiedAt: new Date(), notifiedTo: result.to, notifyError: null }
+        : { notifiedAt: null, notifiedTo: null, notifyError: result.reason },
+    )
+    .where(eq(schema.submissions.id, id));
+}
+
 /** How many requests came from this sender since the given moment (rate limiting). */
 export async function countRecentFromSender(ipHash: string, since: Date) {
   const db = await getDb();

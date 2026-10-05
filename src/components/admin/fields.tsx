@@ -237,6 +237,31 @@ function LocalizedField({ schema, path, value, onChange, ctx }: FieldProps) {
 
 type MediaValue = { src: string; width: number; height: number; alt?: { uk: string; it: string } };
 
+const UPLOAD_LIMIT = 3.5 * 1024 * 1024;
+const MAX_SIDE = 2400;
+
+/**
+ * Large photos are made smaller in the browser before upload: hosting platforms
+ * such as Vercel refuse request bodies over 4.5 MB.
+ */
+async function shrinkForUpload(file: File): Promise<File> {
+  if (file.size <= UPLOAD_LIMIT || file.type === "image/gif") return file;
+  const bitmap = await createImageBitmap(file);
+  const scale = Math.min(1, MAX_SIDE / Math.max(bitmap.width, bitmap.height));
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.round(bitmap.width * scale);
+  canvas.height = Math.round(bitmap.height * scale);
+  canvas.getContext("2d")?.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+  bitmap.close();
+  for (const quality of [0.88, 0.78, 0.65]) {
+    const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/webp", quality));
+    if (blob && blob.size <= UPLOAD_LIMIT) {
+      return new File([blob], file.name.replace(/\.[^.]+$/, "") + ".webp", { type: "image/webp" });
+    }
+  }
+  throw new Error("Фото завелике навіть після стиснення. Спробуйте менше зображення.");
+}
+
 function MediaField({ schema, path, value, onChange, ctx }: FieldProps) {
   const id = fieldDomId(pathKey(path));
   const text = labelOf(path);
@@ -251,9 +276,9 @@ function MediaField({ schema, path, value, onChange, ctx }: FieldProps) {
 
   async function upload(file: File) {
     setState({ busy: true });
-    const body = new FormData();
-    body.set("file", file);
     try {
+      const body = new FormData();
+      body.set("file", await shrinkForUpload(file));
       const response = await fetch("/admin/api/upload", { method: "POST", body });
       const result = (await response.json()) as { src?: string; width?: number; height?: number; error?: string };
       if (!response.ok || !result.src) throw new Error(result.error ?? "Не вдалося завантажити файл.");
@@ -322,7 +347,7 @@ function MediaField({ schema, path, value, onChange, ctx }: FieldProps) {
               {media!.width} × {media!.height} px
             </p>
           )}
-          <p className="cms-hint">JPG, PNG, WebP до 15 МБ. Велике фото зменшиться до 2400 px.</p>
+          <p className="cms-hint">JPG, PNG або WebP. Велике фото зменшиться до 2400 px автоматично.</p>
           <div role="status" className="cms-error">
             {state.error}
           </div>

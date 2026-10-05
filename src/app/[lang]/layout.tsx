@@ -36,8 +36,14 @@ export const revalidate = 3600;
 export async function generateMetadata(): Promise<Metadata> {
   const dict = await getDictionary();
   return {
-    // Read at request time: pages render on the server, so the deployment sets it (k8s/deployment.yaml).
-    metadataBase: new URL(process.env.SITE_URL ?? "http://localhost:3000"),
+    // Read at request time: pages render on the server, so the deployment sets it
+    // (k8s/deployment.yaml); on Vercel the production domain is known automatically.
+    metadataBase: new URL(
+      process.env.SITE_URL ??
+        (process.env.VERCEL_PROJECT_PRODUCTION_URL
+          ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+          : "http://localhost:3000"),
+    ),
     title: {
       default: dict.siteName,
       template: `%s — ${dict.siteName}`,

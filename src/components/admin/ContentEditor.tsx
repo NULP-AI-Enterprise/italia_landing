@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { unstable_isUnrecognizedActionError, useRouter } from "next/navigation";
 import { useEffect, useId, useRef, useState, useTransition } from "react";
 import type { z } from "zod";
 import { deleteItemAction, saveItemAction, savePageAction, type SaveResult } from "@/app/admin/content/actions";
@@ -34,7 +34,11 @@ type ContentEditorProps = Target & {
   itemLabel?: string;
 };
 
-type Status = { kind: "idle" } | { kind: "saved" } | { kind: "error"; message: string };
+type Status =
+  | { kind: "idle" }
+  | { kind: "saved" }
+  | { kind: "restored" }
+  | { kind: "error"; message: string; reload?: boolean };
 type Group = { title?: string; keys: string[]; collapsed?: boolean };
 
 const LANGUAGE_MODES: { value: Language[]; label: string }[] = [
@@ -78,6 +82,16 @@ function groupFields(schema: z.ZodType, idKey: string | undefined, isNew: boolea
   return groups;
 }
 
+/** The unsaved form value kept in this browser tab, if it is valid JSON. */
+function readDraft(key: string) {
+  try {
+    const draft = sessionStorage.getItem(key);
+    return draft && JSON.parse(draft) ? draft : null;
+  } catch {
+    return null;
+  }
+}
+
 /** Form for one content document or collection item, generated from its schema. */
 export function ContentEditor(props: ContentEditorProps) {
   const router = useRouter();
@@ -98,11 +112,48 @@ export function ContentEditor(props: ContentEditorProps) {
   const summaryRef = useRef<HTMLDivElement>(null);
   const savedRef = useRef<HTMLParagraphElement>(null);
   const saveRef = useRef<() => void>(() => {});
+  const reloadingRef = useRef(false);
+
+  // Unsaved changes are kept in this browser tab, so a failed save (the site was being
+  // updated, the connection dropped) or a reload does not lose what was typed.
+  const draftKey = `cms-draft:${props.mode === "page" ? `page:${props.page}` : `${props.collection}:${props.originalId ?? "new"}`}`;
+  useEffect(() => {
+    const draft = readDraft(draftKey);
+    if (!draft || draft === JSON.stringify(props.initial)) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- sessionStorage is readable only after hydration
+    setValue(JSON.parse(draft));
+    setDirty(true);
+    setStatus({ kind: "restored" });
+  }, [draftKey, props.initial]);
+  useEffect(() => {
+    if (!dirty) return;
+    try {
+      sessionStorage.setItem(draftKey, JSON.stringify(value));
+    } catch {}
+  }, [dirty, value, draftKey]);
+  const forgetDraft = () => {
+    try {
+      sessionStorage.removeItem(draftKey);
+    } catch {}
+  };
+  const discardDraft = () => {
+    forgetDraft();
+    setValue(props.initial as Record<string, unknown>);
+    setDirty(false);
+    setErrors([]);
+    setStatus({ kind: "idle" });
+  };
+  const reload = () => {
+    reloadingRef.current = true;
+    window.location.reload();
+  };
 
   // Warn before leaving with unsaved changes.
   useEffect(() => {
     if (!dirty) return;
-    const warn = (event: BeforeUnloadEvent) => event.preventDefault();
+    const warn = (event: BeforeUnloadEvent) => {
+      if (!reloadingRef.current) event.preventDefault();
+    };
     window.addEventListener("beforeunload", warn);
     return () => window.removeEventListener("beforeunload", warn);
   }, [dirty]);
@@ -128,13 +179,13 @@ export function ContentEditor(props: ContentEditorProps) {
     }
     setValue(next);
     setDirty(true);
-    if (status.kind === "saved") setStatus({ kind: "idle" });
+    if (status.kind === "saved" || status.kind === "restored") setStatus({ kind: "idle" });
   };
   const setField = (key: string, fieldValue: unknown) => change({ ...value, [key]: fieldValue });
 
-  const showErrors = (list: FieldError[], message: string) => {
+  const showErrors = (list: FieldError[], message: string, reload?: boolean) => {
     setErrors(list);
-    setStatus({ kind: "error", message });
+    setStatus({ kind: "error", message, reload });
     requestAnimationFrame(() => summaryRef.current?.focus());
   };
 
@@ -154,13 +205,21 @@ export function ContentEditor(props: ContentEditorProps) {
           props.mode === "page"
             ? await savePageAction(props.page, json)
             : await saveItemAction(props.collection, props.originalId, json);
-      } catch {
-        result = { ok: false, message: "Не вдалося зберегти. Перевірте з’єднання і спробуйте ще раз.", errors: [] };
+      } catch (error) {
+        showErrors(
+          [],
+          unstable_isUnrecognizedActionError(error)
+            ? "Не збережено: поки сторінка була відкрита, сайт оновився. Ваші зміни не загубились. Натисніть «Оновити сторінку», вони повернуться у форму, і збережіть ще раз."
+            : "Не збережено: сервер не відповів. Можливо, сайт саме оновлюється, це до 2 хвилин. Ваші зміни не загубились: спробуйте зберегти ще раз трохи згодом.",
+          true,
+        );
+        return;
       }
       if (!result.ok) {
         showErrors(result.errors, result.message);
         return;
       }
+      forgetDraft();
       setErrors([]);
       setDirty(false);
       if (isNew && props.mode === "item" && result.id) {
@@ -203,9 +262,24 @@ export function ContentEditor(props: ContentEditorProps) {
             Збережено. Сайт оновлено.
           </p>
         )}
+        {status.kind === "restored" && (
+          <div className="admin-notice ed-restored" role="status">
+            <p>
+              Повернули зміни, які ще не були збережені. Перевірте їх і натисніть «{isNew ? "Створити" : "Зберегти"}».
+            </p>
+            <button type="button" className="adm-button adm-button-quiet" onClick={discardDraft}>
+              Відкинути ці зміни
+            </button>
+          </div>
+        )}
         {status.kind === "error" && (
           <div className="admin-alert cms-summary" role="alert" tabIndex={-1} ref={summaryRef}>
             <p>{status.message}</p>
+            {status.reload && (
+              <button type="button" className="adm-button" onClick={reload}>
+                Оновити сторінку
+              </button>
+            )}
             {errors.length > 0 && (
               <ul>
                 {errors.map((error) => (

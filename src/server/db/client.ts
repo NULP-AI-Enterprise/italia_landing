@@ -27,7 +27,10 @@ async function connect(): Promise<Database> {
       import("drizzle-orm/postgres-js"),
       import("postgres"),
     ]);
-    return drizzle(postgres(url, { max: 5 }), { schema, casing: "snake_case" }) as unknown as Database;
+    // Serverless (Vercel): one connection per function instance, and no prepared
+    // statements so pooled connection strings (Neon, Supabase, PgBouncer) work.
+    const client = postgres(url, { max: process.env.VERCEL ? 1 : 5, prepare: false });
+    return drizzle(client, { schema, casing: "snake_case" }) as unknown as Database;
   }
 
   if (process.env.NODE_ENV === "production") {

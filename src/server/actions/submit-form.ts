@@ -2,10 +2,12 @@
 
 import { createHash } from "node:crypto";
 import { headers } from "next/headers";
+import { after } from "next/server";
 import { getTeamMember } from "@/content/repository";
 import { formFields, submissionFormSchema, type FormErrorCode, type FormField, type FormState } from "@/server/forms/schema";
 import { turnstileSecret } from "@/server/forms/turnstile";
-import { countRecentFromSender, createSubmission } from "@/server/submissions";
+import { sendRequestMail } from "@/server/mail";
+import { countRecentFromSender, createSubmission, markNotified } from "@/server/submissions";
 
 const RATE_LIMIT = { max: 5, windowMinutes: 10 };
 /** Forms sent faster than this after opening are treated as bots. */
@@ -74,7 +76,7 @@ export async function submitForm(_previous: FormState, formData: FormData): Prom
     const recipient =
       data.kind === "contact" && data.recipientId ? await getTeamMember(data.recipientId, "uk") : null;
 
-    await createSubmission({
+    const id = await createSubmission({
       kind: data.kind,
       contactName: data.contactName,
       companyName: data.companyName,
@@ -86,6 +88,21 @@ export async function submitForm(_previous: FormState, formData: FormData): Prom
       locale: data.locale,
       ipHash,
       userAgent: requestHeaders.get("user-agent")?.slice(0, 300) ?? null,
+    });
+
+    // The e-mail goes out after the answer, so the visitor does not wait for the mail server.
+    after(async () => {
+      const result = await sendRequestMail({
+        kind: data.kind,
+        contactName: data.contactName,
+        companyName: data.companyName,
+        phone: data.phone,
+        email: data.email,
+        message: data.message,
+        locale: data.locale,
+        recipient: recipient ? { name: recipient.name, email: recipient.email } : null,
+      });
+      await markNotified(id, result);
     });
     return { status: "success" };
   } catch (error) {

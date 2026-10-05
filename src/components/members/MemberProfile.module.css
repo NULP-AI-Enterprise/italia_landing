@@ -6,7 +6,7 @@
 
 .card {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 1fr);
   gap: 20px;
   padding: 20px;
   background: #00004a;
@@ -45,6 +45,8 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  /* Room for the dialog's close button in the top right corner */
+  padding-right: 52px;
 }
 
 .logo {
@@ -60,15 +62,17 @@
   line-height: 1.2;
 }
 
+/* Rounded corners rather than a pill, so it still looks right on two lines */
 .programBadge {
   width: fit-content;
-  margin-top: 6px;
-  padding: 2px 10px;
-  border-radius: 999px;
+  max-width: 100%;
+  padding: 4px 10px;
+  border-radius: 6px;
   background: var(--orange);
   color: var(--navy-deep);
   font-size: 13px;
   font-weight: 700;
+  line-height: 1.35;
 }
 
 .tagline {
@@ -111,25 +115,6 @@
   outline-color: #ffd79a;
 }
 
-.badge {
-  display: grid;
-  justify-items: center;
-  align-content: center;
-  gap: 10px;
-}
-
-/* Small Italian flags above and below the emblem, as in the design */
-.flag {
-  width: 30px;
-  height: 12px;
-  background: linear-gradient(90deg, var(--it-green) 0 33.33%, #fff 33.33% 66.66%, var(--it-red) 66.66%);
-}
-
-.emblem {
-  width: clamp(90px, 9vw, 120px);
-  height: auto;
-}
-
 .panel {
   min-height: 150px;
   padding: 16px 20px;
@@ -152,12 +137,50 @@
   color: var(--on-dark-soft);
 }
 
+/* Phones: photo and company side by side, everything else from the left edge under them */
 @media (max-width: 640px) {
   .card {
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: 88px minmax(0, 1fr);
+    gap: 16px 14px;
+    padding: 16px;
   }
 
-  .badge {
-    display: none;
+  .photo {
+    width: 88px;
+  }
+
+  .photoPlaceholder {
+    font-size: 36px;
+  }
+
+  .info {
+    display: contents;
+  }
+
+  .company {
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: center;
+    gap: 8px;
+    padding-right: 0;
+  }
+
+  /* The name is level with the close button only when there is no logo above it */
+  .company:not(:has(.logo)) {
+    padding-right: 44px;
+  }
+
+  .name {
+    font-size: 18px;
+  }
+
+  .programBadge,
+  .facts,
+  .info > .pending {
+    grid-column: 1 / -1;
+  }
+
+  .panel {
+    padding-inline: 16px;
   }
 }

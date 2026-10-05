@@ -1012,6 +1012,22 @@ body.admin {
   color: inherit;
 }
 
+.cms-summary > .adm-button {
+  margin-top: 10px;
+}
+
+/* Unsaved changes brought back from this browser tab */
+.ed-restored {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  border-left-color: var(--orange);
+  background: #fff4e5;
+  color: #6b3a00;
+}
+
 .cms-fields {
   display: grid;
   gap: 18px;

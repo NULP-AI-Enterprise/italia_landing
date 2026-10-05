@@ -30,6 +30,10 @@ export const submissions = pgTable(
     status: submissionStatus().notNull().default("new"),
     /** Internal note visible only in the admin panel. */
     note: text().notNull().default(""),
+    /** E-mail about the request: when it was sent and to whom, or why it failed. */
+    notifiedAt: timestamp({ withTimezone: true }),
+    notifiedTo: text(),
+    notifyError: text(),
     /** Salted hash of the sender IP, used for rate limiting only. */
     ipHash: text(),
     userAgent: text(),

@@ -22,6 +22,8 @@ Copy `.env.example` to `.env.local` and fill it in. Locally `DATABASE_URL` can s
 | `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `ADMIN_NAME` | first start | Creates the first administrator when the table is empty; changing them later does nothing |
 | `IP_HASH_SALT` | production | Salt for hashing visitor IPs (rate limit); IPs are never stored in clear |
 | `TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY` | optional | Cloudflare Turnstile captcha on the forms; on only when both are set |
+| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM` | optional | Sends an e-mail for every request. “Зв’язатися” goes to that team member’s e-mail, “Приєднатися” to `MAIL_TO` |
+| `MAIL_TO`, `MAIL_BCC` | optional | Association inbox for join requests (and contacts of people without an e-mail); a copy of every request |
 
 In Kubernetes these come from the secret `italia-landing-secret` (`envFrom` in `k8s/deployment.yaml`, optional so the pod still starts without it).
 
@@ -93,6 +95,16 @@ The editor: fields in cards (rarely used ones such as SEO and the id folded), Uk
 
 Interface strings (buttons, form labels, screen-reader texts) and the menu names stay in `src/i18n/dictionaries/*.ts`: they belong to the code, and the page names follow the design.
 
+## Deploying to Vercel
+
+The same code runs on Vercel; Docker / Kubernetes (`k8s/`) keep working too.
+
+1. **Database.** Vercel has no disk, so PostgreSQL must be hosted: Neon or Supabase (Vercel Marketplace), or any Postgres reachable from the internet. Use the pooled connection string as `DATABASE_URL`; the client uses one connection per function and no prepared statements, which pooled connections need.
+2. **Environment variables** (Project → Settings → Environment Variables): `DATABASE_URL`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `ADMIN_NAME`, `IP_HASH_SALT`, and optionally `SITE_URL` (defaults to the production domain Vercel assigns), the `SMTP_*` / `MAIL_*` and `TURNSTILE_*` keys.
+3. **Build.** Vercel runs `npm run vercel-build`: it applies the SQL migrations (`scripts/migrate.mjs`), then builds. The migration files are also shipped with every server function, so the app can check them at runtime.
+4. **What carries over.** Edited content, uploaded images, administrators and requests all live in PostgreSQL. To move from the Kubernetes database, dump and restore it into the new one (`pg_dump` / `pg_restore`).
+5. **Limits.** Vercel refuses request bodies over 4.5 MB, so the admin panel shrinks large photos in the browser before uploading. Saving in the admin panel refreshes the cached pages on every Vercel instance (`revalidatePath`).
+
 ## Forms and CRM
 
 Every "Приєднатися" button opens the join form in a dialog; "Зв’язатися" on the team page opens the same form addressed to that person. Both post to the server action `submitForm`:
@@ -100,6 +112,7 @@ Every "Приєднатися" button opens the join form in a dialog; "Зв’�
 1. Spam checks: a hidden honeypot field, a minimum fill time, an optional Turnstile captcha, and at most 5 submissions per 10 minutes from one (hashed) IP.
 2. Validation with zod; errors come back per field and are shown inline, focus moves to the first invalid field.
 3. The submission is stored in the `submissions` table with its kind (join / contact), the addressee, the page language and status `new`.
+4. Right after the answer (`after()`), an e-mail goes out over SMTP: “Зв’язатися” to the team member’s e-mail with the visitor in Reply-To, “Приєднатися” to `MAIL_TO`. The request page in the CRM shows whether and where it was sent. Without SMTP settings nothing is sent and the request is only in the CRM.
 
 The CRM at `/admin` (sign in with an administrator account) lists submissions with status tabs and counts, text search and a kind filter. A submission page shows the full message, lets you change the status (new, in progress, done, spam), keep an internal note, or delete it.
 

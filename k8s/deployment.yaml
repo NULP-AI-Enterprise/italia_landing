@@ -8,7 +8,12 @@ metadata:
 spec:
   replicas: 1
   strategy:
-    type: Recreate
+    # The new pod starts and passes its health check before the old one stops, so
+    # the site and the admin stay up during a deploy (no "could not save" window).
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   selector:
     matchLabels:
       app: italia-landing

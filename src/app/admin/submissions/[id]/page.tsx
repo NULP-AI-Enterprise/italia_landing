@@ -64,6 +64,16 @@ export default async function SubmissionPage({ params, searchParams }: PageProps
             <dt>Мова сайту</dt>
             <dd>{submission.locale === "it" ? "Італійська" : "Українська"}</dd>
           </div>
+          <div>
+            <dt>Лист</dt>
+            <dd>
+              {submission.notifiedAt
+                ? `Надіслано ${formatDateTime(submission.notifiedAt)} на ${submission.notifiedTo}`
+                : submission.notifyError
+                  ? `Не надіслано: ${submission.notifyError}`
+                  : "Ще надсилається або пошту не налаштовано"}
+            </dd>
+          </div>
         </dl>
 
         <h2>Повідомлення</h2>

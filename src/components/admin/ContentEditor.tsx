@@ -117,7 +117,11 @@ export function ContentEditor(props: ContentEditorProps) {
   // Unsaved changes are kept in this browser tab, so a failed save (the site was being
   // updated, the connection dropped) or a reload does not lose what was typed.
   const draftKey = `cms-draft:${props.mode === "page" ? `page:${props.page}` : `${props.collection}:${props.originalId ?? "new"}`}`;
+  const draftCheckedRef = useRef(false);
   useEffect(() => {
+    // Only when the editor opens, not when a save refreshes `initial`
+    if (draftCheckedRef.current) return;
+    draftCheckedRef.current = true;
     const draft = readDraft(draftKey);
     if (!draft || draft === JSON.stringify(props.initial)) return;
     // eslint-disable-next-line react-hooks/set-state-in-effect -- sessionStorage is readable only after hydration

@@ -18,14 +18,15 @@ Copy `.env.example` to `.env.local` and fill it in. Locally `DATABASE_URL` can s
 | Variable | Needed | Purpose |
 |---|---|---|
 | `SITE_URL` | production | Absolute canonical and hreflang links; read at request time (set in `k8s/deployment.yaml`) |
-| `DATABASE_URL` | production | PostgreSQL connection string. The site refuses to start the forms in production without it |
+| `DATABASE_URL` | production | PostgreSQL connection string (on Supabase: transaction pooler, port 6543). The site refuses to start the forms in production without it |
+| `DATABASE_URL_UNPOOLED` | optional | Direct or session-pooler connection for migrations (`npm run db:migrate`, Vercel build); defaults to `DATABASE_URL` |
 | `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `ADMIN_NAME` | first start | Creates the first administrator when the table is empty; changing them later does nothing |
 | `IP_HASH_SALT` | production | Salt for hashing visitor IPs (rate limit); IPs are never stored in clear |
 | `TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY` | optional | Cloudflare Turnstile captcha on the forms; on only when both are set |
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM` | optional | Sends an e-mail for every request. “Зв’язатися” goes to that team member’s e-mail, “Приєднатися” to `MAIL_TO` |
 | `MAIL_TO`, `MAIL_BCC` | optional | Association inbox for join requests (and contacts of people without an e-mail); a copy of every request |
 
-In Kubernetes these come from the secret `italia-landing-secret` (`envFrom` in `k8s/deployment.yaml`, optional so the pod still starts without it).
+In Kubernetes these come from the secret `italia-landing-secret` (`envFrom` in `k8s/deployment.yaml`, optional so the pod still starts without it). On Vercel they are project environment variables (see [DEPLOY-VERCEL.md](DEPLOY-VERCEL.md)).
 
 ## Pages
 
@@ -97,13 +98,14 @@ Interface strings (buttons, form labels, screen-reader texts) and the menu names
 
 ## Deploying to Vercel
 
-The same code runs on Vercel; Docker / Kubernetes (`k8s/`) keep working too.
+The same code runs on Vercel with Supabase PostgreSQL; Docker / Kubernetes (`k8s/`) keep working too. The step-by-step move, including the data transfer from the Kubernetes database, mail, DNS and every variable, is in [DEPLOY-VERCEL.md](DEPLOY-VERCEL.md) (Ukrainian).
 
-1. **Database.** Vercel has no disk, so PostgreSQL must be hosted: Neon or Supabase (Vercel Marketplace), or any Postgres reachable from the internet. Use the pooled connection string as `DATABASE_URL`; the client uses one connection per function and no prepared statements, which pooled connections need.
-2. **Environment variables** (Project → Settings → Environment Variables): `DATABASE_URL`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `ADMIN_NAME`, `IP_HASH_SALT`, and optionally `SITE_URL` (defaults to the production domain Vercel assigns), the `SMTP_*` / `MAIL_*` and `TURNSTILE_*` keys.
-3. **Build.** Vercel runs `npm run vercel-build`: it applies the SQL migrations (`scripts/migrate.mjs`), then builds. The migration files are also shipped with every server function, so the app can check them at runtime.
-4. **What carries over.** Edited content, uploaded images, administrators and requests all live in PostgreSQL. To move from the Kubernetes database, dump and restore it into the new one (`pg_dump` / `pg_restore`).
-5. **Limits.** Vercel refuses request bodies over 4.5 MB, so the admin panel shrinks large photos in the browser before uploading. Saving in the admin panel refreshes the cached pages on every Vercel instance (`revalidatePath`).
+1. **Database.** Vercel has no disk, so PostgreSQL must be hosted. `DATABASE_URL` is the pooled connection string (Supabase transaction pooler, port 6543); `DATABASE_URL_UNPOOLED` (session pooler, port 5432) is used for migrations. The Supabase integration's `POSTGRES_URL` / `POSTGRES_URL_NON_POOLING` work as well; driver hints such as `?supa=` are stripped (`src/server/db/url.ts`). The client uses one connection per function and no prepared statements.
+2. **Security.** Every table has row-level security on and no policies (`drizzle/0003_enable_rls.sql`), so Supabase's public Data API sees nothing; the site connects as the tables' owner.
+3. **Environment variables** (Project → Settings → Environment Variables, Production only): see the table in [Run](#run). Preview deployments without them show the bundled content; previews never migrate the database or merge bundled content into it.
+4. **Build.** Vercel runs `npm run vercel-build`: it applies the SQL migrations (`scripts/migrate.mjs`), then builds. The migration files are also shipped with every server function, so the app can check them at runtime.
+5. **`vercel.json`.** Functions run in `fra1` (next to Supabase `eu-central-1`); a daily cron calls `/api/health/db`, which also keeps a free Supabase project from pausing.
+6. **Limits.** Vercel refuses request bodies over 4.5 MB, so the admin panel shrinks large photos in the browser before uploading. Saving in the admin panel refreshes the cached pages on every Vercel instance (`revalidatePath`).
 
 ## Forms and CRM
 

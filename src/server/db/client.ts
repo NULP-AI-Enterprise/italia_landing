@@ -1,12 +1,13 @@
 /**
  * Database access (server only).
  *
- * - Production and staging: PostgreSQL from DATABASE_URL (k8s secret).
+ * - Production and staging: PostgreSQL from DATABASE_URL (k8s secret, Vercel
+ *   environment variable or POSTGRES_URL from the Supabase integration; see url.ts).
  * - Local development without DATABASE_URL: embedded PGlite stored in .data/,
  *   the same SQL dialect and the same migrations.
  *
- * Migrations from /drizzle run on first use. If ADMIN_EMAIL and ADMIN_PASSWORD
- * are set and there is no administrator yet, the first one is created.
+ * Migrations from /drizzle run on first use (not in Vercel previews). If ADMIN_EMAIL
+ * and ADMIN_PASSWORD are set and there is no administrator yet, the first one is created.
  */
 import { mkdirSync, readFileSync } from "node:fs";
 import path from "node:path";
@@ -14,13 +15,14 @@ import { count } from "drizzle-orm";
 import type { PgDatabase, PgQueryResultHKT } from "drizzle-orm/pg-core";
 import { hashPassword } from "@/server/auth/password";
 import * as schema from "./schema";
+import { databaseUrl, isVercelPreview } from "./url";
 
 export type Database = PgDatabase<PgQueryResultHKT, typeof schema>;
 
 const migrationsFolder = path.join(process.cwd(), "drizzle");
 
 async function connect(): Promise<Database> {
-  const url = process.env.DATABASE_URL;
+  const url = databaseUrl();
 
   if (url) {
     const [{ drizzle }, { default: postgres }] = await Promise.all([
@@ -44,7 +46,8 @@ async function connect(): Promise<Database> {
 }
 
 async function migrate(db: Database) {
-  if (process.env.DATABASE_URL) {
+  if (isVercelPreview()) return;
+  if (databaseUrl()) {
     const { migrate: run } = await import("drizzle-orm/postgres-js/migrator");
     await run(db as unknown as Parameters<typeof run>[0], { migrationsFolder });
   } else {

@@ -1,6 +1,10 @@
 /**
  * Database schema (PostgreSQL). Column names are snake_case in the database
  * (see `casing` in client.ts and drizzle.config.ts).
+ *
+ * Every table has row-level security on and no policies: on Supabase the public
+ * Data API (anon and authenticated roles) can read nothing. The site connects as
+ * the tables' owner, which RLS does not restrict.
  */
 import { customType, index, integer, jsonb, pgEnum, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
@@ -44,7 +48,7 @@ export const submissions = pgTable(
     index("submissions_created_at_idx").on(table.createdAt),
     index("submissions_ip_hash_idx").on(table.ipHash, table.createdAt),
   ],
-);
+).enableRLS();
 
 export const adminUsers = pgTable("admin_users", {
   id: uuid().primaryKey().defaultRandom(),
@@ -52,7 +56,7 @@ export const adminUsers = pgTable("admin_users", {
   name: text().notNull(),
   passwordHash: text().notNull(),
   createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
-});
+}).enableRLS();
 
 export const adminSessions = pgTable("admin_sessions", {
   /** SHA-256 of the session token; the token itself lives only in the cookie. */
@@ -62,7 +66,7 @@ export const adminSessions = pgTable("admin_sessions", {
     .references(() => adminUsers.id, { onDelete: "cascade" }),
   expiresAt: timestamp({ withTimezone: true }).notNull(),
   createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
-});
+}).enableRLS();
 
 /**
  * Editable site content, one row per document of src/content/registry.ts
@@ -74,7 +78,7 @@ export const contentDocuments = pgTable("content_documents", {
   data: jsonb().notNull(),
   updatedAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
   updatedBy: uuid().references(() => adminUsers.id, { onDelete: "set null" }),
-});
+}).enableRLS();
 
 /** Images uploaded in the admin panel, served from /media/uploads/<id>.<ext>. */
 export const mediaFiles = pgTable("media_files", {
@@ -87,7 +91,7 @@ export const mediaFiles = pgTable("media_files", {
   data: bytea().notNull(),
   createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
   createdBy: uuid().references(() => adminUsers.id, { onDelete: "set null" }),
-});
+}).enableRLS();
 
 export type Submission = typeof submissions.$inferSelect;
 export type SubmissionStatus = (typeof submissionStatus.enumValues)[number];

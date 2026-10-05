@@ -10,6 +10,7 @@ import { inArray, sql } from "drizzle-orm";
 import { cache } from "react";
 import { z } from "zod";
 import { getDb, schema } from "@/server/db/client";
+import { databaseUrl, isVercelPreview } from "@/server/db/url";
 import { collectionDef, collections, pageDocumentKey, pages, type CollectionKey, type PageKey } from "./registry";
 import { seedCollections, seedPages } from "./seed";
 
@@ -149,8 +150,12 @@ const MIGRATIONS_KEY = "content-migrations";
 
 let bundledSync: Promise<void> | undefined;
 
-/** Once per server process: merge bundled additions into collections stored in the database. */
+/**
+ * Once per server process: merge bundled additions into collections stored in the database.
+ * Not in Vercel previews: a branch's content must not reach the production database.
+ */
 function syncBundledContent() {
+  if (isVercelPreview()) return Promise.resolve();
   bundledSync ??= (async () => {
     const db = await getDb();
     const keys = Object.keys(collections) as CollectionKey[];
@@ -241,7 +246,7 @@ export async function rememberBundledIfNew(key: CollectionKey) {
 
 async function readStoredDocuments(): Promise<Map<string, unknown>> {
   // A production build has no database; it only needs the bundled content.
-  if (!process.env.DATABASE_URL && process.env.NODE_ENV === "production") return new Map();
+  if (!databaseUrl() && process.env.NODE_ENV === "production") return new Map();
   try {
     await syncBundledContent();
     const db = await getDb();

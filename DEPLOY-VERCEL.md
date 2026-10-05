@@ -1,6 +1,6 @@
 # Переїзд на Vercel + Supabase
 
-Покрокова інструкція: як перенести сайт `italia.thesis-i.com` з Kubernetes на Vercel (хостинг) і Supabase (PostgreSQL), разом з усім, що зібрано в адмінці: тексти, учасники, фото, заявки, адміністратори.
+Покрокова інструкція: як перенести сайт з Kubernetes (`italia.thesis-i.com`) на Vercel (хостинг) і Supabase (PostgreSQL), разом з усім, що зібрано в адмінці: тексти, учасники, фото, заявки, адміністратори. Основний домен нового сайту: **`https://www.madeinukraine.it`** (замість старого WordPress).
 
 Код уже готовий до переїзду. Нижче лише те, що треба зробити руками в панелях Supabase, Vercel, пошти та DNS. Розраховано на 1–2 години, з них 15–30 хвилин адмінку не можна чіпати.
 
@@ -17,7 +17,7 @@
 6. [Капча Turnstile](#6-капча-turnstile)
 7. [Vercel: проєкт і змінні](#7-vercel-проєкт-і-змінні)
 8. [Перевірка на тимчасовій адресі](#8-перевірка-на-тимчасовій-адресі)
-9. [Домен italia.thesis-i.com](#9-домен-italiathesis-icom)
+9. [Домени і пошук Google](#9-домени-і-пошук-google)
 10. [Після переїзду](#10-після-переїзду)
 11. [Довідник змінних оточення](#11-довідник-змінних-оточення)
 12. [Як тепер працюють деплої](#12-як-тепер-працюють-деплої)
@@ -63,7 +63,7 @@
 | Акаунт **Supabase** | база даних | — |
 | `kubectl` з доступом до неймспейсу `italia-landing` | вивантажити поточні дані | той, хто має доступ до кластера |
 | `psql` 16+ на своєму комп'ютері | завантажити дані в Supabase | див. нижче |
-| Доступ до DNS домену `thesis-i.com` | перемкнути `italia.thesis-i.com` | власник домену |
+| Доступ до DNS доменів `madeinukraine.it` і `thesis-i.com` | основний домен; переадресація `italia.thesis-i.com` | власники доменів |
 | Поштовий сервіс: **Resend** (рекомендовано) або SMTP наявної пошти + доступ до DNS домену відправника | листи про заявки | — |
 | Cloudflare (якщо капча Turnstile уже ввімкнена) | додати новий хост | — |
 
@@ -142,6 +142,7 @@ postgresql://postgres.abcdefghijklmnop:ПАРОЛЬ@aws-0-eu-central-1.pooler.su
 
 - Замініть `[YOUR-PASSWORD]` на пароль з 3.1 і **допишіть у кінці `?sslmode=require`**.
 - Користувач для пулера має вигляд `postgres.<project-ref>`, з крапкою. Просто `postgres` не підійде.
+- Хост пулера буває `aws-0-…` або `aws-1-…` (новіші проєкти), беріть рівно той, що в діалозі Connect. Наш проєкт: `aws-1-eu-central-1.pooler.supabase.com`.
 - **Direct connection** (`db.<ref>.supabase.co`) не використовуйте: він працює лише через IPv6, а Vercel і більшість домашніх мереж його не мають.
 
 Збережіть обидва рядки в локальний файл, який не потрапить у git (`.env*` уже в `.gitignore`):
@@ -297,7 +298,7 @@ MAIL_FROM=Made in Ukraine for Italy <site@ваш-домен>
 
 Якщо `TURNSTILE_SITE_KEY` і `TURNSTILE_SECRET_KEY` уже є в секреті Kubernetes:
 1. Cloudflare → **Turnstile** → ваш віджет → **Hostname Management**.
-2. Додайте `<проєкт>.vercel.app`, щоб працювало на тимчасовій адресі. `italia.thesis-i.com` уже там.
+2. Додайте `www.madeinukraine.it`, `madeinukraine.it` і `<проєкт>.vercel.app`.
 3. Ключі ті самі, перенесіть їх у Vercel.
 
 Якщо капчі ще немає, можна пропустити: форма працює й без неї (є обмеження частоти за IP). Капча вмикається, лише коли задано обидва ключі.
@@ -324,7 +325,7 @@ MAIL_FROM=Made in Ukraine for Italy <site@ваш-домен>
 ```
 DATABASE_URL=postgresql://postgres.REF:PASSWORD@aws-0-eu-central-1.pooler.supabase.com:6543/postgres?sslmode=require
 DATABASE_URL_UNPOOLED=postgresql://postgres.REF:PASSWORD@aws-0-eu-central-1.pooler.supabase.com:5432/postgres?sslmode=require
-SITE_URL=https://italia.thesis-i.com
+SITE_URL=https://www.madeinukraine.it
 ADMIN_EMAIL=
 ADMIN_PASSWORD=
 ADMIN_NAME=Адміністратор
@@ -385,20 +386,56 @@ Vercel дасть адресу на зразок `https://italia-landing-xxxx.ve
 - [ ] `https://…vercel.app/api/health/db` → `{"status":"ok","database":"ok",…}`.
 - [ ] Settings → Cron Jobs: є `/api/health/db` щодня о 06:00 UTC.
 
-Канонічні посилання вже вказують на `https://italia.thesis-i.com` (`SITE_URL`), тож тимчасова адреса не потрапить у пошук як дублікат.
+Канонічні посилання вказують на `SITE_URL`. Коли `SITE_URL` задано, продакшн-адреси `*.vercel.app` і інші домени переадресовують на нього (308), тож у пошук потрапляє одна копія сайту. Перевіряйте сайт на `*.vercel.app` **до** того, як задасте `SITE_URL`, або одразу на основному домені.
 
 ---
 
-## 9. Домен italia.thesis-i.com
+## 9. Домени і пошук Google
 
-1. **За день** (бажано) зменшіть TTL запису `italia` у DNS `thesis-i.com` до 300 секунд, щоб перемикання пройшло за хвилини.
-2. Vercel → Settings → **Domains → Add** → `italia.thesis-i.com`.
-3. Vercel покаже потрібний запис: **CNAME** `italia` → `cname.vercel-dns.com` (або адресу, яку покаже Vercel для проєкту).
-4. У DNS `thesis-i.com` замініть поточний запис `italia` (A на кластер або CNAME) цим CNAME.
-5. Зачекайте статусу **Valid Configuration**. SSL-сертифікат Vercel випустить сам за кілька хвилин.
-6. Перевірте `https://italia.thesis-i.com` і вхід в адмінку. Після цього менеджер може знову працювати в адмінці.
+### 9.1. Основний домен www.madeinukraine.it
 
-Ingress і cert-manager у кластері для цього домену більше не потрібні. Їх приберемо разом з рештою (розділ 10).
+1. Vercel → Settings → **Domains → Add** → `www.madeinukraine.it` і `madeinukraine.it`. Для `madeinukraine.it` оберіть **Redirect to www.madeinukraine.it** (308).
+2. Vercel покаже DNS-записи: **A** `@` → IP Vercel і **CNAME** `www` → адреса Vercel. Внесіть їх у DNS `madeinukraine.it`.
+3. Зачекайте статусу **Valid Configuration**, SSL Vercel випустить сам.
+4. **Обов'язково:** Settings → Environment Variables → `SITE_URL` = `https://www.madeinukraine.it` (Production) → **Redeploy**. Без цього канонічні посилання вказують на `*.vercel.app`, і Google вважає головною саме ту адресу.
+
+Перевірка: у коді сторінки `https://www.madeinukraine.it/uk` має бути `<link rel="canonical" href="https://www.madeinukraine.it/uk"/>`.
+
+```bash
+curl -s https://www.madeinukraine.it/uk | grep -o '<link rel="canonical"[^>]*>'
+```
+
+### 9.2. Старий домен italia.thesis-i.com
+
+Поки працює Kubernetes, у `k8s/deployment.yaml` для нього `SITE_URL` = `https://www.madeinukraine.it`. Публічні сторінки `italia.thesis-i.com` переадресовують на основний домен, а адмінка там ще відкривається, але працює зі старою базою, тож нею не користуйтеся.
+
+Коли Kubernetes вимкнете (розділ 10): Vercel → Domains → Add `italia.thesis-i.com` → **Redirect to www.madeinukraine.it**, а в DNS `thesis-i.com` поставте CNAME `italia` на адресу, яку покаже Vercel. Тоді й старі посилання на `italia.thesis-i.com` ведуть на новий сайт.
+
+### 9.3. Старі адреси WordPress у Google
+
+Google ще показує сторінки старого сайту (`/chi-siamo/`, `/ua/про-нас/`, `/ua/home-українська/`, новини…). Сайт переадресовує їх (308, «назавжди») на найближчі нові сторінки. Список зібрано з вебархіву, він у `src/config/legacy-urls.ts`:
+
+| Стара адреса | Нова |
+|---|---|
+| `/ua/home-українська/`, `/uk/home-українська/` | `/uk` |
+| `/ua/про-нас/`, `/chi-siamo/`, `/statuto/`, `/codice-etico/` | `/uk/about`, `/it/about` |
+| `/ua/персони/`, `/ua/департамент…`, `/persone/`, `/dipartimento-…/`, `/sedi/`, `/contatti/` | `/uk/team`, `/it/team` |
+| `/ua/soci-e-partners-ukr/`, `/ua/українські-члени/`, `/soci-partners/`, `/italiani/`, `/ucraini/` | `/uk/members`, `/it/members` |
+| `/affiliazione/` | `/it/join` |
+| `/rebuild-ukraine-better/`, `/ua/rebuild-ukraine-better-2/` | `/it/…`, `/uk/rebuild-ukraine-better` |
+| новини, `/category/…`, `/2022/03/…`, `/ua/news/` | `/uk/events`, `/it/events` |
+| сторінки послуг (`/attivita/`, `/import-export-italia-ucraina/`…) | головна |
+
+Є також `https://www.madeinukraine.it/sitemap.xml` (усі сторінки обома мовами з hreflang) і `robots.txt`.
+
+**Щоб Google оновив результати швидше:**
+1. https://search.google.com/search-console → **Add property** → **Domain** → `madeinukraine.it`. Підтвердьте TXT-записом у DNS. Якщо властивість від старого сайту вже є, використовуйте її.
+2. **Sitemaps** → додати `https://www.madeinukraine.it/sitemap.xml`.
+3. **URL Inspection** → `https://www.madeinukraine.it/uk` і `/it` → **Request indexing**. Можна так само для 3–5 найважливіших старих адрес: Google побачить переадресацію.
+4. Старі результати зміняться самі за кілька днів чи тижнів, у міру повторного обходу. **Removals** (тимчасове приховування на 6 місяців) варто використовувати лише для адрес, яких не повинно бути в пошуку взагалі.
+5. Якщо властивість для `italialanding.vercel.app` чи `italia.thesis-i.com` колись додавали, нічого робити не треба: переадресація все пояснить Google.
+
+Знайшли стару адресу, якої немає в списку (Search Console → Pages → Not found (404))? Додайте її в `src/config/legacy-urls.ts`.
 
 ---
 
@@ -461,7 +498,7 @@ pg_dump "$DATABASE_URL_UNPOOLED" --no-owner --no-privileges --schema=public --sc
 |---|---|---|---|
 | `DATABASE_URL` | так | Supabase → Connect → Transaction pooler (6543) | `postgresql://postgres.REF:PASS@aws-0-eu-central-1.pooler.supabase.com:6543/postgres?sslmode=require` |
 | `DATABASE_URL_UNPOOLED` | бажано | Supabase → Connect → Session pooler (5432) | те саме, порт `5432`; для міграцій під час збірки |
-| `SITE_URL` | бажано | — | `https://italia.thesis-i.com`; без неї береться продакшн-домен Vercel |
+| `SITE_URL` | **так** | — | `https://www.madeinukraine.it`; канонічні посилання, sitemap, переадресація інших доменів на нього |
 | `ADMIN_EMAIL` | для порожньої бази | — | створює першого адміна, лише якщо адмінів немає |
 | `ADMIN_PASSWORD` | для порожньої бази | менеджер паролів | без кутових дужок і лапок навколо |
 | `ADMIN_NAME` | ні | — | `Адміністратор` |
@@ -503,7 +540,7 @@ Vercel сам задає `VERCEL`, `VERCEL_ENV`, `VERCEL_PROJECT_PRODUCTION_URL`
 | Симптом | Причина | Що робити |
 |---|---|---|
 | Збірка падає на `migrate` з `password authentication failed` | неправильний пароль або не закодовані спецсимволи | скинути пароль у Supabase на буквено-цифровий, оновити змінні |
-| `Tenant or user not found` | користувач `postgres` замість `postgres.<project-ref>` | скопіювати рядок саме з Transaction/Session pooler |
+| `Tenant or user not found` / `tenant/user … not found` | користувач `postgres` замість `postgres.<project-ref>`, або не той хост (`aws-0` замість `aws-1`) | скопіювати рядок саме з Transaction/Session pooler у діалозі Connect |
 | `getaddrinfo ENOTFOUND db.….supabase.co` або таймаут | Direct connection (лише IPv6) | використовувати pooler-адреси `…pooler.supabase.com` |
 | `unrecognized configuration parameter` | зайві параметри в URL | код прибирає `supa`, `pgbouncer` тощо; інші приберіть вручну, лишіть лише `?sslmode=require` |
 | Сайт показує стартові тексти, а не з адмінки | немає `DATABASE_URL` у Production або база недоступна | Vercel → Logs: шукати `Content: the database is unavailable`; перевірити змінні → Redeploy |

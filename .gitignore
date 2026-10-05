@@ -47,3 +47,8 @@ k8s/secret.yaml
 README.md
 # local PGlite database (development only)
 /.data
+
+# Database dumps and exports made during a move (personal data)
+/miufi-*.sql
+/miufi-*.dump
+/late-submissions.csv

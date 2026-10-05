@@ -17,7 +17,7 @@ Copy `.env.example` to `.env.local` and fill it in. Locally `DATABASE_URL` can s
 
 | Variable | Needed | Purpose |
 |---|---|---|
-| `SITE_URL` | production | Absolute canonical and hreflang links; read at request time (set in `k8s/deployment.yaml`) |
+| `SITE_URL` | production | `https://www.madeinukraine.it`: canonical and hreflang links, `sitemap.xml`, `robots.txt`; production requests to other hosts (`*.vercel.app`, `italia.thesis-i.com`) redirect to it. Read at request time |
 | `DATABASE_URL` | production | PostgreSQL connection string (on Supabase: transaction pooler, port 6543). The site refuses to start the forms in production without it |
 | `DATABASE_URL_UNPOOLED` | optional | Direct or session-pooler connection for migrations (`npm run db:migrate`, Vercel build); defaults to `DATABASE_URL` |
 | `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `ADMIN_NAME` | first start | Creates the first administrator when the table is empty; changing them later does nothing |
@@ -106,6 +106,10 @@ The same code runs on Vercel with Supabase PostgreSQL; Docker / Kubernetes (`k8s
 4. **Build.** Vercel runs `npm run vercel-build`: it applies the SQL migrations (`scripts/migrate.mjs`), then builds. The migration files are also shipped with every server function, so the app can check them at runtime.
 5. **`vercel.json`.** Functions run in `fra1` (next to Supabase `eu-central-1`); a daily cron calls `/api/health/db`, which also keeps a free Supabase project from pausing.
 6. **Limits.** Vercel refuses request bodies over 4.5 MB, so the admin panel shrinks large photos in the browser before uploading. Saving in the admin panel refreshes the cached pages on every Vercel instance (`revalidatePath`).
+
+## Old addresses and search engines
+
+The previous WordPress site on madeinukraine.it is still in search results. `src/config/legacy-urls.ts` maps its addresses (Italian at the root, Ukrainian under `/ua/` and `/uk/`, collected from the Web Archive) to the nearest new page, and `src/proxy.ts` redirects them permanently (308). `src/app/sitemap.ts` lists every page in both languages with hreflang alternates; `src/app/robots.ts` points to it and keeps Vercel previews out of search.
 
 ## Forms and CRM
 

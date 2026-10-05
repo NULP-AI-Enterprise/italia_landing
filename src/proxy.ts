@@ -1,4 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { legacyRedirect } from "@/config/legacy-urls";
+import { canonicalHostFor } from "@/config/site-url";
 import {
   defaultLocale,
   hasLocale,
@@ -39,6 +41,20 @@ function redirectTo(request: NextRequest, pathname: string, permanent: boolean) 
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // One public copy of the site: *.vercel.app and other domains go to SITE_URL.
+  const canonicalHost = canonicalHostFor(request.headers.get("host") ?? request.nextUrl.host);
+  if (canonicalHost) {
+    const url = request.nextUrl.clone();
+    url.protocol = "https:";
+    url.host = canonicalHost;
+    url.port = "";
+    return NextResponse.redirect(url, 308);
+  }
+
+  // Addresses of the previous WordPress site that search engines still list.
+  const legacy = legacyRedirect(pathname);
+  if (legacy) return redirectTo(request, legacy, true);
   const [, first = "", ...rest] = pathname.split("/");
   const tail = rest.length ? `/${rest.join("/")}` : "";
 

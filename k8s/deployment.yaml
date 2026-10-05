@@ -48,9 +48,10 @@ spec:
           env:
             - name: NODE_ENV
               value: production
-            # Canonical and hreflang links (read at request time)
+            # The site now lives on Vercel: canonical links point there and public
+            # pages of italia.thesis-i.com redirect to it (read at request time)
             - name: SITE_URL
-              value: https://italia.thesis-i.com
+              value: https://www.madeinukraine.it
           # From the secret: DATABASE_URL, ADMIN_EMAIL, ADMIN_PASSWORD, ADMIN_NAME,
           # IP_HASH_SALT, TURNSTILE_SITE_KEY, TURNSTILE_SECRET_KEY (see .env.example)
           envFrom:

@@ -4,6 +4,7 @@ import { FormDialogProvider } from "@/components/forms/FormDialog";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { buildNavigation } from "@/config/navigation";
+import { siteUrl } from "@/config/site-url";
 import { getDictionary, getLocale } from "@/i18n/get-dictionary";
 import { turnstileSiteKey } from "@/server/forms/turnstile";
 import "../globals.css";
@@ -36,14 +37,8 @@ export const revalidate = 3600;
 export async function generateMetadata(): Promise<Metadata> {
   const dict = await getDictionary();
   return {
-    // Read at request time: pages render on the server, so the deployment sets it
-    // (k8s/deployment.yaml); on Vercel the production domain is known automatically.
-    metadataBase: new URL(
-      process.env.SITE_URL ??
-        (process.env.VERCEL_PROJECT_PRODUCTION_URL
-          ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-          : "http://localhost:3000"),
-    ),
+    // Read at request time (SITE_URL), so the deployment sets it without a rebuild.
+    metadataBase: siteUrl(),
     title: {
       default: dict.siteName,
       template: `%s — ${dict.siteName}`,
